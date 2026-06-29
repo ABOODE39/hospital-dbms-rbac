@@ -7,38 +7,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=JetBrains+Mono&display=swap');
 :root{ --red:#E11D2A; --black:#0A0A0C; --ink:#1a1a1f; --gray:#6b7280; --line:#e5e7eb; --soft:#faf7f7; }
 *{ box-sizing:border-box; }
-body{ font-family:'Cairo',Tahoma,Arial,sans-serif; color:var(--ink); margin:0; line-height:1.85; background:#fff; font-size:13.5px; }
-.cover{ background:var(--black); color:#fff; padding:70px 50px; position:relative; overflow:hidden; }
-.cover::after{ content:''; position:absolute; left:-80px; top:-80px; width:260px; height:260px; border-radius:50%; background:radial-gradient(circle,rgba(225,29,42,.35),transparent 70%); }
-.cover .badge{ display:inline-block; background:var(--red); color:#fff; font-weight:900; padding:6px 16px; border-radius:30px; font-size:12px; letter-spacing:.5px; }
-.cover h1{ font-size:30px; font-weight:900; margin:18px 0 6px; line-height:1.4; }
-.cover .sub{ color:#cbd5e1; font-size:15px; font-weight:600; }
-.cover .meta{ margin-top:26px; display:flex; gap:30px; flex-wrap:wrap; font-size:12.5px; color:#e2e8f0; }
+body{ font-family:'Cairo',Tahoma,Arial,sans-serif; color:var(--ink); margin:0; line-height:1.4; background:#fff; font-size:10.5px; }
+.cover{ background:var(--black); color:#fff; padding:26px 40px; position:relative; overflow:hidden; }
+.cover::after{ content:''; position:absolute; left:-80px; top:-80px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(225,29,42,.35),transparent 70%); }
+.cover .badge{ display:inline-block; background:var(--red); color:#fff; font-weight:900; padding:4px 13px; border-radius:30px; font-size:10.5px; letter-spacing:.5px; }
+.cover h1{ font-size:20px; font-weight:900; margin:10px 0 4px; line-height:1.35; }
+.cover .sub{ color:#cbd5e1; font-size:12px; font-weight:600; }
+.cover .meta{ margin-top:12px; display:flex; gap:24px; flex-wrap:wrap; font-size:11px; color:#e2e8f0; }
 .cover .meta b{ color:var(--red); }
-.wrap{ max-width:900px; margin:0 auto; padding:36px 46px; }
-.howto{ background:var(--soft); border-right:5px solid var(--red); border-radius:10px; padding:18px 22px; margin-bottom:30px; }
-.howto h3{ margin:0 0 8px; color:var(--red); font-size:16px; }
-.howto ul{ margin:6px 0 0; padding-right:20px; }
-.toc{ border:1px solid var(--line); border-radius:12px; padding:20px 24px; margin-bottom:36px; }
-.toc h3{ margin:0 0 12px; color:var(--black); font-size:17px; border-bottom:2px solid var(--red); padding-bottom:8px; }
+.wrap{ max-width:900px; margin:0 auto; padding:18px 40px; }
+.howto{ background:var(--soft); border-right:5px solid var(--red); border-radius:10px; padding:9px 16px; margin-bottom:12px; }
+.howto h3{ margin:0 0 4px; color:var(--red); font-size:13px; }
+.howto ul{ margin:3px 0 0; padding-right:18px; }
+.toc{ border:1px solid var(--line); border-radius:12px; padding:10px 18px; margin-bottom:16px; columns:2; column-gap:26px; }
+.toc h3{ margin:0 0 6px; color:var(--black); font-size:14px; border-bottom:2px solid var(--red); padding-bottom:5px; column-span:all; }
 .toc ol{ margin:0; padding-right:22px; }
 .toc li{ margin:7px 0; }
 .toc a{ color:var(--ink); text-decoration:none; font-weight:600; }
 .toc-count{ color:var(--gray); font-size:11.5px; font-weight:400; }
-section{ margin-bottom:42px; }
-section h2{ color:#fff; background:linear-gradient(90deg,var(--red),#a3121c); padding:11px 18px; border-radius:9px; font-size:18px; font-weight:800; }
-.qcard{ border:1px solid var(--line); border-radius:11px; padding:16px 18px 6px; margin:16px 0; page-break-inside:avoid; box-shadow:0 1px 3px rgba(0,0,0,.04); }
-.qhead{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
-.qnum{ background:var(--black); color:#fff; font-weight:900; padding:3px 12px; border-radius:7px; font-size:13px; }
-.qbadge{ color:#fff; font-weight:700; padding:2px 11px; border-radius:20px; font-size:11px; }
-.question{ font-weight:700; color:var(--black); font-size:14.5px; }
-.question p{ margin:0 0 4px; }
-.answer{ background:var(--soft); border-radius:9px; padding:12px 15px; margin:10px 0 12px; }
-.alabel{ display:inline-block; color:var(--red); font-weight:800; font-size:12px; margin-bottom:5px; border-bottom:1.5px dashed var(--red); }
-.answer p{ margin:6px 0; }
-code{ font-family:'JetBrains Mono',monospace; background:#0a0a0c; color:#5dfcb2; padding:1px 6px; border-radius:5px; font-size:11.5px; direction:ltr; display:inline-block; }
-.foot{ text-align:center; color:var(--gray); font-size:11px; border-top:1px solid var(--line); padding:18px; margin-top:30px; }
-@media print{ .cover{ padding:55px 45px; } section h2{ -webkit-print-color-adjust:exact; print-color-adjust:exact; } .qbadge,.qnum{ -webkit-print-color-adjust:exact; print-color-adjust:exact; } body{ font-size:12px; } }
+section{ margin-bottom:14px; }
+section h2{ color:#fff; background:linear-gradient(90deg,var(--red),#a3121c); padding:6px 14px; border-radius:8px; font-size:14px; font-weight:800; margin-bottom:6px; }
+.qcard{ border:1px solid var(--line); border-radius:8px; padding:7px 11px 2px; margin:7px 0; page-break-inside:avoid; }
+.qhead{ display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+.qnum{ background:var(--black); color:#fff; font-weight:900; padding:1px 9px; border-radius:6px; font-size:11px; }
+.qbadge{ color:#fff; font-weight:700; padding:1px 9px; border-radius:20px; font-size:9.5px; }
+.question{ font-weight:700; color:var(--black); font-size:11.5px; }
+.question p{ margin:0 0 3px; }
+.answer{ background:var(--soft); border-radius:8px; padding:6px 10px; margin:5px 0 6px; }
+.alabel{ display:inline-block; color:var(--red); font-weight:800; font-size:10px; margin-bottom:3px; border-bottom:1.5px dashed var(--red); }
+.answer p{ margin:3px 0; }
+code{ font-family:'JetBrains Mono',monospace; background:#0a0a0c; color:#5dfcb2; padding:1px 5px; border-radius:4px; font-size:10px; direction:ltr; display:inline-block; }
+.foot{ text-align:center; color:var(--gray); font-size:10px; border-top:1px solid var(--line); padding:10px; margin-top:14px; }
+@page{ margin:9mm 8mm; }
+@media print{ .cover{ padding:28px 40px; } section h2{ -webkit-print-color-adjust:exact; print-color-adjust:exact; } .qbadge,.qnum,.badge,.foot{ -webkit-print-color-adjust:exact; print-color-adjust:exact; } body{ font-size:9.5px; } }
 </style>
 </head>
 <body>
