@@ -30,7 +30,7 @@ CREATE OR REPLACE FUNCTION audit_trigger_func()
 RETURNS TRIGGER AS $$
 DECLARE
     -- هوية الفاعل من سياق الجلسة (قد تكون NULL لأحداث النظام)
-    v_user_id BIGINT := current_setting('app.current_user_id', true)::BIGINT;
+    v_user_id BIGINT := NULLIF(current_setting('app.current_user_id', true), '')::BIGINT;
     -- عنوان IP من سياق الجلسة (nullif يتعامل مع السلسلة الفارغة)
     v_ip      INET   := NULLIF(current_setting('app.client_ip', true), '')::INET;
     -- القيم القديمة/الجديدة كـ JSONB (تُعبّأ حسب نوع العملية)
