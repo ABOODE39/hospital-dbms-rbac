@@ -72,7 +72,7 @@ window.HMS.modules.push({
               <select class="form-control" id="pay-method">
                 <option value="cash">نقداً</option>
                 <option value="card">بطاقة</option>
-                <option value="bank_transfer">تحويل بنكي</option>
+                <option value="transfer">تحويل بنكي</option>
                 <option value="insurance">تأمين</option>
               </select>
             </div>
@@ -90,12 +90,10 @@ window.HMS.modules.push({
     `;
 
     const INV_STATUS = {
-      draft:       ['badge-gray',   'مسودة'],
-      pending:     ['badge-yellow', 'معلّقة'],
-      partial:     ['badge-blue',   'مدفوعة جزئياً'],
-      paid:        ['badge-green',  'مدفوعة'],
-      overdue:     ['badge-red',    'متأخرة'],
-      cancelled:   ['badge-red',    'ملغاة'],
+      unpaid:          ['badge-yellow', 'غير مدفوعة'],
+      partially_paid:  ['badge-blue',   'مدفوعة جزئياً'],
+      paid:            ['badge-green',  'مدفوعة'],
+      cancelled:       ['badge-red',    'ملغاة'],
     };
 
     async function load() {
@@ -190,9 +188,9 @@ window.HMS.modules.push({
       btn.disabled = true; btn.textContent = 'جارٍ التسجيل...';
       try {
         await apiPost('/billing/invoices/' + invoiceId + '/payments', {
-          amount:           parseFloat(document.getElementById('pay-amount').value),
-          payment_method:   document.getElementById('pay-method').value,
-          reference_number: document.getElementById('pay-ref').value.trim() || undefined,
+          amount:       parseFloat(document.getElementById('pay-amount').value),
+          method:       document.getElementById('pay-method').value,
+          reference_no: document.getElementById('pay-ref').value.trim() || undefined,
         });
         document.getElementById('pay-modal').hidden = true;
         _bilMsg('billing-msg', 'success', 'تم تسجيل الدفعة بنجاح.');

@@ -14,9 +14,9 @@
     try {
       const data = await apiPost('/auth/login', { username, password });
 
-      /* الـ backend يُرجع: { token, user: { id, username, roles, ... } } */
-      const token = data.token || data.accessToken || data.access_token;
-      const user  = data.user  || data.data?.user  || data;
+      /* الـ backend يُرجع: { success, data: { access_token, user } } */
+      const token = data.data?.access_token;
+      const user  = data.data?.user;
 
       if (!token) {
         return { ok: false, message: 'لم يتم استلام رمز المصادقة من الخادم.' };

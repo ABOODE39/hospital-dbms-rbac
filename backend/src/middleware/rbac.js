@@ -74,4 +74,37 @@ function requirePermission(...codes) {
   };
 }
 
-module.exports = { requireRole, requirePermission };
+/**
+ * requireAnyPermission — يتحقق أن المستخدم يحمل على الأقل إحدى الصلاحيات (OR)
+ *
+ * مثال: requireAnyPermission('prescriptions:dispense', 'prescriptions:update')
+ * يكفي توافر صلاحية واحدة منها للسماح بالعملية.
+ *
+ * @param  {...string} codes - رموز الصلاحيات بصيغة 'resource:action'
+ * @returns {Function} middleware
+ */
+function requireAnyPermission(...codes) {
+  return (req, res, next) => {
+    if (!req.user) {
+      return next(new AppError('غير مصادَق', 401, 'UNAUTHENTICATED'));
+    }
+
+    const userPermissions = req.user.permissions || [];
+    const hasAny = codes.some((c) => userPermissions.includes(c));
+
+    if (!hasAny) {
+      return next(
+        new AppError(
+          'صلاحيات غير كافية لهذه العملية',
+          403,
+          'INSUFFICIENT_PERMISSIONS',
+          { required_any: codes, assigned: userPermissions }
+        )
+      );
+    }
+
+    next();
+  };
+}
+
+module.exports = { requireRole, requirePermission, requireAnyPermission };

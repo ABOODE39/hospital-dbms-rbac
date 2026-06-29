@@ -12,8 +12,8 @@
 const express = require('express');
 const router  = express.Router();
 
-const { authenticate }      = require('../middleware/auth');
-const { requirePermission } = require('../middleware/rbac');
+const { authenticate }                        = require('../middleware/auth');
+const { requirePermission, requireAnyPermission } = require('../middleware/rbac');
 const {
   listPrescriptions,
   getPrescription,
@@ -46,9 +46,10 @@ router.get(
 );
 
 // PATCH /api/v1/prescriptions/:id/status — تغيير الحالة (dispensed/cancelled)
+// الصيدلي يملك prescriptions:dispense والطبيب يملك prescriptions:update — يكفي أحدهما
 router.patch(
   '/:id/status',
-  requirePermission('prescriptions:update'),
+  requireAnyPermission('prescriptions:dispense', 'prescriptions:update'),
   updatePrescriptionStatus
 );
 

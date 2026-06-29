@@ -211,25 +211,38 @@ const createAppointment = asyncHandler(async (req, res) => {
     );
   }
 
-  const result = await withUserContext(req.user.id, req.user.roles, async (client) => {
-    // RLS WITH CHECK ستتحقق تلقائياً من صلاحية الإدراج
-    return client.query(
-      `INSERT INTO appointments
-         (patient_id, doctor_id, department_id, scheduled_at,
-          duration_minutes, reason, created_by)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)
-       RETURNING *`,
-      [
-        parseInt(patient_id, 10),
-        parseInt(doctor_id, 10),
-        department_id ? parseInt(department_id, 10) : null,
-        scheduled_at,
-        duration_minutes ? parseInt(duration_minutes, 10) : 30,
-        reason || null,
-        req.user.id,
-      ]
-    );
-  });
+  let result;
+  try {
+    result = await withUserContext(req.user.id, req.user.roles, async (client) => {
+      // RLS WITH CHECK ستتحقق تلقائياً من صلاحية الإدراج
+      return client.query(
+        `INSERT INTO appointments
+           (patient_id, doctor_id, department_id, scheduled_at,
+            duration_minutes, reason, created_by)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)
+         RETURNING *`,
+        [
+          parseInt(patient_id, 10),
+          parseInt(doctor_id, 10),
+          department_id ? parseInt(department_id, 10) : null,
+          scheduled_at,
+          duration_minutes ? parseInt(duration_minutes, 10) : 30,
+          reason || null,
+          req.user.id,
+        ]
+      );
+    });
+  } catch (err) {
+    // UNIQUE violation على (doctor_id, scheduled_at) — تعارض في جدول الطبيب
+    if (err.code === '23505') {
+      throw new AppError(
+        'الطبيب محجوز في هذا الموعد، يرجى اختيار وقت آخر',
+        409,
+        'APPOINTMENT_CONFLICT'
+      );
+    }
+    throw err;
+  }
 
   res.status(201).json({ success: true, data: result.rows[0] });
 });

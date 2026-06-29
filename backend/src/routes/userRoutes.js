@@ -64,17 +64,17 @@ router.patch(
   updateUser
 );
 
-// POST /api/v1/users/:id/roles — تعيين أدوار (admin)
+// POST /api/v1/users/:id/roles — تعيين أدوار (admin) — يتطلب user_roles:create
 router.post(
   '/:id/roles',
-  requirePermission('users:manage_roles'),
+  requirePermission('user_roles:create'),
   assignRoles
 );
 
-// DELETE /api/v1/users/:id/roles/:role_id — سحب دور (admin)
+// DELETE /api/v1/users/:id/roles/:role_id — سحب دور (admin) — يتطلب user_roles:delete
 router.delete(
   '/:id/roles/:role_id',
-  requirePermission('users:manage_roles'),
+  requirePermission('user_roles:delete'),
   removeRole
 );
 
