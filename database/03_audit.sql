@@ -38,18 +38,21 @@ DECLARE
     v_new     JSONB;
     v_row_id  BIGINT;
 BEGIN
+    -- نستخرج المعرّف من تمثيل JSONB لا عبر NEW.id مباشرةً، لأنّ جداول الوصل
+    -- (user_roles بمفتاح مركّب user_id+role_id) لا تملك عمود id؛ الوصول المباشر
+    -- NEW.id يُطلق خطأ «record new has no field id». ->>'id' يُرجع NULL بأمان عند غيابه.
     IF (TG_OP = 'INSERT') THEN
         v_new    := to_jsonb(NEW);
-        v_row_id := NEW.id;
+        v_row_id := (v_new ->> 'id')::BIGINT;
 
     ELSIF (TG_OP = 'UPDATE') THEN
         v_old    := to_jsonb(OLD);
         v_new    := to_jsonb(NEW);
-        v_row_id := NEW.id;
+        v_row_id := (v_new ->> 'id')::BIGINT;
 
     ELSIF (TG_OP = 'DELETE') THEN
         v_old    := to_jsonb(OLD);
-        v_row_id := OLD.id;
+        v_row_id := (v_old ->> 'id')::BIGINT;
     END IF;
 
     -- تصفية أمنية: لا يُسرَّب hash كلمة المرور إلى سجلّ التدقيق عند تدقيق users
