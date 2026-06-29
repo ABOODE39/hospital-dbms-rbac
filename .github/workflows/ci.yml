@@ -55,7 +55,7 @@ jobs:
                    database/04_views_masking.sql \
                    database/05_seed.sql; do
             echo "▶ Applying $f …"
-            psql -h localhost -U postgres -d hospital -f "$f"
+            psql -v ON_ERROR_STOP=1 -h localhost -U postgres -d hospital -f "$f"
           done
 
       # ── 5. تثبيت تبعيات Node ─────────────────────────────────────────
