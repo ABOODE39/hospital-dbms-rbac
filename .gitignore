@@ -2,4 +2,3 @@ node_modules/
 .env
 *.log
 dist/
-.github/workflows/ci.yml

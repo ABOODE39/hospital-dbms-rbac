@@ -1,0 +1,75 @@
+name: CI — Hospital DBMS RBAC
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  test:
+    name: Unit + Integration Tests
+    runs-on: ubuntu-latest
+
+    # ─── PostgreSQL 16 كـ service container ──────────────────────────────
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: pass
+          POSTGRES_DB: hospital
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d hospital"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Node.js 20 ────────────────────────────────────────────────
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+
+      # ── 3. postgresql-client (psql) ───────────────────────────────────
+      - name: Install postgresql-client
+        run: sudo apt-get install -y --no-install-recommends postgresql-client
+
+      # ── 4. تطبيق ملفات قاعدة البيانات بالترتيب 01 → 05 ──────────────
+      - name: Apply database migrations and seed (01 → 05)
+        env:
+          PGPASSWORD: pass
+        run: |
+          for f in database/01_schema.sql \
+                   database/02_rbac_rls.sql \
+                   database/03_audit.sql \
+                   database/04_views_masking.sql \
+                   database/05_seed.sql; do
+            echo "▶ Applying $f …"
+            psql -h localhost -U postgres -d hospital -f "$f"
+          done
+
+      # ── 5. تثبيت تبعيات Node ─────────────────────────────────────────
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+
+      # ── 6. تشغيل جميع الاختبارات (وحدة + تكامل) ─────────────────────
+      - name: Run all tests (unit + integration)
+        working-directory: backend
+        env:
+          DATABASE_URL: postgres://postgres:pass@localhost:5432/hospital
+          JWT_SECRET: ci-test-secret-hospital-32chars!!
+          JWT_EXPIRES_IN: 15m
+          BCRYPT_ROUNDS: "4"
+          NODE_ENV: test
+        run: npm test
