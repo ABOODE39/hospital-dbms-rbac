@@ -71,6 +71,12 @@ async function withUserContext(userId, roles, fn, clientIp) {
       [clientIp ? String(clientIp) : '']
     );
 
+    // تفعيل RLS فعلياً: التبديل لدور التطبيق app_role (NOBYPASSRLS) داخل المعاملة فقط.
+    // اتصال التطبيق قد يكون مالكاً/superuser يتجاوز RLS؛ SET LOCAL ROLE يضمن سريان
+    // السياسات على عمليات بيانات المريض/الطبيب. يعود الدور الأصلي تلقائياً عند COMMIT/ROLLBACK.
+    // (تسجيل الدخول يجري عبر query() خارج هذا السياق فيبقى على الدور الأصلي ليقرأ users قبل المصادقة.)
+    await client.query('SET LOCAL ROLE app_role');
+
     const result = await fn(client);
 
     await client.query('COMMIT');
