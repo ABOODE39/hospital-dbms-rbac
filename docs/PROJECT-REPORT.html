@@ -197,7 +197,7 @@ table.cmp td.udp { color:#047857; }
   </div>
   <h2 class="section"><span class="num">00</span>فهرس المحتويات · Table of Contents</h2>
   <p class="ar">يتناول هذا التقرير بناء نظام قاعدة بيانات مستشفى آمن بشكل معمّق عبر 13 أقسام، تغطّي التصميم والمعمارية ونموذج الصلاحيات وطبقات الأمان والاختبار والتحديات والأعمال المستقبلية.</p>
-  <ul class="toc-list"><li><strong>01</strong> · <a href="#s1">الملخّص التنفيذي (Abstract)</a></li><li><strong>02</strong> · <a href="#s2">المقدمة والخلفية (Introduction &amp; Problem Statement)</a></li><li><strong>03</strong> · <a href="#s3">الأهداف (Objectives)</a></li><li><strong>04</strong> · <a href="#s4">تحليل المتطلّبات (Requirements Analysis)</a></li><li><strong>05</strong> · <a href="#s5">تصميم قاعدة البيانات والكيانات الأساسية</a></li><li><strong>06</strong> · <a href="#s6">المعمارية ثلاثية الطبقات والقرارات التقنية</a></li><li><strong>07</strong> · <a href="#s7">نموذج RBAC والتحكم على مستوى الصف (RLS)</a></li><li><strong>08</strong> · <a href="#s8">طبقات الأمان الشاملة والتشفير والتدقيق والإخفاء</a></li><li><strong>09</strong> · <a href="#s9">التنفيذ — البنية والتقنيات المستخدمة</a></li><li><strong>10</strong> · <a href="#s10">الاختبار وضمان الجودة</a></li><li><strong>11</strong> · <a href="#s11">التحديات والحلول — سيناريوهات الأعطال المكتشفة والمحلولة</a></li><li><strong>12</strong> · <a href="#s12">الأعمال المستقبلية والتحسينات المخطط لها</a></li><li><strong>13</strong> · <a href="#s13">الخاتمة</a></li></ul>
+  <ul class="toc-list"><li><strong>01</strong> · <a href="#s1">الملخّص التنفيذي (Abstract)</a></li><li><strong>02</strong> · <a href="#s2">المقدمة والخلفية</a></li><li><strong>03</strong> · <a href="#s3">الأهداف الرئيسية</a></li><li><strong>04</strong> · <a href="#s4">المتطلّبات</a></li><li><strong>05</strong> · <a href="#s5">تصميم قاعدة البيانات</a></li><li><strong>06</strong> · <a href="#s6">المعمارية ثلاثية الطبقات</a></li><li><strong>07</strong> · <a href="#s7">نموذج RBAC و RLS</a></li><li><strong>08</strong> · <a href="#s8">طبقات الأمان الشاملة</a></li><li><strong>09</strong> · <a href="#s9">التنفيذ والبنية التقنية</a></li><li><strong>10</strong> · <a href="#s10">الاختبار وضمان الجودة</a></li><li><strong>11</strong> · <a href="#s11">التحديات والحلول</a></li><li><strong>12</strong> · <a href="#s12">الأعمال المستقبلية</a></li><li><strong>13</strong> · <a href="#s13">الخاتمة والإنجازات</a></li></ul>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>الفهرس</span>
@@ -211,7 +211,7 @@ table.cmp td.udp { color:#047857; }
     <div class="num">01 / 13</div>
   </div>
   <h2 class="section"><span class="num">01</span>الملخّص التنفيذي (Abstract)</h2>
-  <p class="ar">يقدّم هذا المشروع نظام إدارة قاعدة بيانات شاملاً وآمناً لمستشفى العالمية IVF، مبنياً على تقنيات الأمان السيبراني المتقدمة. يجمع النظام بين ثلاث طبقات أمان متزامنة: التحكم بالوصول القائم على الأدوار (RBAC) على مستوى التطبيق، وأمان مستوى الصفّ (RLS) المفروض من قاعدة البيانات نفسها، إلى جانب نظام تدقيق شامل وتقنيع البيانات الحسّاسة. استخدم المشروع قاعدة البيانات PostgreSQL 15، محرّك العمليات Node.js/Express، وواجهة مستخدم حديثة بالعربية. يتضمن النظام 22 جدولاً معايّراً، 7 أدوار محددة بدقة، 68 صلاحية بصيغة resource:action، و21 سياسة Row-Level Security. تم اختبار المشروع بـ 46 اختبار Jest مع تكامل مستمر عبر GitHub Actions، مما يضمن جودة عالية والتزام بأفضل الممارسات الأمنية والبرمجية.</p><div class="callout"><div class="tag">النطاق · Scope</div><p>هذا التقرير دراسة هندسية <strong>محدّدة</strong> لنظام قاعدة بيانات مستشفى واحد مع نموذج أمان ثلاثي الطبقات، وليس مسحاً عاماً لأنظمة قواعد البيانات. كل رقم وكل سياسة موثّقة من شيفرة المشروع الفعلية.</p></div>
+  <p class="ar">نظام إدارة قاعدة بيانات شامل وآمن لمستشفى العالمية IVF مبنياً على ثلاث طبقات أمان متزامنة: RBAC على مستوى التطبيق (7 أدوار، 68 صلاحية)، RLS من قاعدة البيانات نفسها (21 سياسة)، وتدقيق append-only مع تقنيع البيانات. يستخدم PostgreSQL 15، Node.js/Express، وواجهة عربية RTL. يتضمّن 22 جدولاً معايّراً، 30+ endpoint، و61 اختبار ناجح مع CI/CD مستمر.</p><div class="callout"><div class="tag">النطاق · Scope</div><p>هذا التقرير دراسة هندسية <strong>محدّدة</strong> لنظام قاعدة بيانات مستشفى واحد مع نموذج أمان ثلاثي الطبقات، وليس مسحاً عاماً لأنظمة قواعد البيانات. كل رقم وكل سياسة موثّقة من شيفرة المشروع الفعلية.</p></div>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 01 / 13</span>
@@ -222,8 +222,8 @@ table.cmp td.udp { color:#047857; }
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">02 / 13</div>
   </div>
-  <h2 class="section"><span class="num">02</span>المقدمة والخلفية (Introduction &amp; Problem Statement)</h2>
-  <h4 class="sub2">السياق والمشاكل التقليدية</h4><p class="ar">تُمثّل المؤسسات الطبية مراكز احتفاظ بيانات حسّاسة جداً تشتمل على السجلات الطبية الشاملة والبيانات الشخصية والمالية للمرضى. تعاني الأنظمة التقليدية من ضعف التحكم بالوصول (لا تمييز دقيق بين الأدوار)، غياب أمان مستوى الصفّ (إذا اخترق المهاجم قاعدة البيانات مباشرة يرى كل البيانات)، عدم وجود سجلّ تدقيق شامل (لا يُعرف من عدّل أي سجلّ)، وإفشاء البيانات الحسّاسة (كل من يرى السجلّ يرى كل شيء).</p><h4 class="sub2">الأثر والحاجة الملحة</h4><p class="ar">اختراق نظام قديم قد يعني: انتهاك خصوصية المريض، ضرر مالي وقانوني (غرامات، دعاوى قضائية)، تعديل غير مصرح بالسجلات الطبية (قد يُلحق ضرراً بحياة المريض)، أو كشف بيانات تنافسية.</p><h4 class="sub2">الحل المقترح</h4><p class="ar">هذا المشروع يقدّم نموذجاً شاملاً لنظام آمن يعالج كل هذه المشاكل من خلال: RBAC متقدم بـ 7 أدوار و68 صلاحية دقيقة، Row-Level Security بـ 21 سياسة تفرضها قاعدة البيانات نفسها، Audit Logging Append-only لا يسمح بالتعديل، Data Masking إخفاء أرقام حسّاسة حسب الدور، وتشفير آمن (bcrypt 12 جولة، JWT موقّعة).</p>
+  <h2 class="section"><span class="num">02</span>المقدمة والخلفية</h2>
+  <p class="ar">المؤسسات الطبية تحتفظ ببيانات حسّاسة جداً (سجلات طبية، بيانات شخصية، بيانات مالية). الأنظمة التقليدية تعاني من: ضعف التحكم بالوصول (لا تمييز دقيق)، غياب أمان مستوى الصفّ (إذا اخترق المهاجم قاعدة البيانات يرى كل شيء)، عدم وجود سجلّ تدقيق شامل، وإفشاء البيانات الحسّاسة.</p><p class="ar">هذا المشروع يقدّم حلاً متكاملاً:</p><ul class="tech"><li><strong>RBAC متقدم</strong>: 7 أدوار و68 صلاحية بـ least privilege</li><li><strong>Row-Level Security</strong>: 21 سياسة تفرضها قاعدة البيانات</li><li><strong>Audit Logging Append-only</strong>: لا يسمح بالتعديل</li><li><strong>Data Masking</strong>: إخفاء أرقام حسّاسة حسب الدور</li><li><strong>التشفير الآمن</strong>: bcrypt 12 جولة، JWT موقّعة</li></ul>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 02 / 13</span>
@@ -234,8 +234,8 @@ table.cmp td.udp { color:#047857; }
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">03 / 13</div>
   </div>
-  <h2 class="section"><span class="num">03</span>الأهداف (Objectives)</h2>
-  <h4 class="sub2">الهدف الرئيسي</h4><p class="ar">بناء نظام إدارة قاعدة بيانات آمن وموثوق يجمع بين الأداء العالي والحماية الاستثنائية للبيانات الحسّاسة.</p><h4 class="sub2">الأهداف التفصيلية</h4><p class="ar"><strong>الهدف 1</strong>: تصميم نموذج أمان متعدد الطبقات (4 طبقات: RBAC، RLS، Audit، Data Masking) — القياس: تصنيف أمان A+.</p><p class="ar"><strong>الهدف 2</strong>: تصميم RBAC دقيق بـ 7 أدوار و68 صلاحية (resource:action) مع مبدأ Least Privilege — القياس: غياب تضاربات، توافق 100% مع المصفوفة.</p><p class="ar"><strong>الهدف 3</strong>: تنفيذ RLS بـ 21 سياسة على 7 جداول حسّاسة — القياس: اختبار RLS بـ SQL مباشر يفشل عند التحايل.</p><p class="ar"><strong>الهدف 4</strong>: بناء نظام تدقيق Append-only مع سياق كامل — القياس: لا يمكن حذف/تعديل السجلات.</p><p class="ar"><strong>الهدف 5</strong>: تطبيق تشفير آمن (bcrypt 12 جولة، JWT، قفل بعد 5 محاولات فاشلة) — القياس: عدم اكتشاف كلمات مرور خام.</p><p class="ar"><strong>الهدف 6</strong>: إخفاء بيانات حسّاسة حسب الدور — القياس: موظّف استقبال لا يرى رقم الهوية الكامل.</p><p class="ar"><strong>الهدف 7</strong>: قاعدة بيانات معايّرة (BCNF) مع 22 جدولاً وفهارس استراتيجية — القياس: لا يمكن إدراج بيانات غير صحيحة.</p><p class="ar"><strong>الهدف 8</strong>: واجهة مستخدم RTL آمنة بالعربية — القياس: غياب ثغرات XSS/CSRF.</p><p class="ar"><strong>الهدف 9</strong>: 46 اختبار Jest مع تكامل GitHub Actions — القياس: Coverage &gt; 80%، جميع الاختبارات تمرّ.</p><p class="ar"><strong>الهدف 10</strong>: توثيق احترافي شامل (ERD، RBAC-MATRIX، Setup Guide) — القياس: أي مطور يفهم ويشغّل النظام في أقل من ساعة.</p>
+  <h2 class="section"><span class="num">03</span>الأهداف الرئيسية</h2>
+  <p class="ar"><strong>الهدف 1</strong>: نموذج أمان متعدد الطبقات (RBAC، RLS، Audit، Data Masking) بتصنيف A+.</p><p class="ar"><strong>الهدف 2</strong>: RBAC دقيق (7 أدوار، 68 صلاحية) بـ least privilege مع توافق 100%.</p><p class="ar"><strong>الهدف 3</strong>: RLS بـ 21 سياسة على 7 جداول حسّاسة مع حماية قاعدة البيانات.</p><p class="ar"><strong>الهدف 4</strong>: نظام تدقيق append-only يمنع التعديل/الحذف.</p><p class="ar"><strong>الهدف 5</strong>: تشفير آمن (bcrypt 12 جولة، JWT، قفل بعد 5 محاولات فاشلة).</p><p class="ar"><strong>الهدف 6</strong>: تقنيع بيانات حسّاسة حسب الدور.</p><p class="ar"><strong>الهدف 7</strong>: قاعدة بيانات معايّرة (BCNF) مع 22 جدولاً و28+ فهرس.</p><p class="ar"><strong>الهدف 8</strong>: 61 اختبار ناجح مع GitHub Actions CI/CD.</p>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 03 / 13</span>
@@ -246,8 +246,8 @@ table.cmp td.udp { color:#047857; }
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">04 / 13</div>
   </div>
-  <h2 class="section"><span class="num">04</span>تحليل المتطلّبات (Requirements Analysis)</h2>
-  <h4 class="sub2">المتطلّبات الوظيفية (اختيار من 10 مجموعات)</h4><p class="ar"><strong>REQ-F1</strong>: إدارة المرضى — تسجيل مريض جديد، إنشاء MRN تلقائي، كل مريض يرى ملفه فقط (RLS)، الطبيب يرى مرضاه فقط.</p><p class="ar"><strong>REQ-F2</strong>: إدارة المواعيد — حجز موعد، منع تضارب المواعيد (UNIQUE constraint)، المريض يلغي مواعيده القادمة فقط، RLS حسب الدور.</p><p class="ar"><strong>REQ-F3</strong>: السجلات الطبية — إنشاء سجلّ مع شكوى وفحص وعلامات حيوية، الممرّض يحدّث العلامات، Append-only (لا حذف).</p><p class="ar"><strong>REQ-F4</strong>: التشخيصات — الطبيب يضيف تشخيصات (ICD-10)، تصنيف (primary/secondary/provisional)، الممرّض والمريض يريان فقط.</p><p class="ar"><strong>REQ-F5</strong>: الأدوية والوصفات — الطبيب ينشئ وصفة، الصيدلي يصرفها، إدارة مخزون، المريض يرى وصفاته.</p><p class="ar"><strong>REQ-F6</strong>: المختبر — الطبيب يطلب فحص، فنّي المختبر يدخل نتائج، الطبيب والمريض يريان النتائج.</p><p class="ar"><strong>REQ-F7</strong>: الفوترة — إصدار فاتورة، دفع على دفعات، RLS (مريض يرى فواتيره)، لا حذف (تحديث حالة فقط).</p><p class="ar"><strong>REQ-F8</strong>: الموظفون والأقسام — Admin يضيف موظفين، تعيين رئيس قسم، الموظفون يريان بيانات زملائهم.</p><p class="ar"><strong>REQ-F9</strong>: المصادقة و RBAC — حساب آمن (bcrypt)، JWT مع دور وصلاحيات، قفل بعد 5 محاولات.</p><p class="ar"><strong>REQ-F10</strong>: التدقيق — تسجيل كل عملية حرجة (من، ماذا، متى، IP)، Append-only، Admin يقرأ.</p><h4 class="sub2">المتطلّبات غير الوظيفية (الأمان الأساسي)</h4><p class="ar"><strong>REQ-NFR-S1</strong>: RBAC — 7 أدوار، 68 صلاحية (resource:action)، Least Privilege، لا privilege escalation.</p><p class="ar"><strong>REQ-NFR-S2</strong>: RLS — 21 سياسة على 7 جداول حسّاسة، حماية قاعدة البيانات.</p><p class="ar"><strong>REQ-NFR-S3</strong>: تشفير كلمات المرور — bcrypt 12 جولة، لا نصّ خام.</p><p class="ar"><strong>REQ-NFR-S4</strong>: JWT — توقيع رقمي، صلاحية 15 دقيقة، تضمين الدور والصلاحيات.</p><p class="ar"><strong>REQ-NFR-S5</strong>: قفل الحسابات — بعد 5 محاولات دخول فاشلة.</p><p class="ar"><strong>REQ-NFR-S6</strong>: تدقيق شامل — Append-only، محمية من التعديل/الحذف.</p><p class="ar"><strong>REQ-NFR-S7</strong>: Data Masking — إخفاء أرقام حسّاسة (national_id, phone) حسب الدور.</p><p class="ar"><strong>REQ-NFR-S8</strong>: حماية OWASP — ضد SQL Injection, XSS, CSRF, Rate Limiting (100/دقيقة عام، 10/دقيقة على الدخول)، Helmet headers.</p><h4 class="sub2">متطلّبات الأداء والموثوقية</h4><p class="ar"><strong>REQ-NFR-P1</strong>: الاستجابة السريعة — &lt; 100ms للطلبات الشائعة، &lt; 500ms للبحث.</p><p class="ar"><strong>REQ-NFR-R1</strong>: سلامة البيانات — FK، UNIQUE، CHECK، NOT NULL من قاعدة البيانات.</p><p class="ar"><strong>REQ-NFR-R2</strong>: عدم فقدان البيانات — نسخ احتياطية دورية.</p><p class="ar"><strong>REQ-NFR-U1</strong>: واجهة بديهية — بالعربية (RTL)، سهلة للموظفين الطبيين.</p><p class="ar"><strong>REQ-NFR-M1</strong>: كود نظيف — ESLint، JSDoc، معايير التسمية.</p><p class="ar"><strong>REQ-NFR-M2</strong>: اختبار شامل — Coverage &gt; 80%.</p><p class="ar"><strong>REQ-NFR-M3</strong>: توثيق — ERD، RBAC-MATRIX، Setup Guide.</p><p class="ar"><strong>REQ-NFR-M4</strong>: تكامل مستمر — GitHub Actions على كل push.</p>
+  <h2 class="section"><span class="num">04</span>المتطلّبات</h2>
+  <h4 class="sub2">المتطلّبات الوظيفية الأساسية</h4><p class="ar"><strong>REQ-F1</strong>: إدارة المرضى — تسجيل، MRN تلقائي، RLS حسب الدور.</p><p class="ar"><strong>REQ-F2</strong>: المواعيد — حجز، منع تضارب (UNIQUE)، RLS حسب المريض والطبيب.</p><p class="ar"><strong>REQ-F3</strong>: السجلات الطبية — إنشاء، تحديث العلامات، append-only (لا حذف).</p><p class="ar"><strong>REQ-F4</strong>: التشخيصات — إضافة بـ ICD-10، تصنيف، رؤية محدودة.</p><p class="ar"><strong>REQ-F5</strong>: الأدوية والوصفات — إنشاء، صرف، إدارة مخزون.</p><p class="ar"><strong>REQ-F6</strong>: المختبر — طلب فحص، إدخال نتائج، RLS للنتائج.</p><p class="ar"><strong>REQ-F7</strong>: الفوترة — إصدار فاتورة، دفع على دفعات، لا حذف (تحديث فقط).</p><p class="ar"><strong>REQ-F8</strong>: الموظفون — إضافة، تعيين أقسام، رؤية بيانات محدودة.</p><p class="ar"><strong>REQ-F9</strong>: المصادقة — bcrypt آمن، JWT، قفل بعد 5 محاولات.</p><p class="ar"><strong>REQ-F10</strong>: التدقيق — تسجيل كل عملية (من، ماذا، متى، IP).</p><h4 class="sub2">المتطلّبات غير الوظيفية</h4><p class="ar"><strong>الأمان</strong>: RBAC (7 أدوار، 68 صلاحية)، RLS (21 سياسة)، bcrypt، JWT، قفل الحسابات، تدقيق append-only، تقنيع البيانات، OWASP (SQL injection, XSS, CSRF), Rate Limiting (100/دقيقة عام، 10/دقيقة دخول), Helmet headers.</p><p class="ar"><strong>الأداء</strong>: &lt; 100ms للطلبات الشائعة، &lt; 500ms للبحث.</p><p class="ar"><strong>الموثوقية</strong>: FK، UNIQUE، CHECK، NOT NULL، نسخ احتياطية دورية.</p><p class="ar"><strong>الجودة</strong>: اختبارات &gt; 80% coverage، CI/CD GitHub Actions، توثيق شامل (ERD، RBAC-MATRIX، Setup Guide).</p>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 04 / 13</span>
@@ -258,8 +258,8 @@ table.cmp td.udp { color:#047857; }
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">05 / 13</div>
   </div>
-  <h2 class="section"><span class="num">05</span>تصميم قاعدة البيانات والكيانات الأساسية</h2>
-  <h3 class="sub">1. أساليب التصميم والتطبيع</h3><p class="ar">يقوم مخطط قاعدة البيانات على مبادئ التطبيع الثلاثي (Third Normal Form — 3NF) وصيغة بويس-كود (Boyce-Codd Normal Form — BCNF) لضمان عدم تكرار البيانات وسلامتها. تحتوي القاعدة على <strong>22 جدول</strong> موزعة على 9 مجموعات وظيفية مترابطة عبر مفاتيح أجنبية (Foreign Keys) بشكل منطقي ومحكم.</p><div class="diagram-frame">
+  <h2 class="section"><span class="num">05</span>تصميم قاعدة البيانات</h2>
+  <h3 class="sub">البنية الأساسية</h3><p class="ar"><strong>22 جدول</strong> موزعة على 9 مجموعات:</p><div class="diagram-frame">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 400" class="diagram-svg" dir="ltr">
   <rect width="820" height="400" fill="#fafafa" rx="8"/>
   <text x="410" y="32" text-anchor="middle" font-family="Inter,Arial" font-size="16" font-weight="700" fill="#0f172a">22 جدولاً موزّعة على 9 مجموعات وظيفية</text>
@@ -302,47 +302,16 @@ table.cmp td.udp { color:#047857; }
     <text x="748" y="192" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" font-weight="700" fill="#475569">2</text>
     <text x="748" y="348" text-anchor="middle" font-family="Inter,Arial" font-size="11" font-weight="700" fill="#0f172a">Audit</text>
     <text x="748" y="363" text-anchor="middle" font-family="Cairo,Arial" font-size="10.5" fill="#64748b">التدقيق</text>
-</svg><div class="diagram-caption"><span class="id">DIAGRAM 01</span><span class="txt">Functional distribution of the 22 tables across 9 groups</span><span class="ar">توزيع الجداول الـ22 على المجموعات الوظيفية التسع</span></div></div><h4 class="sub2">1.1 مثال توضيحي: تطبيع جدول الموظفين</h4><p class="ar">قبل التطبيع، قد يجمع جدول واحد بين بيانات الموظف والتخصص:</p><pre><code>staff (id, name, specialization, license_number, years_exp, dept_name, head_staff)
-</code></pre><p class="ar">بعد تطبيق 3NF والفصل، أصبح لدينا:</p><ul class="tech"><li><strong>جدول staff</strong>: (id, first_name, last_name, national_id, phone, email, staff_type, department_id)</li><li><strong>جدول doctors</strong>: (id, staff_id*, specialty, license_number, years_of_experience) — علاقة 1:1</li><li><strong>جدول nurses</strong>: (id, staff_id*, license_number, shift, ward) — علاقة 1:1</li><li><strong>جدول departments</strong>: (id, name, location, phone, head_staff_id*)</li></ul><p class="ar">هذا الفصل يحقق عدة فوائد: (أ) لا تكرار البيانات الشخصية لكل طبيب/ممرّض، (ب) لا توجد قيم فارغة (NULL) لا ضرورة لها، (ج) سهولة البحث والتحديث.</p><h4 class="sub2">1.2 معالجة التبعية الدائرية</h4><p class="ar">يوجد تبعية دائرية بين <code>departments</code> و <code>staff</code>: رئيس القسم هو موظف (staff)، لكن الموظف مرتبط بقسم. حُلّت عبر:</p><pre><code>-- أولاً: إنشاء الجدولين بدون الـ FK للرئيس
-CREATE TABLE departments (..., head_staff_id BIGINT,);
-CREATE TABLE staff (..., department_id BIGINT REFERENCES departments(id),);
-
--- ثانياً: إضافة الـ FK بعد وجود جدول staff
-ALTER TABLE departments
-    ADD CONSTRAINT fk_departments_head_staff
-    FOREIGN KEY (head_staff_id) REFERENCES staff(id);
-</code></pre><p class="ar">هذا الحل يسمح بوجود التبعية دون تضارب في ترتيب الإنشاء.</p><hr class="rule"><h3 class="sub">2. الجداول الـ22 والمجموعات التسع</h3><h4 class="sub2">المجموعة الأولى: RBAC (الأدوار والصلاحيات)</h4><p class="ar"><strong>الجداول الثلاثة:</strong></p><ul class="tech"><li><strong>roles</strong> (7 أدوار): admin, doctor, nurse, receptionist, lab_technician, pharmacist, patient</li><li><strong>permissions</strong> (68 صلاحية): بصيغة <code>resource:action</code> مثل <code>medical_records:read</code>, <code>prescriptions:dispense</code></li><li><strong>role_permissions</strong> (علاقة N:M): تربط كل دور بصلاحياته بمرونة عالية</li></ul><p class="ar">الفائدة: إذا أردنا إضافة دور جديد أو تعديل الصلاحيات، نعدّل هذه الجداول فقط دون تغيير الكود.</p><h4 class="sub2">المجموعة الثانية: المنظمة (الأقسام والموظفون)</h4><p class="ar"><strong>الجداول الأربعة:</strong></p><ul class="tech"><li><strong>departments</strong>: الأقسام (الباطنية، الجراحة، المختبر...)</li><li><strong>staff</strong>: جميع الموظفين (عمود staff_type يحدد نوعهم)</li><li><strong>doctors</strong>: بيانات متخصصة (specialty, license_number, consultation_fee)</li><li><strong>nurses</strong>: بيانات متخصصة (shift, ward)</li></ul><p class="ar">العلاقات:</p><ul class="tech"><li>1:N من departments إلى staff</li><li>1:1 من staff إلى doctors و nurses (اختياري)</li></ul><h4 class="sub2">المجموعة الثالثة: الهوية والمصادقة</h4><p class="ar"><strong>جداول الثلاثة:</strong></p><ul class="tech"><li><strong>users</strong>: حسابات الدخول (username, email, password_hash)</li><li><strong>user_roles</strong> (N:M): تسند أدوار للمستخدمين</li><li><strong>patients</strong>: بيانات ديموغرافية منفصلة (medical_record_number, blood_type, emergency_contact)</li></ul><p class="ar">الفكرة الجوهرية: <strong>فصل مستوى الهوية (users) عن مستوى البيانات (staff/patients)</strong>. مستخدم واحد (users.id) قد يكون موظّف (users.staff_id) أو مريض (users.patient_id) أو كليهما (نادرة).</p><h4 class="sub2">المجموعات الأخرى (4-9):</h4><ul class="tech"><li><strong>المواعيد</strong> (appointments): N:M بين المرضى والأطباء</li><li><strong>السجلات الطبية</strong> (medical_records, diagnoses): 1:N من المرضى</li><li><strong>الأدوية والوصفات</strong> (medications, prescriptions, prescription_items): N:M مع بنود</li><li><strong>المختبر</strong> (lab_tests, lab_orders): طلبات وإدارة النتائج</li><li><strong>الفوترة</strong> (invoices, invoice_items, payments): الإدارة المالية</li><li><strong>التدقيق</strong> (audit_logs): سجل append-only</li></ul><hr class="rule"><h3 class="sub">3. أنواع العلاقات (Relations)</h3><h4 class="sub2">العلاقات 1:1 (اثنتان)</h4><p class="ar"><strong>doctors و nurses من staff:</strong></p><pre><code>CREATE TABLE doctors (
-    id BIGSERIAL PRIMARY KEY,
-    staff_id BIGINT NOT NULL UNIQUE REFERENCES staff(id),
-    -- وحيد: كل موظّف طبيب له سجل doctor واحد فقط
-);
-</code></pre><p class="ar">أي موظّف من نوع <code>doctor</code> يملك سجل واحد فقط في جدول doctors.</p><h4 class="sub2">العلاقات 1:N (16 علاقة)</h4><p class="ar"><strong>مثال:</strong></p><ul class="tech"><li>1 مريض → N سجل طبي (medical_records)</li><li>1 قسم → N موظّف (staff)</li><li>1 وصفة → N بند وصفة (prescription_items)</li></ul><p class="ar">هذا الفصل يدعم التطبيع ويسهّل الاستعلام (مثل: "كل سجلات المريض ABC").</p><h4 class="sub2">العلاقات N:M (ثلاث)</h4><p class="ar"><strong>الثلاث علاقات N:M:</strong></p><p class="ar">1. <strong>role_permissions</strong>: أي دور يملك أي صلاحيات (جداول ثالثة)</p><p class="ar">2. <strong>user_roles</strong>: أي مستخدم له أي أدوار (جداول ثالثة)</p><p class="ar">3. <strong>prescription_items</strong>: ربط prescriptions مع medications (جداول ثالثة بأعمدة إضافية: dosage, frequency, duration_days)</p><hr class="rule"><h3 class="sub">4. الفهارس والأداء</h3><p class="ar">المشروع يحتوي على <strong>28+ فهرس</strong> موضوعة بذكاء:</p><h4 class="sub2">فهارس المفاتيح الأجنبية</h4><pre><code>CREATE INDEX idx_users_staff_id   ON users(staff_id);
-CREATE INDEX idx_users_patient_id ON users(patient_id);
-CREATE INDEX idx_staff_department_id ON staff(department_id);
-</code></pre><p class="ar">هذه تسرّع الاستعلامات التي تجمع (JOINs) على هذه العلاقات.</p><h4 class="sub2">فهارس جزئية (Partial Indexes)</h4><pre><code>CREATE INDEX idx_appointments_upcoming ON appointments(scheduled_at)
- WHERE status = 'scheduled';
-</code></pre><p class="ar">فقط المواعيد المجدولة (ليست المكتملة/الملغاة) تُفهرس، مما يوفر مساحة ويسرّع البحث عن "المواعيد القادمة".</p><h4 class="sub2">فهرس مركّب (Composite Index)</h4><pre><code>CREATE INDEX idx_appointments_doctor_date ON appointments(doctor_id, scheduled_at);
-</code></pre><p class="ar">يسرّع الاستعلامات من نوع: "كل مواعيد الطبيب في تاريخ معين".</p><hr class="rule"><h3 class="sub">5. قيود السلامة والبيانات</h3><p class="ar">قاعدة البيانات نفسها تفرض القيود (Constraints):</p><pre><code>-- CHECK: فصيلة الدم من 8 خيارات فقط
+</svg><div class="diagram-caption"><span class="id">DIAGRAM 01</span><span class="txt">Functional distribution of the 22 tables across 9 groups</span><span class="ar">توزيع الجداول الـ22 على المجموعات الوظيفية التسع</span></div></div><ul class="tech"><li><strong>RBAC</strong> (4 جداول): roles (7)، permissions (68)، role_permissions، user_roles</li><li><strong>المنظمة</strong> (4): departments، staff، doctors، nurses</li><li><strong>المرضى</strong> (2): patients، users</li><li><strong>الخدمات السريرية</strong> (7): appointments، medical_records، diagnoses، prescriptions، prescription_items، lab_tests، lab_orders</li><li><strong>الفوترة</strong> (3): invoices، invoice_items، payments</li><li><strong>التدقيق</strong> (1): audit_logs</li></ul><h3 class="sub">التطبيع والعلاقات</h3><p class="ar"><strong>3NF/BCNF</strong>: لا تكرار بيانات، فصل الجداول حسب الموضوع. مثال: جدول staff منفصل عن doctors/nurses.</p><p class="ar"><strong>العلاقات</strong>:</p><ul class="tech"><li><strong>1:1</strong>: doctors/nurses من staff (UNIQUE)</li><li><strong>1:N</strong>: 16 علاقة (مثل: 1 مريض → N سجل طبي)</li><li><strong>N:M</strong>: 3 علاقات (role_permissions, user_roles, prescription_items)</li></ul><h3 class="sub">قيود السلامة</h3><pre><code>-- CHECK: فصيلة الدم من 8 خيارات
 blood_type VARCHAR(3) CHECK (blood_type IN ('A+','A-','B+','B-','AB+','AB-','O+','O-'))
 
 -- CHECK: نوع الموظّف من 6 خيارات
-staff_type VARCHAR(30) CHECK (staff_type IN ('doctor','nurse','receptionist','lab_technician','pharmacist','admin'))
+staff_type VARCHAR(30) CHECK (staff_type IN ('doctor','nurse','receptionist',...)
 
--- CHECK: حالة الموعد من 4 خيارات
-status VARCHAR(20) CHECK (status IN ('scheduled','completed','cancelled','no_show'))
-
--- CHECK: المستخدم إمّا موظّف أو مريض (لا كليهما بلا حد)
-CONSTRAINT chk_users_staff_or_patient CHECK (staff_id IS NOT NULL OR patient_id IS NOT NULL)
-
--- UNIQUE: لا موعدان للطبيب نفسه في نفس الوقت
+-- UNIQUE: لا موعدان للطبيب في نفس الوقت
 UNIQUE (doctor_id, scheduled_at)
-</code></pre><p class="ar">هذه القيود تمنع إدراج بيانات غير صحيحة في المستوى الأساسي قبل وصولها للتطبيق.</p><hr class="rule"><h3 class="sub">6. الأعمدة الخاصة والبيانات المرنة</h3><h4 class="sub2">JSONB للمرونة</h4><pre><code>-- العلامات الحيوية: مرنة وقابلة للتوسع
-vital_signs JSONB
--- مثال: {"bp":"120/80","pulse":78,"temp":36.8,"o2_saturation":98}
-</code></pre><p class="ar">بدلاً من إنشاء جداول منفصلة لكل علامة (مما يعقد الهيكل)، نخزّن JSON يدعم أي عدد من المقاييس.</p><h4 class="sub2">الأعمدة المحسوبة (Generated)</h4><pre><code>line_total NUMERIC(12,2) GENERATED ALWAYS AS (quantity * unit_price) STORED
-</code></pre><p class="ar">حقل الإجمالي في بنود الفاتورة يُحسب تلقائياً من الكمية والسعر، ولا يُخزَّن يدوياً (تجنب الخطأ الحسابي).</p><h4 class="sub2">الطوابع الزمنية</h4><pre><code>created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-</code></pre><p class="ar">كل صفّ يحمل طابع إنشاء/تحديث تلقائياً، مفيد للتدقيق والفرز الزمني.</p><hr class="rule"><p class="ar">هذا التصميم المتقن يوازن بين الأمان والأداء والمرونة، مما يجعله مناسباً للبيئة الطبية الحقيقية.</p>
+</code></pre><h3 class="sub">الفهارس والأداء</h3><p class="ar"><strong>28+ فهرس</strong> موضوعة بذكاء:</p><ul class="tech"><li>فهارس المفاتيح الأجنبية (سرعة JOIN)</li><li>فهارس جزئية (partial indexes) للبيانات الفعالة</li><li>فهارس مركّبة (composite) للاستعلامات الشائعة</li></ul><p class="ar">مثال:</p><pre><code>CREATE INDEX idx_appointments_doctor_date ON appointments(doctor_id, scheduled_at);
+</code></pre>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 05 / 13</span>
@@ -353,8 +322,13 @@ updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">06 / 13</div>
   </div>
-  <h2 class="section"><span class="num">06</span>المعمارية ثلاثية الطبقات والقرارات التقنية</h2>
-  <h3 class="sub">1. نموذج المعمارية ثلاثي الطبقات (Three-Tier Architecture)</h3><p class="ar">نظام المستشفى مبني على نموذج معماري كلاسيكي متكامل يفصل المسؤوليات بوضوح:</p><div class="diagram-frame">
+  <h2 class="section"><span class="num">06</span>المعمارية ثلاثية الطبقات</h2>
+  <h3 class="sub">البنية الكلية</h3><pre><code>Frontend (HTML/CSS/JS) ← عربي RTL
+        ↓ HTTP/HTTPS
+Backend (Node.js + Express) ← تحكم وسيط
+        ↓ SQL + RLS
+Database (PostgreSQL 15) ← فرض الأمان
+</code></pre><h3 class="sub">طبقة العرض (Frontend)</h3><p class="ar"><strong>الملفات</strong>: index.html (دخول)، dashboard.html (لوحة حسب الدور)، css/style.css (RTL)، js/api.js (HTTP wrapper)، js/auth.js (المصادقة)، js/dashboard.js (العمليات).</p><div class="diagram-frame">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 430" class="diagram-svg" dir="ltr">
   <defs>
     <linearGradient id="ttF" x1="0" x2="1"><stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#6366f1"/></linearGradient>
@@ -387,297 +361,7 @@ updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
   <text x="540" y="242" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#1e293b">SQL</text>
   <text x="410" y="305" text-anchor="middle" font-family="Cairo,Arial" font-size="10.5" fill="#64748b">مسار الاستجابة (Response)</text>
   <text x="410" y="345" text-anchor="middle" font-family="Cairo,Arial" font-size="11.5" font-weight="700" fill="#0f172a">كل طبقة تفرض حدوداً أمنية مستقلّة — Defense in Depth</text>
-</svg><div class="diagram-caption"><span class="id">DIAGRAM 02</span><span class="txt">Three-tier architecture — secure request flow</span><span class="ar">المعمارية ثلاثية الطبقات وتدفّق الطلب الآمن</span></div></div><pre><code>┌─────────────────────────────────────┐
-│  الطبقة الأولى: العرض (Presentation)
-│  ✓ Frontend (Vanilla JavaScript + HTML/CSS)
-│  ✓ واجهات مستخدم RTL بالعربية
-│  ✓ نماذج، جداول بيانات، لوحات تحكم
-└────────────────┬────────────────────┘
-                 │ HTTP/HTTPS
-                 ↓
-┌─────────────────────────────────────┐
-│  الطبقة الثانية: التطبيق (Application)
-│  ✓ Backend: Node.js + Express 4.19
-│  ✓ Controllers: منطق العمل
-│  ✓ Middleware: مصادقة، RBAC، معالجة الأخطاء
-│  ✓ Routes: تعريف المسارات والـ Endpoints
-│  ✓ Authentication/Authorization: JWT + bcryptjs
-└────────────────┬────────────────────┘
-                 │ SQL + TCPv4
-                 ↓
-┌─────────────────────────────────────┐
-│  الطبقة الثالثة: البيانات (Data)
-│  ✓ PostgreSQL 15+ DBMS
-│  ✓ قاعدة بيانات: 22 جدول
-│  ✓ RLS: 21 سياسة على 7 جداول
-│  ✓ Triggers: نظام التدقيق
-│  ✓ Views: إخفاء وتقنيع البيانات
-└─────────────────────────────────────┘
-</code></pre><h4 class="sub2">1.1 لماذا ثلاث طبقات؟</h4><p class="ar"><strong>فصل المسؤوليات:</strong></p><ul class="tech"><li><strong>Frontend</strong> لا يعرف تفاصيل قاعدة البيانات → سهل التغيير أو الاستبدال</li><li><strong>Backend</strong> يوسّط بين الواجهة والبيانات → منطق العمل المركزي</li><li><strong>Database</strong> تفرض القواعد بنفسها (لا تعتمد على التطبيق) → أمان متعدد الطبقات</li></ul><p class="ar"><strong>الفوائد الأمنية:</strong></p><ul class="tech"><li>لا وصول مباشر من Frontend للـ Database</li><li>كل طلب يمر عبر Backend الذي يفرض RBAC و RLS</li><li>قاعدة البيانات تفرض الحد الأدنى من الامتياز حتى لو اخترق المهاجم Backend</li></ul><p class="ar"><strong>سهولة الصيانة:</strong></p><ul class="tech"><li>تحديث Frontend لا يتطلب تغيير Backend</li><li>تحديث خوارزميات Backend لا يتطلب تغيير Database</li><li>تطوير متوازي لفريق واحد أو أكثر</li></ul><hr class="rule"><h3 class="sub">2. طبقة العرض (Frontend)</h3><h4 class="sub2">2.1 البنية التقنية</h4><p class="ar"><strong>ملفات رئيسية:</strong></p><ul class="tech"><li><strong>index.html</strong>: صفحة تسجيل الدخول (login form)</li><li><strong>dashboard.html</strong>: لوحة المعلومات (تختلف حسب الدور)</li><li><strong>css/style.css</strong>: تنسيقات RTL احترافية بالعربية</li><li><strong>js/api.js</strong>: طبقة التواصل مع الـ API (Fetch wrapper)</li><li><strong>js/auth.js</strong>: منطق المصادقة والتسجيل</li><li><strong>js/dashboard.js</strong>: منطق الصفحات والعمليات</li></ul><h4 class="sub2">2.2 مثال: تسجيل الدخول</h4><pre><code>// js/auth.js
-async function handleLogin(username, password) {
-    // 1. إرسال بيانات المستخدم للـ Backend
-    const response = await fetch('http://localhost:3000/api/v1/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    });
-
-    const data = await response.json();
-    
-    if (response.ok) {
-        // 2. حفظ JWT في localStorage
-        localStorage.setItem('token', data.token);
-        // 3. توجيه للوحة المعلومات
-        window.location.href = 'dashboard.html';
-    } else {
-        // عرض رسالة خطأ
-        alert('فشل تسجيل الدخول: ' + data.message);
-    }
-}
-</code></pre><p class="ar">لاحظ:</p><ul class="tech"><li><strong>بدون كلمة مرور مُخزّنة</strong> في Frontend (تُرسل مرة واحدة فقط)</li><li><strong>JWT محفوظ بأمان</strong> نسبي (يُضاف لكل طلب بعدها)</li><li><strong>لا منطق عمل</strong> معقد (كل شيء يمر عبر Backend)</li></ul><h4 class="sub2">2.3 الطبقة الثانية في Frontend: API Wrapper</h4><pre><code>// js/api.js
-const API_BASE = 'http://localhost:3000/api/v1';
-
-async function apiCall(endpoint, options = {}) {
-    const token = localStorage.getItem('token');
-    const headers = {
-        'Content-Type': 'application/json',
-        ...(token &amp;&amp; { 'Authorization': `Bearer ${token}` })
-    };
-    
-    const response = await fetch(`${API_BASE}${endpoint}`, {
-        ...options,
-        headers: { ...headers, ...options.headers }
-    });
-    
-    return response.json();
-}
-
-// استخدام:
-const patients = await apiCall('/patients');
-</code></pre><p class="ar">هذا يوحّد طريقة الاتصال ويسهّل إضافة logic مشترك (مثل التعامل مع انتهاء الـ JWT).</p><hr class="rule"><h3 class="sub">3. طبقة التطبيق (Backend — Node.js + Express)</h3><h4 class="sub2">3.1 بنية المشروع</h4><pre><code>backend/src/
-├── server.js                    # نقطة الدخول
-├── app.js                       # إعدادات Express
-├── config/db.js                 # اتصال PostgreSQL + RLS
-├── middleware/
-│   ├── auth.js                  # التحقق من JWT
-│   └── rbac.js                  # التحقق من الصلاحيات
-├── controllers/
-│   ├── authController.js        # تسجيل دخول، تسجيل
-│   ├── patientsController.js    # CRUD للمرضى
-│   ├── medicalRecordsController.js
-│   └── ...
-├── routes/
-│   ├── auth.js
-│   ├── patients.js
-│   └── ...
-└── utils/
-    ├── AppError.js              # فئة الخطأ الموحّدة
-    └── asyncHandler.js          # لفافة try/catch
-</code></pre><h4 class="sub2">3.2 تدفق الطلب (Request Flow)</h4><pre><code>GET /api/v1/patients
-    ↓
-[CORS Middleware]
-    ↓
-[Body Parser]
-    ↓
-[Authentication Middleware] ← التحقق من JWT
-    ↓
-[RBAC Middleware] ← التحقق من permission: 'patients:read'
-    ↓
-[Route Handler]
-    ↓
-[patientsController.getAll()]
-    ↓
-[withUserContext] ← تفعيل RLS: SET LOCAL app.current_user_id
-    ↓
-[Database Query] ← PostgreSQL يفرض السياسات
-    ↓
-[Response JSON]
-</code></pre><h4 class="sub2">3.3 مثال: Middleware المصادقة</h4><pre><code>// middleware/auth.js
-const jwt = require('jsonwebtoken');
-
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader &amp;&amp; authHeader.split(' ')[1]; // Bearer TOKEN
-    
-    if (!token) {
-        return res.status(401).json({ error: 'No token provided' });
-    }
-    
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) =&gt; {
-        if (err) return res.status(403).json({ error: 'Invalid token' });
-        
-        // فك تشفير التوكن وحفظ معلومات المستخدم
-        req.user = {
-            id: decoded.id,
-            roles: decoded.roles,
-            permissions: decoded.permissions
-        };
-        next();
-    });
-}
-
-module.exports = authenticateToken;
-</code></pre><p class="ar">لاحظ: التوكن يحتوي على الأدوار والصلاحيات <strong>مسبقاً</strong> (لتجنب استعلام DB في كل طلب).</p><h4 class="sub2">3.4 مثال: Middleware RBAC</h4><pre><code>// middleware/rbac.js
-function requirePermission(permissionCode) {
-    return (req, res, next) =&gt; {
-        if (!req.user.permissions.includes(permissionCode)) {
-            return res.status(403).json({
-                error: 'Insufficient permissions',
-                required: permissionCode
-            });
-        }
-        next();
-    };
-}
-
-// الاستخدام في Routes:
-router.get('/patients', 
-    authenticateToken,              // طبقة 1: تحقق من JWT
-    requirePermission('patients:read'),  // طبقة 2: تحقق من الصلاحية
-    asyncHandler(patientsController.getAll)  // طبقة 3: المنطق الفعلي
-);
-</code></pre><h4 class="sub2">3.5 تفعيل RLS: withUserContext</h4><pre><code>// config/db.js
-const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
-
-// دالة تفعّل RLS بضبط سياق الجلسة
-function withUserContext(userId, role, callback) {
-    return pool.query(
-        `BEGIN TRANSACTION;
-         SET LOCAL app.current_user_id = $1;
-         SET LOCAL app.current_role    = $2;` +
-        callback,
-        [userId, role]
-    );
-}
-
-// الاستخدام:
-const patients = await withUserContext(
-    req.user.id,
-    req.user.roles.join(','),  // مثل: 'doctor,nurse'
-    'SELECT * FROM patients;'   // PostgreSQL سيطبّق RLS تلقائياً
-);
-</code></pre><hr class="rule"><h3 class="sub">4. طبقة البيانات (PostgreSQL)</h3><h4 class="sub2">4.1 العمليات الأساسية مع RLS</h4><p class="ar">عندما تُنفّذ استعلام في Backend:</p><pre><code>// Backend تشغيل:
-SET LOCAL app.current_user_id = 5;
-SET LOCAL app.current_role    = 'doctor';
-SELECT * FROM patients;
-
-// PostgreSQL تطبّق السياسات تلقائياً:
-SELECT * FROM patients
-WHERE app_has_role('admin')              -- Doctor لا يملك هذا
-OR app_has_role('receptionist')          -- Doctor لا يملك هذا
-OR id = app_current_patient_id()         -- Doctor لا يملك هذا (ليس مريضاً)
-OR EXISTS (                              -- Doctor يملك هذا!
-    SELECT 1 FROM medical_records mr
-    WHERE mr.patient_id = patients.id
-      AND mr.doctor_id = app_current_doctor_id()  -- فقط مرضاه
-);
-</code></pre><p class="ar">النتيجة: يرى الطبيب <strong>مرضاه فقط</strong> بدون أن يُضطر Backend لكتابة حالات مشروطة معقدة.</p><h4 class="sub2">4.2 دور التطبيق (app_role)</h4><pre><code>CREATE ROLE app_role
-    LOGIN
-    PASSWORD 'change_me_in_production'
-    NOSUPERUSER              -- ليس superuser
-    NOBYPASSRLS              -- يخضع لسياسات RLS (مهمّ!)
-    NOCREATEDB
-    NOCREATEROLE;
-
--- إعطاء صلاحيات محدودة
-GRANT USAGE ON SCHEMA public TO app_role;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO app_role;
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO app_role;
-
--- منع التعديل على سجل التدقيق (append-only)
-REVOKE UPDATE, DELETE ON audit_logs FROM app_role;
-
--- منع الكتابة المباشرة على جداول RBAC
-REVOKE INSERT, UPDATE, DELETE ON roles, permissions, role_permissions FROM app_role;
-</code></pre><p class="ar">هذا الدور يستخدمه التطبيق في <code>.env</code>:</p><pre><code>DATABASE_URL=postgresql://app_role:change_me@localhost:5432/hospital_db
-</code></pre><hr class="rule"><h3 class="sub">5. دفاع متعدد الطبقات (Defense in Depth)</h3><pre><code>طبقة 1 — Frontend
-├─ عدم تخزين كلمات مرور
-├─ HTTPS فقط (إنتاج)
-└─ التحقق من الإدخال (Client-side)
-
-طبقة 2 — Backend
-├─ التحقق من JWT (expiration, signature)
-├─ التحقق من RBAC (permission code)
-├─ Helmet (رؤوس HTTP الأمنية)
-├─ Rate Limiting (حماية من DoS)
-├─ CORS (بدون * — محصور برأصل واحد)
-└─ Prepared Statements (منع SQL injection)
-
-طبقة 3 — Database
-├─ RLS (Row-Level Security)
-├─ Audit Logging (تسجيل كل عملية)
-├─ Append-Only (لا تعديل السجلات)
-├─ Constraints (CHECK, UNIQUE, FK)
-├─ Data Masking (إخفاء البيانات الحسّاسة)
-└─ app_role (لا bypassrls)
-</code></pre><p class="ar">إذا اخترق المهاجم <strong>طبقة واحدة فقط</strong>، لا يستطيع:</p><ul class="tech"><li>الوصول للبيانات: يحجبها RLS</li><li>العبث بالسجلات: Audit logs أثبتت الجريمة</li><li>قراءة بيانات حسّاسة: Data masking أخفتها</li></ul><hr class="rule"><h3 class="sub">6. مثال عملي شامل: طبيب ينشئ سجل طبي</h3><h4 class="sub2">Step 1: Frontend — الطبيب يملأ النموذج</h4><pre><code>// dashboard.js
-const medicalRecord = {
-    patient_id: 5,
-    chief_complaint: 'آلام في الصدر',
-    vital_signs: {
-        bp: '140/90',
-        pulse: 95,
-        temp: 37.5
-    }
-};
-
-// إرسال للـ Backend مع JWT
-await apiCall('/medical-records', {
-    method: 'POST',
-    body: JSON.stringify(medicalRecord)
-});
-</code></pre><h4 class="sub2">Step 2: Backend — الطلب يصل</h4><pre><code>// routes/medicalRecords.js
-router.post('/medical-records',
-    authenticateToken,                        // Step A: فك JWT
-    requirePermission('medical_records:create'), // Step B: تحقق من الصلاحية
-    asyncHandler(async (req, res) =&gt; {
-        // Step C: تفعيل RLS
-        const result = await withUserContext(
-            req.user.id,
-            req.user.roles,
-            `INSERT INTO medical_records (patient_id, doctor_id, visit_date, chief_complaint, vital_signs)
-             VALUES ($1, app_current_doctor_id(), NOW(), $2, $3)
-             RETURNING *;`,
-            [req.body.patient_id, req.body.chief_complaint, JSON.stringify(req.body.vital_signs)]
-        );
-        res.json(result.rows[0]);
-    })
-);
-</code></pre><h4 class="sub2">Step 3: PostgreSQL — تفعيل RLS والتدقيق</h4><pre><code>-- PostgreSQL:
-BEGIN TRANSACTION;
-SET LOCAL app.current_user_id = 10;        -- معرّف الطبيب
-SET LOCAL app.current_role = 'doctor';
-SET LOCAL app.client_ip = '192.168.1.100';
-
--- INSERT
-INSERT INTO medical_records (...) VALUES (...);
--- ✓ RLS policy: يملك الطبيب صلاحية الإنشاء؟ نعم (medical_records_insert)
-
--- TRIGGER: تسجيل التدقيق
-INSERT INTO audit_logs (
-    user_id, action, entity_type, entity_id,
-    new_values, ip_address, created_at
-) VALUES (
-    10, 'INSERT', 'medical_records', 42,
-    '{"patient_id":5,"doctor_id":8,...}',
-    '192.168.1.100'::INET, NOW()
-);
-
-COMMIT;
-</code></pre><h4 class="sub2">Step 4: الاستجابة للـ Frontend</h4><pre><code>{
-  "id": 42,
-  "patient_id": 5,
-  "doctor_id": 8,
-  "visit_date": "2026-06-30T14:30:00Z",
-  "chief_complaint": "آلام في الصدر",
-  "vital_signs": { "bp": "140/90", "pulse": 95, "temp": 37.5 }
-}
-</code></pre><p class="ar"><strong>لاحظ:</strong> إذا حاول طبيب آخر قراءة هذا السجل:</p><pre><code>SET LOCAL app.current_user_id = 11;  -- طبيب آخر
-SET LOCAL app.current_role = 'doctor';
-SELECT * FROM medical_records WHERE id = 42;
--- ✗ RLS: لا توجد سياسة تسمح له برؤية سجل طبيب آخر
--- النتيجة: صفحة فارغة (0 صفوف)
-</code></pre><hr class="rule"><p class="ar">هذا التصميم المتقن يضمن أن كل طلب:</p><p class="ar">1. <strong>مصرّح</strong> (توكن صحيح + صلاحيات)</p><p class="ar">2. <strong>محدود</strong> (RLS يحدّد الصفوف المرئية)</p><p class="ar">3. <strong>مسجّل</strong> (كل عملية في audit_logs)</p><p class="ar">4. <strong>معزول</strong> (معاملة منفصلة لكل طلب)</p>
+</svg><div class="diagram-caption"><span class="id">DIAGRAM 02</span><span class="txt">Three-tier architecture — secure request flow</span><span class="ar">المعمارية ثلاثية الطبقات وتدفّق الطلب الآمن</span></div></div><p class="ar"><strong>7 واجهات مختلفة</strong> حسب الدور: Admin، Doctor، Nurse، Receptionist، Lab Technician، Pharmacist، Patient.</p><h3 class="sub">طبقة التطبيق (Backend)</h3><p class="ar"><strong>الهيكل</strong>:</p><ul class="tech"><li><strong>server.js</strong>: نقطة الدخول</li><li><strong>app.js</strong>: إعداد Express + Middleware</li><li><strong>config/db.js</strong>: PostgreSQL Pool + withUserContext (تفعيل RLS)</li><li><strong>middleware/</strong>: auth (JWT)، rbac (صلاحيات)</li><li><strong>controllers/</strong>: منطق الأعمال (9 controllers)</li><li><strong>routes/</strong>: تعريف 30+ endpoint</li><li><strong>utils/</strong>: AppError، asyncHandler</li></ul><p class="ar"><strong>الأمان</strong>:</p><ul class="tech"><li><strong>JWT</strong>: 15 دقيقة مع roles وpermissions</li><li><strong>RBAC</strong>: requireRole، requirePermission، requireAnyPermission</li><li><strong>Helmet</strong>: رؤوس HTTP أمنية</li><li><strong>CORS</strong>: محصور برأصل واحد</li><li><strong>Rate Limiting</strong>: 100/دقيقة عام، 10/دقيقة login</li></ul><h3 class="sub">تدفق الطلب</h3><p class="ar">1. Frontend يرسل JWT في Authorization header</p><p class="ar">2. authenticateToken: يفك JWT ويملأ req.user</p><p class="ar">3. requirePermission: يفحص الصلاحيات</p><p class="ar">4. Controller: يستدعي withUserContext(userId, roles, SQL)</p><p class="ar">5. PostgreSQL: يفعّل RLS تلقائياً (SET LOCAL)، ينفذ الاستعلام، ينطلق audit trigger</p><p class="ar">6. Response: يرد 200/403/404 مع البيانات أو الخطأ</p><h3 class="sub">طبقة البيانات</h3><p class="ar"><strong>RLS تطبيق</strong>: معاملات منفصلة، SET LOCAL app.current_user_id، تطبيق سياسات تلقائياً.</p><p class="ar"><strong>app_role</strong>: دور التطبيق بـ NOBYPASSRLS لفرض RLS حتى عند الاختراق.</p><p class="ar"><strong>Audit Triggers</strong>: 22 trigger على الجداول الحسّاسة تسجل كل INSERT/UPDATE/DELETE.</p>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 06 / 13</span>
@@ -688,8 +372,8 @@ SELECT * FROM medical_records WHERE id = 42;
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">07 / 13</div>
   </div>
-  <h2 class="section"><span class="num">07</span>نموذج RBAC والتحكم على مستوى الصف (RLS)</h2>
-  <h3 class="sub">1. نموذج RBAC (Role-Based Access Control)</h3><p class="ar">نظام التحكم بالوصول القائم على الأدوار يوفر طريقة منظمة لإدارة الصلاحيات عبر فئات من المستخدمين.</p><div class="callout"><div class="tag">المبدأ · Principle</div><p><strong>RBAC يقرّر ما يُسمح فعله، وRLS يقرّر أي صفوف تُرى.</strong> الطبقتان متكاملتان لا بديلتان؛ فلو سقطت طبقة التطبيق تبقى سياسات RLS تحرس البيانات على مستوى المحرّك نفسه.</p></div><div class="diagram-frame">
+  <h2 class="section"><span class="num">07</span>نموذج RBAC و RLS</h2>
+  <h3 class="sub">RBAC — 7 أدوار، 68 صلاحية</h3><p class="ar"><strong>الأدوار</strong>:</p><div class="callout"><div class="tag">المبدأ · Principle</div><p><strong>RBAC يقرّر ما يُسمح فعله، وRLS يقرّر أي صفوف تُرى.</strong> الطبقتان متكاملتان لا بديلتان؛ فلو سقطت طبقة التطبيق تبقى سياسات RLS تحرس البيانات على مستوى المحرّك نفسه.</p></div><div class="diagram-frame">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 776 449" class="diagram-svg" dir="ltr">
   <rect width="776" height="449" fill="#fafafa" rx="8"/>
   <text x="388" y="34" text-anchor="middle" font-family="Inter,Arial" font-size="16" font-weight="700" fill="#0f172a">مصفوفة RBAC المبسّطة — الأدوار × الموارد</text>
@@ -701,343 +385,25 @@ SELECT * FROM medical_records WHERE id = 42;
     <rect x="120" y="-12" width="14" height="14" rx="3" fill="#bae6fd"/><text x="140" y="0" font-family="Cairo,Arial" font-size="11" fill="#334155">محدود / قراءة</text>
     <rect x="270" y="-12" width="14" height="14" rx="3" fill="#f1f5f9" stroke="#e2e8f0"/><text x="290" y="0" font-family="Cairo,Arial" font-size="11" fill="#334155">لا صلاحية</text>
   </g>
-</svg><div class="diagram-caption"><span class="id">DIAGRAM 03</span><span class="txt">Simplified RBAC matrix — roles × resources</span><span class="ar">مصفوفة RBAC المبسّطة: الأدوار مقابل الموارد</span></div></div><h4 class="sub2">1.1 البنية الثلاثية لـ RBAC</h4><pre><code>المستخدمون (Users)
-    ↓ (N:M عبر user_roles)
-الأدوار (Roles) — 7 أدوار
-    ↓ (N:M عبر role_permissions)
-الصلاحيات (Permissions) — 68 صلاحية
-</code></pre><p class="ar"><strong>الجداول الثلاثة:</strong></p><pre><code>roles (id, name, description)
--- مثال: ('doctor', 'الطبيب: قراءة سجلات المرضى، إنشاء تشخيصات')
-
-permissions (id, code, description)
--- مثل: ('medical_records:read', 'قراءة السجلات الطبية')
--- مثل: ('prescriptions:dispense', 'صرف وصفة (حالة → dispensed)')
-
-role_permissions (role_id, permission_id)
--- مثل: role_id=2 (doctor) يملك permission_id=15 (medical_records:read)
-
-user_roles (user_id, role_id)
--- مثل: user_id=5 لديه role_id=2 (doctor)
-</code></pre><h4 class="sub2">1.2 الأدوار السبعة بالتفصيل</h4><h4 class="sub2">1.2.1 Admin (مدير النظام)</h4><p class="ar"><strong>الصلاحيات:</strong> 68 صلاحية (جميع الصلاحيات)</p><p class="ar"><strong>المسؤوليات:</strong></p><ul class="tech"><li>إدارة الأدوار والصلاحيات والمستخدمين (CRUD)</li><li>إدارة الأقسام والموظفين</li><li>مراقبة سجل التدقيق (audit logs)</li><li>الوصول الكامل لجميع البيانات بلا قيود RLS</li></ul><h4 class="sub2">1.2.2 Doctor (الطبيب)</h4><p class="ar"><strong>الصلاحيات:</strong> ~25 صلاحية (تخصصية)</p><pre><code>✓ patients:read              — قراءة مرضاه (RLS)
-✓ medical_records:*          — إنشاء، قراءة، تعديل السجلات
-✓ diagnoses:*               — تشخيص
-✓ prescriptions:*           — وصف الأدوية
-✓ lab_orders:create         — طلب فحوص
-✓ appointments:read, update — رؤية مواعيده وتحديثها
-✗ invoices:*                — (بدون صلاحيات مالية)
-✗ staff management          — (إدارة الموظفين محتكرة للأدمن)
-</code></pre><p class="ar"><strong>مثال RLS:</strong></p><pre><code>-- الطبيب ID=8 ينفذ:
-SET LOCAL app.current_user_id = 10;  -- معرّف مستخدم الطبيب
+</svg><div class="diagram-caption"><span class="id">DIAGRAM 03</span><span class="txt">Simplified RBAC matrix — roles × resources</span><span class="ar">مصفوفة RBAC المبسّطة: الأدوار مقابل الموارد</span></div></div><p class="ar">1. <strong>Admin</strong>: 68 صلاحية (كاملة)</p><p class="ar">2. <strong>Doctor</strong>: ~25 صلاحية (سجلات مرضاه، تشخيصات، وصفات، طلب فحوصات)</p><p class="ar">3. <strong>Nurse</strong>: ~15 صلاحية (قراءة سجلات، تحديث علامات حيوية، تصحيح المواعيد)</p><p class="ar">4. <strong>Receptionist</strong>: ~20 صلاحية (تسجيل مرضى، حجز مواعيد، فوترة)</p><p class="ar">5. <strong>Lab Technician</strong>: ~5 صلاحيات (قراءة طلبات، إدخال نتائج)</p><p class="ar">6. <strong>Pharmacist</strong>: ~8 صلاحيات (قراءة وصفات، صرف، إدارة مخزون)</p><p class="ar">7. <strong>Patient</strong>: ~10 صلاحيات (ملفه الخاص، مواعيده، فواتيره)</p><p class="ar"><strong>الصيغة</strong>: <code>resource:action</code> (مثل: <code>patients:read</code>, <code>medical_records:create</code>, <code>prescriptions:dispense</code>).</p><h3 class="sub">RLS — 21 سياسة على 7 جداول</h3><p class="ar"><strong>الجداول المحمية</strong>:</p><ul class="tech"><li><strong>patients</strong> (3 سياسات): SELECT، INSERT، UPDATE حسب الدور والـ ID</li><li><strong>medical_records</strong> (3 سياسات): الطبيب يرى مرضاه، الممرّض يرى القسم، لا حذف</li><li><strong>appointments</strong> (3 سياسات): المريض مواعيده، الطبيب مواعيده، الاستقبال الكل</li><li><strong>diagnoses</strong> (3 سياسات): الطبيب يرى تشخيصاته، المريض يرى تشخيصاته</li><li><strong>prescriptions</strong> (3 سياسات): الطبيب ينشئ، الصيدلي يصرف، المريض يرى</li><li><strong>lab_orders</strong> (3 سياسات): الطبيب ينشئ، الفنّي ينفذ، النتائج محدودة</li><li><strong>invoices</strong> (3 سياسات): المريض يرى فواتيره، الاستقبال الكل، لا تعديل</li></ul><p class="ar"><strong>دوال المساعدة</strong>:</p><pre><code>app_current_user_id()      -- معرّف المستخدم
+app_has_role(role_text)    -- هل يملك الدور؟
+app_current_doctor_id()    -- معرّف الطبيب
+app_current_patient_id()   -- معرّف المريض
+</code></pre><h3 class="sub">مثال عملي</h3><pre><code>-- Doctor يرى مرضاه فقط
+SET LOCAL app.current_user_id = 5;    -- الطبيب
 SET LOCAL app.current_role = 'doctor';
-SELECT * FROM patients WHERE (...RLS policy...);
--- النتيجة: مرضى الطبيب فقط (المرتبطون عبر medical_records أو appointments)
-</code></pre><h4 class="sub2">1.2.3 Nurse (الممرّض)</h4><p class="ar"><strong>الصلاحيات:</strong> ~15 صلاحية (رعاية سريرية)</p><pre><code>✓ patients:read              — مرضى نطاقه (RLS)
-✓ medical_records:read       — قراءة السجلات
-✓ medical_records:update     — تحديث العلامات الحيوية فقط
-✓ diagnoses:read             — قراءة التشخيصات
-✓ appointments:read, update  — إدارة المواعيد في النطاق
-✓ prescriptions:read         — قراءة الأدوية
-✗ medical_records:create     — (الإنشاء حصري للطبيب)
-✗ invoices:*                 — (بدون صلاحيات مالية)
-</code></pre><h4 class="sub2">1.2.4 Receptionist (موظف الاستقبال)</h4><p class="ar"><strong>الصلاحيات:</strong> ~20 صلاحية (إداري)</p><pre><code>✓ patients:create, read, update   — تسجيل مرضى جدد
-✓ appointments:create, read, update — جدولة المواعيد
-✓ invoices:*                       — إصدار الفواتير
-✓ payments:create, read            — تسجيل الدفعات
-✗ medical_records:*                — (بدون وصول سريري)
-✗ diagnoses:*                      — (معلومات حسّاسة)
-✗ prescriptions:*                  — (بدون وصول)
-</code></pre><h4 class="sub2">1.2.5 Lab Technician (فنّي المختبر)</h4><p class="ar"><strong>الصلاحيات:</strong> ~5 صلاحيات (متخصصة)</p><pre><code>✓ lab_tests:read                   — كتالوج الفحوص
-✓ lab_orders:read, update          — تنفيذ الطلبات وإدخال النتائج
-✓ patients:read                    — المريض المطلوب له الفحص
-✗ medical_records:*                — (لا يرى ملف المريض السريري)
-✗ diagnoses:*                      — (بدون تشخيصات)
-</code></pre><h4 class="sub2">1.2.6 Pharmacist (الصيدلي)</h4><p class="ar"><strong>الصلاحيات:</strong> ~8 صلاحيات (إدارة أدوية)</p><pre><code>✓ medications:read, create, update — إدارة المخزون
-✓ prescriptions:read               — قراءة الوصفات
-✓ prescriptions:dispense           — صرف الوصفة فقط (تغيير الحالة)
-✓ patients:read                    — بيانات المريض الأساسية
-✗ medical_records:*                — (بدون وصول سريري)
-✗ diagnoses:*                      — (لا يرى التشخيصات)
-</code></pre><h4 class="sub2">1.2.7 Patient (المريض)</h4><p class="ar"><strong>الصلاحيات:</strong> ~10 صلاحيات (شخصية)</p><pre><code>✓ patients:read, update            — ملفه الخاص فقط (RLS محصور جداً)
-✓ medical_records:read             — سجله الطبي
-✓ diagnoses:read                   — تشخيصاته
-✓ prescriptions:read               — وصفاته
-✓ lab_orders:read                  — نتائج فحوصه
-✓ appointments:read, create, update — حجز إلغاء مواعيده
-✓ invoices:read                    — فواتيره
-✗ معظم العمليات الأخرى            — (محتكرة للموظفين)
-</code></pre><h4 class="sub2">1.3 مثال توضيحي: صلاحيات الطبيب (68 صلاحية كاملة)</h4><pre><code>-- الاستعلام الفعلي من الكود:
-INSERT INTO role_permissions (role_id, permission_id)
-SELECT r.id, p.id
-FROM roles r, permissions p
-WHERE r.name = 'doctor'
-  AND p.code IN (
-        'patients:read',
-        'departments:read', 'staff:read', 'doctors:read', 'doctors:update', 'nurses:read',
-        'appointments:read', 'appointments:update',
-        'medical_records:read', 'medical_records:create', 'medical_records:update',
-        'diagnoses:read', 'diagnoses:create', 'diagnoses:update',
-        'medications:read',
-        'prescriptions:read', 'prescriptions:create', 'prescriptions:update',
-        'prescription_items:read', 'prescription_items:create', 'prescription_items:update',
-        'lab_tests:read',
-        'lab_orders:read', 'lab_orders:create'
-  );
-</code></pre><p class="ar">هذا يعني: الطبيب يملك <strong>21 صلاحية دقيقة</strong> من أصل 68 الكلية.</p><hr class="rule"><h3 class="sub">2. Row-Level Security (RLS) في PostgreSQL</h3><p class="ar">بينما RBAC يتحكم <strong>من يستطيع فعل الفعل</strong>، RLS يتحكم <strong>أي صفوف يراها</strong>.</p><h4 class="sub2">2.1 مبدأ العمل</h4><pre><code>Query: SELECT * FROM patients;
-    ↓
-Database يطبّق RLS Policies تلقائياً:
-    ↓
-FILTERED: SELECT * FROM patients
-WHERE (
-    app_has_role('admin')              -- Admin يرى الكل
-    OR app_has_role('receptionist')    -- Receptionist يرى الكل
-    OR id = app_current_patient_id()   -- المريض يرى نفسه
-    OR EXISTS (
-        SELECT 1 FROM medical_records   -- الطبيب يرى مرضاه
-        WHERE patient_id = patients.id
-          AND doctor_id = app_current_doctor_id()
-    )
-);
-</code></pre><h4 class="sub2">2.2 الجداول المحمية (7 جداول، 40 سياسة)</h4><p class="ar">| الجدول | العدد | الأسباب الأمنية |</p><p class="ar">|--------|------|----------|</p><p class="ar">| patients | 3 سياسات | بيانات ديموغرافية حسّاسة |</p><p class="ar">| appointments | 3 سياسات | خصوصية الزيارات |</p><p class="ar">| medical_records | 3 سياسات | <strong>جوهر البيانات السريرية</strong> |</p><p class="ar">| diagnoses | 3 سياسات | تشخيصات حسّاسة |</p><p class="ar">| prescriptions | 3 سياسات | وصفات طبية |</p><p class="ar">| lab_orders | 3 سياسات | نتائج الفحوصات |</p><p class="ar">| invoices | 3 سياسات | <strong>بيانات مالية</strong> |</p><p class="ar">| users | 4 سياسات | كلمات مرور محمية |</p><p class="ar">| user_roles | 2 سياسات | إدارة الامتيازات |</p><p class="ar">| payments | 2 سياسات | سجل مالي append-only |</p><p class="ar">| invoice_items | 3 سياسات | تراث من invoices |</p><p class="ar">| prescription_items | 3 سياسات | تراث من prescriptions |</p><h4 class="sub2">2.3 مثال: Policies للمرضى (patients)</h4><h4 class="sub2">Policy 1: SELECT (القراءة)</h4><pre><code>CREATE POLICY patients_select ON patients
-    FOR SELECT
-    USING (
-        app_has_role('admin')
-        OR app_has_role('receptionist')
-        OR id = app_current_patient_id()                -- المريض يرى نفسه
-        OR EXISTS (
-            SELECT 1 FROM medical_records mr
-            WHERE mr.patient_id = patients.id
-              AND mr.doctor_id = app_current_doctor_id()  -- الطبيب يرى مرضاه
-        )
-        OR EXISTS (
-            SELECT 1 FROM appointments a
-            WHERE a.patient_id = patients.id
-              AND a.doctor_id = app_current_doctor_id()   -- من خلال المواعيد أيضاً
-        )
-    );
-</code></pre><h4 class="sub2">Policy 2: INSERT (الإدراج)</h4><pre><code>CREATE POLICY patients_insert ON patients
-    FOR INSERT
-    WITH CHECK ( app_has_role('receptionist') OR app_has_role('admin') );
--- فقط الاستقبال والأدمن يسجّلان مرضى جدد
-</code></pre><h4 class="sub2">Policy 3: UPDATE (التحديث)</h4><pre><code>CREATE POLICY patients_update ON patients
-    FOR UPDATE
-    USING (
-        app_has_role('admin')
-        OR app_has_role('receptionist')
-        OR id = app_current_patient_id()              -- المريض يعدّل بياناته
-    )
-    WITH CHECK (
-        app_has_role('admin')
-        OR app_has_role('receptionist')
-        OR id = app_current_patient_id()
-    );
-</code></pre><p class="ar"><strong>ملاحظة:</strong> لا توجد Policy للحذف → حذف المرضى ممنوع للجميع (سلامة البيانات).</p><h4 class="sub2">2.4 مثال: Policies للسجلات الطبية (الأكثر حساسية)</h4><pre><code>-- SELECT: الطبيب يرى مرضاه، المريض يرى سجله، والممرّض يرى سجل النطاق
-CREATE POLICY medical_records_select ON medical_records
-    FOR SELECT
-    USING (
-        doctor_id = app_current_doctor_id()           -- الطبيب المالك
-        OR patient_id = app_current_patient_id()      -- المريض صاحب السجل
-        OR app_has_role('nurse')                      -- الممرّض (بدون تقييد من patient)
-    );
+SELECT * FROM patients;  -- يرى فقط مرضاه عبر medical_records
 
--- INSERT: الطبيب المعالج فقط
-CREATE POLICY medical_records_insert ON medical_records
-    FOR INSERT
-    WITH CHECK ( doctor_id = app_current_doctor_id() );
-
--- UPDATE: الطبيب المالك، أو الممرّض (للعلامات الحيوية ضمن النطاق)
-CREATE POLICY medical_records_update ON medical_records
-    FOR UPDATE
-    USING ( doctor_id = app_current_doctor_id() OR app_has_role('nurse') )
-    WITH CHECK ( doctor_id = app_current_doctor_id() OR app_has_role('nurse') );
-
--- DELETE: لا سياسة → ممنوع الحذف (سلامة السجل الطبي)
-</code></pre><h4 class="sub2">2.5 مثال عملي: ممرّض يحاول قراءة سجلات خارج نطاقه</h4><pre><code>-- المعاملة 1: ممرّض في قسم الباطنية
-SET LOCAL app.current_user_id = 11;     -- معرّف الممرّض
-SET LOCAL app.current_role = 'nurse';
-
-SELECT * FROM medical_records WHERE patient_id = 5;
--- ✓ يرى السجل (app_has_role('nurse') = TRUE)
-
--- المعاملة 2: محاولة الحذف
-DELETE FROM medical_records WHERE patient_id = 5;
--- ✗ فشل! لا توجد policy للحذف على medical_records
--- الخطأ: new row violates row level security policy
-
--- المعاملة 3: محاولة الكتابة (الإدراج)
-INSERT INTO medical_records (patient_id, doctor_id, ...)
-VALUES (5, 8, ...);
--- ✗ فشل! Policy يتطلب: doctor_id = app_current_doctor_id()
--- لكن app_current_doctor_id() = NULL (الممرّض ليس طبيباً)
-</code></pre><h4 class="sub2">2.6 الدوال المساعدة لـ RLS</h4><pre><code>-- الدالة 1: معرّف المستخدم الحالي
-CREATE OR REPLACE FUNCTION app_current_user_id()
-RETURNS BIGINT AS $$
-    SELECT NULLIF(current_setting('app.current_user_id', true), '')::BIGINT;
-$$ LANGUAGE sql STABLE;
-
--- الدالة 2: هل يملك الدور المطلوب؟
-CREATE OR REPLACE FUNCTION app_has_role(p_role TEXT)
-RETURNS BOOLEAN AS $$
-    SELECT p_role = ANY (
-        string_to_array(
-            coalesce(NULLIF(current_setting('app.current_role', true), ''), ''),
-            ','
-        )
-    );
-$$ LANGUAGE sql STABLE;
-
--- الدالة 3: معرّف الطبيب الحالي
-CREATE OR REPLACE FUNCTION app_current_doctor_id()
-RETURNS BIGINT AS $$
-    SELECT d.id
-    FROM users u
-    JOIN staff s ON s.id = u.staff_id
-    JOIN doctors d ON d.staff_id = s.id
-    WHERE u.id = app_current_user_id();
-$$ LANGUAGE sql STABLE;
-
--- الدالة 4: معرّف المريض الحالي
-CREATE OR REPLACE FUNCTION app_current_patient_id()
-RETURNS BIGINT AS $$
-    SELECT u.patient_id FROM users u
-    WHERE u.id = app_current_user_id();
-$$ LANGUAGE sql STABLE;
-</code></pre><h4 class="sub2">2.7 تفعيل RLS على جدول</h4><pre><code>-- تفعيل RLS (إجباري)
-ALTER TABLE medical_records ENABLE ROW LEVEL SECURITY;
-
--- فرض RLS حتى على مالك الجدول (مهمّ جداً!)
-ALTER TABLE medical_records FORCE ROW LEVEL SECURITY;
--- بدون FORCE، مالك الجدول (postgres superuser) يتجاوز السياسات
-</code></pre><hr class="rule"><h3 class="sub">3. دور التطبيق (app_role) والأمان</h3><h4 class="sub2">3.1 تكوين دور التطبيق</h4><pre><code>CREATE ROLE app_role
-    LOGIN
-    PASSWORD 'change_me_in_production'
-    NOSUPERUSER              -- ليس مسؤول النظام
-    NOBYPASSRLS              -- **يخضع لـ RLS (حاسم)**
-    NOCREATEDB               -- لا ينشئ قواعد بيانات
-    NOCREATEROLE;            -- لا ينشئ أدوار
-</code></pre><p class="ar"><strong>لماذا <code>NOBYPASSRLS</code> مهمّ؟</strong></p><p class="ar">إذا كان الدور <code>BYPASSRLS</code>:</p><pre><code>ALTER ROLE app_role BYPASSRLS;  -- ❌ خطر!
-SET ROLE app_role;
-SELECT * FROM medical_records;  -- يرى ALL records (بدون RLS)
-</code></pre><p class="ar">مع <code>NOBYPASSRLS</code> (الإعداد الصحيح):</p><pre><code>SET ROLE app_role;  -- NOBYPASSRLS
-SET LOCAL app.current_role = 'doctor';
-SELECT * FROM medical_records;  -- يرى فقط سجلات مرضى الطبيب
-</code></pre><h4 class="sub2">3.2 الصلاحيات المسموح بها</h4><pre><code>-- صلاحيات DML (قراءة، كتابة)
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO app_role;
-
--- صلاحيات التسلسلات (للـ BIGSERIAL)
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO app_role;
-
--- منع التعديل على سجل التدقيق (append-only)
-REVOKE UPDATE, DELETE ON audit_logs FROM app_role;
-
--- منع تعديل جداول RBAC (إدارة الأدوار من خلال التطبيق فقط)
-REVOKE INSERT, UPDATE, DELETE ON roles, permissions, role_permissions FROM app_role;
-</code></pre><hr class="rule"><h3 class="sub">4. مثال متكامل: سيناريو يوم واحد</h3><h4 class="sub2">08:00 الصباح: Receptionist تسجّل مريضاً جديداً</h4><pre><code>Request: POST /api/v1/patients
-Body: {
-  "first_name": "أحمد",
-  "last_name": "علي",
-  "date_of_birth": "1985-05-15",
-  "blood_type": "O+"
-}
-Token: JWT { user_id: 3, roles: ["receptionist"], permissions: ["patients:create", ...] }
-
---- Backend ---
-1. authenticateToken: ✓ JWT صحيح
-2. requirePermission('patients:create'): ✓ Receptionist له هذه الصلاحية
-3. withUserContext(3, 'receptionist', ...): ✓ تفعيل RLS
-4. INSERT INTO patients (...): ✓ يملك الصلاحية والـ RLS يسمح
-5. TRIGGER audit_trigger_func: ✓ تسجيل الحدث
-
-Response: ✓ 201 Created { id: 101, ... }
-</code></pre><h4 class="sub2">10:00: Doctor يرى المريض الجديد</h4><pre><code>Request: GET /api/v1/patients/101
-Token: JWT { user_id: 5, roles: ["doctor"], permissions: ["patients:read", ...] }
-
---- Backend ---
-1. authenticateToken: ✓
-2. requirePermission('patients:read'): ✓ Doctor له هذه الصلاحية
-3. withUserContext(5, 'doctor', ...): ✓ تفعيل RLS
-
---- PostgreSQL ---
-SET LOCAL app.current_user_id = 5;
-SET LOCAL app.current_role = 'doctor';
-SELECT * FROM patients WHERE id = 101
-  AND (
-    app_has_role('admin')          -- ❌ false
-    OR app_has_role('receptionist') -- ❌ false
-    OR id = app_current_patient_id() -- ❌ false (Doctor ليس مريضاً)
-    OR EXISTS (SELECT 1 FROM medical_records ...) -- ❌ لا يوجد سجل بعد
-  );
--- النتيجة: 0 صفوف (Doctor لا يراه بعد)
-
-Response: ✗ 404 Not Found
-</code></pre><h4 class="sub2">11:00: Doctor ينشئ سجل طبي للمريض (الآن يراه)</h4><pre><code>Request: POST /api/v1/medical-records
-Body: {
-  "patient_id": 101,
-  "chief_complaint": "حمى عالية",
-  "vital_signs": { "temp": 39.0 }
-}
-
---- PostgreSQL ---
-INSERT INTO medical_records (patient_id, doctor_id, ...) VALUES (101, 8, ...);
--- doctor_id = 8 (معرّف الطبيب المستخرج من app_current_user_id)
-
---- الآن Doctor يرى المريض ---
-SET LOCAL app.current_user_id = 5;
-SET LOCAL app.current_role = 'doctor';
-SELECT * FROM patients WHERE id = 101
-  AND EXISTS (SELECT 1 FROM medical_records WHERE patient_id = 101 AND doctor_id = 8);
--- النتيجة: ✓ 1 صفّ (Doctor يرى مريضه الآن)
-</code></pre><h4 class="sub2">14:00: Nurse تحدّث العلامات الحيوية</h4><pre><code>Request: PATCH /api/v1/medical-records/42/vital-signs
-Body: { "vital_signs": { "temp": 38.5, "bp": "130/80" } }
-Token: JWT { user_id: 6, roles: ["nurse"], ... }
-
---- PostgreSQL ---
+-- Nurse في قسم يرى سجلات ذاك القسم
 SET LOCAL app.current_user_id = 6;
 SET LOCAL app.current_role = 'nurse';
-UPDATE medical_records SET vital_signs = $1 WHERE id = 42
-  AND (doctor_id = app_current_doctor_id() OR app_has_role('nurse'));
--- ✓ app_has_role('nurse') = true → تحديث مسموح
-</code></pre><h4 class="sub2">17:00: Nurse تحاول قراءة التشخيصات (بدون صلاحية)</h4><pre><code>Request: GET /api/v1/diagnoses?medical_record_id=42
-Token: JWT { user_id: 6, roles: ["nurse"], permissions: [...] }
+SELECT * FROM medical_records;  -- فقط سجلات القسم
 
---- Backend ---
-1. authenticateToken: ✓
-2. requirePermission('diagnoses:read'): ❌ Nurse ليس لديها هذه الصلاحية
-
-Response: ✗ 403 Forbidden { error: 'Insufficient permissions' }
-</code></pre><h4 class="sub2">18:00: Pharamacist يصرف الوصفة</h4><pre><code>Request: PATCH /api/v1/prescriptions/55/dispense
-Token: JWT { user_id: 7, roles: ["pharmacist"], permissions: ["prescriptions:dispense", ...] }
-
---- PostgreSQL ---
+-- Patient يرى ملفه فقط
 SET LOCAL app.current_user_id = 7;
-SET LOCAL app.current_role = 'pharmacist';
-UPDATE prescriptions SET status = 'dispensed' WHERE id = 55
-  AND (doctor_id = app_current_doctor_id() OR (app_has_role('pharmacist') AND status = 'active'));
--- ✓ app_has_role('pharmacist') = true AND status = 'active' → مسموح
-</code></pre><hr class="rule"><h3 class="sub">5. الفائدة الأمنية الكلية</h3><pre><code>السيناريو: مهاجم يخترق Backend ويحاول سرقة سجلات طبية
-
---- محاولة 1: استعلام مباشر عبر Backend Code ---
-const result = await pool.query('SELECT * FROM medical_records;');
-
---- النتيجة ---
-app_role لا يملك BYPASSRLS → RLS يطبّق تلقائياً
-→ يرى فقط السجلات المسموح بها (صفر إذا لم يضبط السياق)
-
---- محاولة 2: تغيير سياق الجلسة يدوياً ---
-const result = await pool.query(
-    'SET LOCAL app.current_role = "admin"; SELECT * FROM medical_records;'
-);
-
---- النتيجة ---
-set_config فقط (لا يمكن الوصول إلى دور admin بدون توكن صحيح)
-→ المهاجم يرى اسمه في audit_logs!
-
---- محاولة 3: حذف سجل التدقيق ---
-DELETE FROM audit_logs WHERE ...;
-
---- النتيجة ---
-✗ خطأ: audit_logs is append-only
-→ لا يمكن حذف أو تعديل (trigger يمنع)
-</code></pre><p class="ar">هذا النظام <strong>دفاع متعدد الطبقات</strong> يضمن أمان البيانات حتى في حالة اختراق Backend.</p>
+SET LOCAL app.current_role = 'patient';
+SELECT * FROM patients;  -- فقط ملفه (id = app_current_patient_id())
+</code></pre>
 <table class="cmp">
   <thead><tr><th>#</th><th>البُعد · Dimension</th><th>RBAC (مستوى التطبيق)</th><th>RLS (مستوى القاعدة)</th></tr></thead>
   <tbody>
@@ -1060,8 +426,8 @@ DELETE FROM audit_logs WHERE ...;
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">08 / 13</div>
   </div>
-  <h2 class="section"><span class="num">08</span>طبقات الأمان الشاملة والتشفير والتدقيق والإخفاء</h2>
-  <h3 class="sub">1. أمان كلمات المرور (bcryptjs)</h3><h4 class="sub2">1.1 تشفير bcrypt — التطبيق</h4><p class="ar">كلمات المرور لا تُخزَّن أبداً كنصّ صريح. بدلاً من ذلك، تُحسب لها hash (بصمة) باستخدام <strong>bcryptjs</strong>:</p><div class="callout"><div class="tag">الدفاع المتعمّق · Defense in Depth</div><p>لا توجد طبقة أمان واحدة كافية. يجمع المشروع <strong>المصادقة + التفويض + عزل الصفوف + التدقيق + التقنيع</strong> بحيث يتطلّب اختراق البيانات تجاوز أربع طبقات مستقلّة معاً.</p></div><div class="diagram-frame">
+  <h2 class="section"><span class="num">08</span>طبقات الأمان الشاملة</h2>
+  <h3 class="sub">التشفير والمصادقة</h3><p class="ar"><strong>bcryptjs</strong>: 12 جولة (0.3 ثانية/محاولة) تمنع brute force. مثال:</p><div class="callout"><div class="tag">الدفاع المتعمّق · Defense in Depth</div><p>لا توجد طبقة أمان واحدة كافية. يجمع المشروع <strong>المصادقة + التفويض + عزل الصفوف + التدقيق + التقنيع</strong> بحيث يتطلّب اختراق البيانات تجاوز أربع طبقات مستقلّة معاً.</p></div><div class="diagram-frame">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 430" class="diagram-svg" dir="ltr">
   <defs>
     <linearGradient id="dlA" x1="0" x2="1"><stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#0284c7"/></linearGradient>
@@ -1094,430 +460,29 @@ DELETE FROM audit_logs WHERE ...;
   <!-- protected core -->
   <text x="410" y="404" text-anchor="middle" font-family="Inter,Arial" font-size="13" font-weight="700" fill="#065f46">🔒 البيانات الحسّاسة محميّة في القلب</text>
   <line x1="410" y1="384" x2="410" y2="392" stroke="#10b981" stroke-width="2"/>
-</svg><div class="diagram-caption"><span class="id">DIAGRAM 04</span><span class="txt">Defense-in-Depth — four consecutive security layers</span><span class="ar">الدفاع المتعمّق: أربع طبقات أمان متتالية</span></div></div><pre><code>// backend/controllers/authController.js
-const bcrypt = require('bcryptjs');
-
-const registerUser = async (username, email, password) =&gt; {
-    // Step 1: توليد salt (عنصر عشوائي)
-    const salt = await bcrypt.genSalt(12);  // 12 جولة (تقريباً 0.3 ثانية)
-    
-    // Step 2: حساب hash
-    const passwordHash = await bcrypt.hash(password, salt);
-    // مثال: 'Passw0rd!' → '$2b$12$R9...xyz' (60 حرف)
-    
-    // Step 3: حفظ الـ hash فقط في Database
-    await db.query(
-        'INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3)',
-        [username, email, passwordHash]
-    );
-};
-</code></pre><h4 class="sub2">1.2 التحقق من كلمة المرور أثناء تسجيل الدخول</h4><pre><code>const loginUser = async (username, password) =&gt; {
-    // Step 1: جلب الـ hash من Database
-    const result = await db.query(
-        'SELECT id, password_hash FROM users WHERE username = $1',
-        [username]
-    );
-    
-    if (result.rows.length === 0) {
-        throw new Error('المستخدم غير موجود');
-    }
-    
-    const user = result.rows[0];
-    
-    // Step 2: مقارنة كلمة المرور المُدخَلة مع الـ hash المخزون
-    const isValid = await bcrypt.compare(password, user.password_hash);
-    // bcrypt تعيد true/false بدون الكشف عن الـ hash الفعلي
-    
-    if (!isValid) {
-        // تسجيل محاولة فاشلة
-        failed_login_attempts++;
-        if (failed_login_attempts &gt;= 5) {
-            // قفل الحساب لـ 15 دقيقة
-            user.is_active = false;
-        }
-        throw new Error('كلمة المرور غير صحيحة');
-    }
-    
-    // Step 3: إنشاء JWT
-    return generateJWT(user);
-};
-</code></pre><h4 class="sub2">1.3 لماذا bcrypt آمن جداً؟</h4><pre><code>| الخاصية        | الفائدة                              |
-|---------------|------------------------------------|
-| Salt          | كل كلمة مرور لها salt فريد → لا يمكن استخدام rainbow tables |
-| Slow Hashing  | 12 جولة تستغرق 0.3 ثانية → تبطيء هجمات brute force |
-| One-way       | لا يمكن فك hash لاستخراج كلمة المرور |
-| Adaptive      | الجولات تزيد مع السنوات (كلما كانت الحواسب أسرع) |
-</code></pre><p class="ar"><strong>مثال عملي:</strong></p><pre><code>كلمة المرور المدخَلة: "Passw0rd!"
-
-الـ Hash المخزون في DB: 
-  $2b$12$R9h.cIPz0gi.URNNHV3/2OPST9/PgBkqquzi.Ss7KIUgO2t0jKMUm
-  
-إذا حاول المهاجم:
-- قاموس كلمات المرور: ❌ كل كلمة لها salt فريد
-- Rainbow tables: ❌ نفس السبب
-- Brute force (1 مليار محاولة/ثانية): 
-  ❌ بـ 12 جولة، كل محاولة تستغرق 0.3 ثانية
-  = 3.3 سنوات لاختبار مليون كلمة فقط
-</code></pre><hr class="rule"><h3 class="sub">2. JSON Web Tokens (JWT) — المصادقة الآمنة</h3><h4 class="sub2">2.1 كيفية عمل JWT</h4><pre><code>POST /api/v1/auth/login
-├─ body: { username, password }
-│
-└─→ Backend يتحقق (bcrypt.compare)
-    └─→ إذا صحيح:
-        ├─ توليد JWT
-        │  Header: { alg: "HS256", typ: "JWT" }
-        │  Payload: { id: 5, roles: ["doctor"], permissions: [...] }
-        │  Signature: HMACSHA256(Header.Payload, JWT_SECRET)
-        │
-        └─→ إرسال: { token: "eyJhbGc...", expires_in: "15m" }
-            ↓
-            Frontend يحفظ في localStorage
-            ↓
-            كل طلب يُرسل: Authorization: Bearer eyJhbGc...
-</code></pre><h4 class="sub2">2.2 محتوى التوكن</h4><pre><code>// jwt.sign payload (مشفَّر لكن مرئي)
-{
-    id: 5,                                    // معرّف المستخدم
-    username: "dr.ahmed",                    // اسم المستخدم
-    roles: ["doctor"],                       // الأدوار
-    permissions: [
-        "patients:read",
-        "medical_records:read",
-        "medical_records:create",
-        "prescriptions:create",
-        // ... 21 صلاحية
-    ],
-    iat: 1719767400,                         // Issued At (الآن)
-    exp: 1719768300                          // Expiration (15 دقيقة)
+</svg><div class="diagram-caption"><span class="id">DIAGRAM 04</span><span class="txt">Defense-in-Depth — four consecutive security layers</span><span class="ar">الدفاع المتعمّق: أربع طبقات أمان متتالية</span></div></div><pre><code>const hash = await bcrypt.hash('Passw0rd!', 12);
+// يُخزَّن: $2b$12$R9h.cIPz0gi.URNNHV3/2OPST9/PgBkqquzi.Ss7KIUgO2t0jKMUm
+await bcrypt.compare('Passw0rd!', hash);  // true
+</code></pre><p class="ar"><strong>JWT</strong>: توكنات موقّعة 15 دقيقة تتضمّن roles وpermissions:</p><pre><code>{
+  "id": 5,
+  "roles": ["doctor"],
+  "permissions": ["patients:read", "medical_records:create", ...],
+  "iat": 1719767400,
+  "exp": 1719768300
 }
-</code></pre><p class="ar"><strong>الفائدة:</strong> Backend يقرأ الصلاحيات من التوكن مباشرةً (بدون استعلام DB في كل طلب).</p><h4 class="sub2">2.3 التحقق من التوكن</h4><pre><code>// middleware/auth.js
-function authenticateToken(req, res, next) {
-    const token = req.headers['authorization']?.split(' ')[1];
-    
-    if (!token) return res.status(401).json({ error: 'No token' });
-    
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) =&gt; {
-        if (err) {
-            if (err.name === 'TokenExpiredError') {
-                return res.status(401).json({ error: 'Token expired' });
-            }
-            return res.status(403).json({ error: 'Invalid token' });
-        }
-        
-        // التوقيع صحيح، والـ payload موثوق
-        req.user = decoded;
-        next();
-    });
-}
-</code></pre><p class="ar"><strong>الأمان:</strong></p><ul class="tech"><li>إذا عدّل المهاجم الـ payload (مثل إضافة role: "admin"):</li></ul><pre><code>  Original: eyJhbGc... (وقيع صحيح)
-  Tampered: eyJhbGc... (وقيع خاطئ)
-  ❌ jwt.verify يرفع خطأ: "invalid signature"
-  </code></pre><hr class="rule"><h3 class="sub">3. تشفير pgcrypto — مستوى القاعدة</h3><h4 class="sub2">3.1 استخدام pgcrypto (اختياري في المشروع الحالي)</h4><p class="ar">بينما bcryptjs تشفّر في Backend، يمكن لـ PostgreSQL أن تشفّر بيانات حسّاسة (مثل رقم بطاقة الائتمان):</p><pre><code>-- تفعيل pgcrypto
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
--- تشفير البيانات
-SELECT pgp_pub_encrypt(
-    'رقم حساس',
-    dearmor(pubkey)
-);
-
--- فك التشفير (بمفتاح خاص)
-SELECT pgp_pub_decrypt(
-    ciphertext,
-    dearmor(privkey),
-    'passphrase'
-);
-</code></pre><p class="ar"><strong>الاستخدام:</strong></p><pre><code>CREATE TABLE credit_cards (
-    id BIGSERIAL PRIMARY KEY,
-    patient_id BIGINT,
-    card_encrypted BYTEA,  -- بيانات مشفّرة
-    created_at TIMESTAMPTZ
-);
-
--- الإدراج
-INSERT INTO credit_cards (patient_id, card_encrypted)
-VALUES (5, pgp_pub_encrypt('4532-1111-2222-3333', pubkey));
-
--- القراءة (مع المفتاح الخاص)
-SELECT pgp_pub_decrypt(card_encrypted, privkey, 'password')
-FROM credit_cards
-WHERE patient_id = 5;
-</code></pre><hr class="rule"><h3 class="sub">4. التدقيق (Audit Logging) — Append-Only</h3><h4 class="sub2">4.1 نظام التدقيق الشامل</h4><p class="ar">كل عملية (INSERT, UPDATE, DELETE) على الجداول الحسّاسة تُسجَّل تلقائياً:</p><pre><code>-- جدول audit_logs
-CREATE TABLE audit_logs (
-    id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT REFERENCES users(id),    -- من فعل
-    action VARCHAR(50),                      -- INSERT/UPDATE/DELETE
-    entity_type VARCHAR(50),                 -- الجدول (مثل: medical_records)
-    entity_id BIGINT,                        -- معرّف الصفّ
-    old_values JSONB,                        -- القيم قبل التعديل
-    new_values JSONB,                        -- القيم بعد التعديل
-    ip_address INET,                         -- عنوان IP
-    user_agent VARCHAR(255),                 -- متصفح/تطبيق
-    created_at TIMESTAMPTZ NOT NULL          -- متى
-);
-</code></pre><h4 class="sub2">4.2 الـ Trigger التلقائي</h4><pre><code>CREATE OR REPLACE FUNCTION audit_trigger_func()
-RETURNS TRIGGER AS $$
-DECLARE
-    v_user_id BIGINT := NULLIF(current_setting('app.current_user_id', true), '')::BIGINT;
-    v_ip INET := NULLIF(current_setting('app.client_ip', true), '')::INET;
-    v_old JSONB;
-    v_new JSONB;
-BEGIN
-    -- نسخ الصفوف القديمة/الجديدة
-    IF (TG_OP = 'INSERT') THEN
-        v_new := to_jsonb(NEW);
-    ELSIF (TG_OP = 'UPDATE') THEN
-        v_old := to_jsonb(OLD);
-        v_new := to_jsonb(NEW);
-    ELSIF (TG_OP = 'DELETE') THEN
-        v_old := to_jsonb(OLD);
-    END IF;
-    
-    -- تصفية أمنية: لا تُسرِّب كلمات المرور
-    IF (TG_TABLE_NAME = 'users') THEN
-        v_old := v_old - 'password_hash';
-        v_new := v_new - 'password_hash';
-    END IF;
-    
-    -- إدراج السجل
-    INSERT INTO audit_logs (user_id, action, entity_type, entity_id, old_values, new_values, ip_address, created_at)
-    VALUES (v_user_id, TG_OP, TG_TABLE_NAME, (v_new -&gt;&gt; 'id')::BIGINT, v_old, v_new, v_ip, NOW());
-    
-    RETURN CASE WHEN TG_OP = 'DELETE' THEN OLD ELSE NEW END;
-END;
-$$ LANGUAGE plpgsql;
-
--- ربط الـ Trigger بالجداول الحسّاسة
-CREATE TRIGGER trg_audit_medical_records
-    AFTER INSERT OR UPDATE OR DELETE ON medical_records
-    FOR EACH ROW EXECUTE FUNCTION audit_trigger_func();
-</code></pre><h4 class="sub2">4.3 إجبار Append-Only</h4><pre><code>-- دالة تمنع التعديل/الحذف
-CREATE OR REPLACE FUNCTION block_audit_change()
-RETURNS TRIGGER AS $$
-BEGIN
-    RAISE EXCEPTION 'audit_logs is append-only: % is not allowed', TG_OP;
-END;
-$$ LANGUAGE plpgsql;
-
--- ربط الدالة
-CREATE TRIGGER trg_audit_logs_immutable
-    BEFORE UPDATE OR DELETE ON audit_logs
-    FOR EACH ROW EXECUTE FUNCTION block_audit_change();
-
--- سحب صلاحيات التعديل على مستوى الدور
-REVOKE UPDATE, DELETE ON audit_logs FROM app_role;
-</code></pre><p class="ar"><strong>النتيجة:</strong> حتى إذا اخترق المهاجم Database، لا يستطيع:</p><ul class="tech"><li>تعديل السجل (Trigger يرفع استثناء)</li><li>حذف الأدلة (Trigger يرفع استثناء)</li><li>تغيير timestamp (قاعدة البيانات فقط تكتب)</li></ul><h4 class="sub2">4.4 مثال من الحياة الحقيقية</h4><pre><code>// audit_log entry — تعديل سجل طبي
-{
-  "id": 1542,
+</code></pre><h3 class="sub">التدقيق (Audit Logging)</h3><p class="ar"><strong>جدول audit_logs</strong>: append-only، يسجل:</p><ul class="tech"><li>من: user_id</li><li>ماذا: INSERT/UPDATE/DELETE</li><li>أين: entity_type, entity_id</li><li>الفوارق: old_values, new_values (JSONB)</li><li>متى: created_at، ip_address</li></ul><p class="ar"><strong>إجبار Append-Only</strong>: Trigger يرفع EXCEPTION عند محاولة UPDATE/DELETE، + REVOKE من app_role.</p><p class="ar"><strong>مثال</strong>:</p><pre><code>{
   "user_id": 5,
   "action": "UPDATE",
   "entity_type": "medical_records",
-  "entity_id": 42,
-  "old_values": {
-    "chief_complaint": "آلام عادية",
-    "vital_signs": {"temp": 37.5, "pulse": 72}
-  },
-  "new_values": {
-    "chief_complaint": "آلام حادة",
-    "vital_signs": {"temp": 39.0, "pulse": 95}
-  },
+  "old_values": {"temp": 37.5, "pulse": 72},
+  "new_values": {"temp": 39.0, "pulse": 95},
   "ip_address": "192.168.1.100",
   "created_at": "2026-06-30T14:32:15Z"
 }
-</code></pre><p class="ar">هذا يثبت: الطبيب (user_id=5) عدّل السجل (42) في وقت محدد من عنوان معين.</p><hr class="rule"><h3 class="sub">5. إخفاء البيانات (Data Masking) — الحد الأدنى من الامتياز</h3><h4 class="sub2">5.1 مبدأ التقنيع</h4><p class="ar">بدلاً من إظهار بيانات حسّاسة كاملة، تُقنَّع جزئياً:</p><pre><code>الرقم الوطني الكامل:    123456789012
-الرقم الوطني المُقنّع:   **********12  (آخر رقمين فقط)
-
-رقم الهاتف الكامل:      07901234567
-رقم الهاتف المُقنّع:     *******4567    (آخر 4 أرقام)
-
-البريد الإلكتروني الكامل: ahmed@hospital.iq
-البريد المُقنّع:         a***@hospital.iq  (أول حرف + النطاق)
-</code></pre><h4 class="sub2">5.2 دوال التقنيع</h4><pre><code>-- تقنيع الهاتف
-CREATE OR REPLACE FUNCTION mask_phone(p TEXT)
-RETURNS TEXT IMMUTABLE AS $$
-    SELECT CASE
-        WHEN p IS NULL THEN NULL
-        ELSE repeat('*', greatest(length(p) - 4, 0)) || right(p, 4)
-    END;
-$$ LANGUAGE sql;
-
--- مثال:
-SELECT mask_phone('07901234567');  → '*******4567'
-
--- تقنيع الرقم الوطني
-CREATE OR REPLACE FUNCTION mask_national_id(p TEXT)
-RETURNS TEXT IMMUTABLE AS $$
-    SELECT CASE
-        WHEN p IS NULL THEN NULL
-        ELSE repeat('*', greatest(length(p) - 2, 0)) || right(p, 2)
-    END;
-$$ LANGUAGE sql;
-
--- مثال:
-SELECT mask_national_id('123456789012');  → '**********12'
-
--- تقنيع البريد
-CREATE OR REPLACE FUNCTION mask_email(p TEXT)
-RETURNS TEXT IMMUTABLE AS $$
-    SELECT CASE
-        WHEN p IS NULL OR position('@' IN p) = 0 THEN p
-        ELSE left(p, 1) || '***' || substring(p FROM position('@' IN p))
-    END;
-$$ LANGUAGE sql;
-
--- مثال:
-SELECT mask_email('ahmed@hospital.iq');  → 'a***@hospital.iq'
-</code></pre><h4 class="sub2">5.3 Views للقراءة الآمنة حسب الدور</h4><pre><code>-- View للاستقبال: رقم وطني وهاتف مُقنّع
-CREATE OR REPLACE VIEW v_patients_reception AS
-SELECT
-    p.id,
-    p.medical_record_number,
-    p.first_name,
-    p.last_name,
-    mask_national_id(p.national_id) AS national_id,  -- مُقنّع
-    mask_phone(p.phone) AS phone,                      -- مُقنّع
-    mask_email(p.email) AS email,                      -- مُقنّع
-    NULL::text AS address                             -- مُخفى تماماً
-FROM patients p;
-
--- View للطبيب: بيانات كاملة (مخوّل سريرياً)
-CREATE OR REPLACE VIEW v_patients_doctor AS
-SELECT
-    p.id,
-    p.medical_record_number,
-    p.first_name,
-    p.last_name,
-    p.national_id,        -- كاملة (الطبيب مخوّل)
-    p.phone,               -- كاملة
-    p.email,               -- كاملة
-    p.address              -- كاملة
-FROM patients p;
-
--- View للممرّض: بيانات سريرية أساسية بلا معرّفات وطنية
-CREATE OR REPLACE VIEW v_patients_nurse AS
-SELECT
-    p.id,
-    p.medical_record_number,
-    p.first_name,
-    p.last_name,
-    p.blood_type,         -- مهم للتمريض
-    mask_phone(p.phone) AS phone,
-    NULL::text AS national_id,   -- مُخفى
-    NULL::text AS address        -- مُخفى
-FROM patients p;
-</code></pre><h4 class="sub2">5.4 منح الصلاحيات</h4><pre><code>-- سحب الوصول المباشر
-REVOKE ALL ON patients FROM role_receptionist;
-REVOKE ALL ON patients FROM role_nurse;
-REVOKE ALL ON patients FROM role_patient;
-
--- منح الوصول فقط عبر الـ Views
-GRANT SELECT ON v_patients_reception TO role_receptionist;
-GRANT SELECT ON v_patients_nurse TO role_nurse;
-GRANT SELECT ON v_patients_doctor TO role_doctor;
-</code></pre><p class="ar"><strong>النتيجة:</strong></p><ul class="tech"><li>الممرّض يستعلم: <code>SELECT * FROM v_patients_nurse</code> → يرى البيانات المقننة فقط</li><li>لا يستطيع الوصول: <code>SELECT * FROM patients</code> → ❌ PERMISSION DENIED</li></ul><hr class="rule"><h3 class="sub">6. دفاع إضافي (Middleware)</h3><h4 class="sub2">6.1 Helmet — رؤوس HTTP الأمنية</h4><pre><code>// app.js
-const helmet = require('helmet');
-
-app.use(helmet());
-// تفعيل الرؤوس التالية تلقائياً:
-// X-Content-Type-Options: nosniff
-// X-Frame-Options: DENY
-// Strict-Transport-Security: max-age=31536000
-// X-XSS-Protection: 1; mode=block
-</code></pre><h4 class="sub2">6.2 Rate Limiting</h4><pre><code>const rateLimit = require('express-rate-limit');
-
-// عام: 100 طلب/دقيقة
-const limiter = rateLimit({
-    windowMs: 60 * 1000,
-    max: 100,
-    message: 'Too many requests, please try again later'
-});
-app.use(limiter);
-
-// تسجيل الدخول: 10 طلبات/دقيقة (أكثر صرامة)
-const loginLimiter = rateLimit({
-    windowMs: 60 * 1000,
-    max: 10,
-    skipSuccessfulRequests: true  // لا تحسب المحاولات الناجحة
-});
-app.post('/auth/login', loginLimiter, loginHandler);
-</code></pre><h4 class="sub2">6.3 قفل الحساب بعد محاولات فاشلة</h4><pre><code>const MAX_FAILED_ATTEMPTS = 5;
-const LOCKOUT_DURATION = 15 * 60 * 1000; // 15 دقيقة
-
-const loginUser = async (username, password) =&gt; {
-    const user = await db.query('SELECT * FROM users WHERE username = $1', [username]);
-    
-    if (!user.rows.length) {
-        throw new AppError('User not found', 401);
-    }
-    
-    const userData = user.rows[0];
-    
-    // فحص قفل الحساب
-    if (userData.failed_login_attempts &gt;= MAX_FAILED_ATTEMPTS) {
-        const timeSinceLock = Date.now() - userData.last_failed_login.getTime();
-        if (timeSinceLock &lt; LOCKOUT_DURATION) {
-            throw new AppError('Account is locked, try again later', 403);
-        }
-    }
-    
-    // التحقق من كلمة المرور
-    const isValid = await bcrypt.compare(password, userData.password_hash);
-    
-    if (!isValid) {
-        // تزايد العداد
-        await db.query(
-            'UPDATE users SET failed_login_attempts = failed_login_attempts + 1 WHERE id = $1',
-            [userData.id]
-        );
-        throw new AppError('Invalid password', 401);
-    }
-    
-    // نجح: إعادة تعيين العداد
-    await db.query(
-        'UPDATE users SET failed_login_attempts = 0, last_login_at = NOW() WHERE id = $1',
-        [userData.id]
-    );
-    
-    return generateJWT(userData);
-};
-</code></pre><h4 class="sub2">6.4 CORS — تقيُّد الأصول</h4><pre><code>const cors = require('cors');
-
-app.use(cors({
-    origin: process.env.CORS_ORIGIN,  // مثل: 'http://localhost:5173'
-    credentials: true,                 // السماح بـ cookies
-    optionsSuccessStatus: 200
-}));
-
-// بدون هذا، أي موقع يمكنه:
-// - استدعاء API نيابة عن المستخدم
-// - قراءة البيانات (مع الـ cookies)
-</code></pre><hr class="rule"><h3 class="sub">7. ملخص دفاع متعدد الطبقات</h3><pre><code>طبقة 1: Frontend
-├─ لا تخزين كلمات المرور
-├─ HTTPS فقط (شهادة SSL)
-└─ CSP (Content Security Policy)
-
-طبقة 2: Backend
-├─ bcryptjs (12 جولة): كلمات مرور
-├─ JWT (15 دقيقة): مصادقة
-├─ RBAC: تحكم بالصلاحيات
-├─ Helmet: رؤوس HTTP الأمنية
-├─ Rate Limiting: حماية من DoS
-├─ قفل الحساب: بعد 5 محاولات فاشلة
-├─ CORS: محصور برأصل واحد
-└─ Prepared Statements: منع SQL injection
-
-طبقة 3: Database
-├─ RLS: فرض السلامة على صفوف
-├─ Audit Logging: Append-only
-├─ Data Masking: إخفاء البيانات الحسّاسة
-├─ pgcrypto: تشفير إضافي (اختياري)
-├─ Constraints: CHECK, UNIQUE, FK
-└─ app_role: بدون BYPASSRLS
-
-طبقة 4: الإدارة
-├─ نسخ احتياطية منتظمة
-├─ مراقبة الأداء (slow queries)
-├─ تحديثات الأمان (patches)
-└─ اختبار الاختراق (penetration testing)
-</code></pre><p class="ar"><strong>المحصلة:</strong> اخترق واحدة، لكن الأخرى تحميك.</p>
+</code></pre><h3 class="sub">تقنيع البيانات (Data Masking)</h3><p class="ar"><strong>دوال التقنيع</strong>:</p><pre><code>mask_phone('07901234567')        → '*******4567'
+mask_national_id('123456789012') → '**********12'
+mask_email('ahmed@hospital.iq')  → 'a***@hospital.iq'
+</code></pre><p class="ar"><strong>Views حسب الدور</strong>:</p><ul class="tech"><li><strong>Receptionist</strong>: رقم وطني وهاتف مُقنّع</li><li><strong>Doctor</strong>: بيانات كاملة (مخوّل سريرياً)</li><li><strong>Nurse</strong>: بيانات سريرية بدون معرّفات</li><li><strong>Pharmacist</strong>: معلومات الصرف الأساسية فقط</li></ul><h3 class="sub">الدفاع الإضافي</h3><p class="ar"><strong>Helmet</strong>: رؤوس أمنية (CSP, X-Frame-Options, HSTS).</p><p class="ar"><strong>CORS</strong>: محصور برأصل واحد (بدون *).</p><p class="ar"><strong>Rate Limiting</strong>: 100/دقيقة عام، 10/دقيقة login.</p><p class="ar"><strong>قفل الحساب</strong>: بعد 5 محاولات فاشلة (15 دقيقة).</p><p class="ar"><strong>معالجة الأخطاء</strong>: SQL error codes مثل 23505 (duplicate) و23514 (check violation).</p>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 08 / 13</span>
@@ -1528,41 +493,15 @@ app.use(cors({
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">09 / 13</div>
   </div>
-  <h2 class="section"><span class="num">09</span>التنفيذ — البنية والتقنيات المستخدمة</h2>
-  <h3 class="sub">البنية المعمارية المتكاملة</h3><p class="ar">تم بناء نظام مستشفى العالمية IVF على أساس معمارية ثلاثية الطبقات (Three-Tier Architecture):</p><h4 class="sub2">1. طبقة قاعدة البيانات (PostgreSQL 15+)</h4><p class="ar">تضم 22 جدولاً منظماً وفق نموذج البيانات العلاقي مع تطبيق معايير التطبيع الـ BCNF. الجداول مصنفة إلى 9 مجموعات:</p><ul class="tech"><li><strong>مجموعة RBAC</strong>: roles، permissions، role_permissions، user_roles (7 أدوار، 68 صلاحية)</li><li><strong>مجموعة المنظمة</strong>: departments، staff، doctors، nurses</li><li><strong>مجموعة المرضى</strong>: patients، users</li><li><strong>مجموعة الخدمات السريرية</strong>: appointments، medical_records، diagnoses، prescriptions، prescription_items، lab_tests، lab_orders</li><li><strong>مجموعة الفوترة</strong>: invoices، invoice_items، payments</li><li><strong>مجموعة التدقيق</strong>: audit_logs (سجل append-only)</li></ul><p class="ar"><strong>آليات الأمان في قاعدة البيانات</strong>:</p><ul class="tech"><li><strong>Row-Level Security (RLS)</strong>: 21 سياسة أمان على 7 جداول حسّاسة (patients، appointments، medical_records، diagnoses، prescriptions، lab_orders، invoices) تفرض قيود الوصول على مستوى الصفّ تلقائياً</li><li><strong>دوال سياق الجلسة</strong>: دالة set_config() لضبط متغيرات الجلسة (app.current_user_id، app.current_role، app.client_ip) داخل معاملة (Transaction) قبل كل عملية كتابة</li><li><strong>قفل الدور</strong>: دور تطبيق app_role مع معامل NOBYPASSRLS لضمان عدم تجاوز superuser لسياسات RLS</li><li><strong>التدقيق التلقائي</strong>: 22 trigger على الجداول الحسّاسة تُسجّل كل INSERT/UPDATE/DELETE مع هوية الفاعل والقيم القديمة/الجديدة</li></ul><h4 class="sub2">2. طبقة الخادم (Node.js + Express 4.19)</h4><p class="ar"><strong>هيكل المشروع الخلفي</strong> (<code>backend/src/</code>):</p><pre><code>backend/src/
-├── server.js              # نقطة الدخول — إنشاء التطبيق وتشغيل الخادم
-├── app.js                 # إعداد Express + middleware عام + Routes
-├── config/
-│   └── db.js              # PostgreSQL Pool + withUserContext (تفعيل RLS)
-├── middleware/
-│   ├── auth.js            # jwt.verify و تعبئة req.user
-│   └── rbac.js            # requireRole + requirePermission + requireAnyPermission
-├── controllers/           # منطق الأعمال (9 controllers)
-│   ├── authController.js  # register + login + me
-│   ├── patientController.js
-│   ├── appointmentController.js
-│   ├── medicalRecordController.js
-│   ├── diagnosisController.js
-│   ├── prescriptionController.js
-│   ├── labOrderController.js
-│   ├── invoiceController.js
-│   └── paymentController.js
-├── routes/                # تعريف نقاط النهاية (endpoints)
-│   ├── authRoutes.js
-│   ├── patientRoutes.js
-│   ├── appointmentRoutes.js
-│   └── [5 أخرى]
-└── utils/
-    ├── AppError.js        # فئة الخطأ الموحّدة
-    └── asyncHandler.js    # لفافة try/catch للـ async
-</code></pre><p class="ar"><strong>آليات الأمان في الخادم</strong>:</p><h4 class="sub2">أ. المصادقة (Authentication)</h4><ul class="tech"><li><strong>JWT (JSON Web Tokens)</strong>: توكنات مُوقَّعة بـ HMAC-SHA256 بصلاحية 15 دقيقة تتضمّن: معرّف المستخدم (sub)، معرّف الموظف/المريض، أسماء الأدوار، رموز الصلاحيات</li><li><strong>Middleware authenticate</strong>: يستخلص Bearer token من <code>Authorization</code> header، يتحقق من التوقيع، ويملأ <code>req.user</code></li><li><strong>تشفير كلمات المرور</strong>: bcryptjs بـ 12 جولة (10 في بيئة الاختبار) لتجزئة كلمات المرور بشكل آمن غير قابل للعكس</li><li><strong>قفل الحساب</strong>: بعد 5 محاولات دخول فاشلة يُقفل الحساب (is_active = false)</li></ul><h4 class="sub2">ب. التحكم بالوصول (Authorization)</h4><ul class="tech"><li><strong>requireRole middleware</strong>: يفحص أن المستخدم يحمل دوراً واحداً على الأقل من الأدوار المطلوبة (OR logic)</li><li><strong>requirePermission middleware</strong>: يفحص أن المستخدم يحمل كل الصلاحيات المطلوبة بصيغة <code>resource:action</code> (AND logic)</li><li><strong>requireAnyPermission middleware</strong>: يفحص أن المستخدم يحمل على الأقل إحدى الصلاحيات (OR logic)</li></ul><h4 class="sub2">ج. الدفاع الإضافي</h4><ul class="tech"><li><strong>Helmet.js</strong>: تعيين رؤوس HTTP أمنية (Content-Security-Policy، X-Frame-Options، إلخ)</li><li><strong>CORS مقيّد</strong>: السماح فقط من أصول موثوقة (CORS_ORIGIN متغير بيئي)</li><li><strong>Rate Limiting</strong>:</li><li>العام: 100 طلب/دقيقة للـ API</li><li>تسجيل الدخول: 10 محاولات/دقيقة (منع brute-force)</li><li><strong>معالجة الأخطاء المركزية</strong>: middleware خطأ موحّد يميّز بين AppError (تشغيلي) وخطأ برمجي، يتعامل مع أخطاء قاعدة البيانات (23505 للقيم المكرّرة، 23514 للقيود)</li><li><strong>تحديد حجم JSON</strong>: حد أقصى 10KB لمنع هجمات DoS</li></ul><h4 class="sub2">3. طبقة العرض (Frontend)</h4><p class="ar"><strong>بنية الواجهة</strong> (<code>frontend/</code>):</p><ul class="tech"><li><strong>index.html</strong>: صفحة تسجيل الدخول برمز QR للمسح السريع</li><li><strong>dashboard.html</strong>: لوحة معلومات ديناميكية تختلف حسب دور المستخدم (7 واجهات مختلفة)</li><li><strong>css/style.css</strong>: تنسيقات عربية RTL احترافية بألوان مستشفى حديثة</li><li><strong>js/api.js</strong>: طبقة اتصال (HTTP wrapper) بمعالجة تلقائية للأخطاء والتوكن</li><li><strong>js/auth.js</strong>: منطق المصادقة والتسجيل والحفظ المحلي</li><li><strong>js/dashboard.js</strong>: منطق لوحة المعلومات الديناميكية والعمليات</li></ul><h3 class="sub">تدفق الطلب (Request Flow)</h3><p class="ar"><strong>سيناريو: طبيب ينشئ سجل طبي</strong></p><p class="ar">1. <strong>العميل (Frontend)</strong>:</p><ul class="tech"><li>يرسل <code>POST /api/v1/medical-records</code> مع Authorization header يحوي JWT</li></ul><p class="ar">2. <strong>Middleware authenticate</strong>:</p><ul class="tech"><li>يستخلص token، يتحقق من التوقيع والصلاحية الزمنية</li><li>يملأ <code>req.user = { id: 42, staff_id: 5, roles: ['doctor'], permissions: [...] }</code></li></ul><p class="ar">3. <strong>Middleware requirePermission('medical_records:create')</strong>:</p><ul class="tech"><li>يفحص أن 'medical_records:create' موجودة في <code>req.user.permissions</code></li><li>إذا غاب → ترد 403 INSUFFICIENT_PERMISSIONS</li></ul><p class="ar">4. <strong>Controller medicalRecordController.create</strong>:</p><ul class="tech"><li>يستدعي <code>withUserContext(userId, roles, async (client) =&gt; { ... })</code></li><li>ينفتح اتصال عميل، ينجز BEGIN معاملة</li><li>يضبط: SET LOCAL app.current_user_id = '42'; SET LOCAL app.current_role = 'doctor';</li><li>يضبط: SET LOCAL ROLE app_role (تفعيل RLS)</li><li>ينفذ INSERT INTO medical_records (patient_id, doctor_id, ...) VALUES (...)</li></ul><p class="ar">5. <strong>طبقة قاعدة البيانات (PostgreSQL)</strong>:</p><ul class="tech"><li>سياسة RLS على جدول medical_records تقرأ app.current_user_id و app.current_role</li><li>إذا كان الطبيب لا يملك حساباً طبياً (doctors.staff_id != app.current_user_id) → SQL رفع خطأ</li><li>إذا مرّ الفحص → INSERTينجز</li><li>Trigger trg_audit_medical_records ينطلق، يدوّن العملية في audit_logs</li></ul><p class="ar">6. <strong>Client (العميل)</strong>:</p><ul class="tech"><li>يرد 201 Created مع السجل الجديد</li><li>العملية الآن موثّقة بالكامل في audit_logs مع timestamp، user_id، IP</li></ul><h3 class="sub">نقاط النهاية REST (Endpoints)</h3><h4 class="sub2">Authentication (<code>/api/v1/auth</code>)</h4><ul class="tech"><li><code>POST /auth/register</code>: تسجيل مستخدم جديد (موظف أو مريض)</li><li><code>POST /auth/login</code>: تسجيل الدخول، إرجاع JWT</li><li><code>GET /auth/me</code>: الملف الشخصي للمستخدم المصادَق</li></ul><h4 class="sub2">المرضى (<code>/api/v1/patients</code>)</h4><ul class="tech"><li><code>GET /patients</code>: قائمة المرضى (محمية بـ RLS)</li><li><code>POST /patients</code>: تسجيل مريض جديد</li><li><code>GET /patients/:id</code>: بيانات مريض (محمية بـ RLS + permission)</li><li><code>PATCH /patients/:id</code>: تحديث بيانات المريض</li></ul><h4 class="sub2">المواعيد (<code>/api/v1/appointments</code>)</h4><ul class="tech"><li><code>GET /appointments</code>: قائمة المواعيد (محمية بـ RLS حسب الدور)</li><li><code>POST /appointments</code>: حجز موعد جديد</li><li><code>PATCH /appointments/:id</code>: تحديث/إلغاء موعد</li></ul><h4 class="sub2">السجلات الطبية (<code>/api/v1/medical-records</code>)</h4><ul class="tech"><li><code>GET /medical-records</code>: قائمة السجلات (محمية بـ RLS)</li><li><code>POST /medical-records</code>: إنشاء سجل طبي جديد</li><li><code>PATCH /medical-records/:id</code>: تحديث السجل</li></ul><h4 class="sub2">التشخيصات (<code>/api/v1/diagnoses</code>)</h4><ul class="tech"><li><code>GET /diagnoses</code>: قائمة التشخيصات (محمية بـ RLS)</li><li><code>POST /diagnoses</code>: إضافة تشخيص جديد</li><li><code>PATCH /diagnoses/:id</code>: تعديل تشخيص</li></ul><h4 class="sub2">الوصفات (<code>/api/v1/prescriptions</code>)</h4><ul class="tech"><li><code>GET /prescriptions</code>: قائمة الوصفات (محمية بـ RLS)</li><li><code>POST /prescriptions</code>: إنشاء وصفة جديدة</li><li><code>PATCH /prescriptions/:id/dispense</code>: صرف وصفة (صيدلي فقط)</li><li><code>GET /prescriptions/:id/items</code>: بنود الوصفة</li></ul><h4 class="sub2">المختبر (<code>/api/v1/lab-tests</code> و <code>/api/v1/lab-orders</code>)</h4><ul class="tech"><li><code>GET /lab-tests</code>: كتالوج الفحوصات</li><li><code>POST /lab-orders</code>: طلب فحص مختبري</li><li><code>PATCH /lab-orders/:id</code>: إدخال النتيجة (فنّي مختبر فقط)</li><li><code>GET /lab-orders/:id/result</code>: نتيجة الفحص (محمية بـ RLS)</li></ul><h4 class="sub2">الفوترة (<code>/api/v1/billing</code>)</h4><ul class="tech"><li><code>GET /billing/invoices</code>: قائمة الفواتير (محمية بـ RLS)</li><li><code>POST /billing/invoices</code>: إصدار فاتورة جديدة</li><li><code>POST /billing/payments</code>: تسجيل دفعة</li><li><code>GET /billing/invoices/:id/items</code>: بنود الفاتورة</li></ul><h4 class="sub2">إدارة المستخدمين (<code>/api/v1/users</code> — Admin فقط)</h4><ul class="tech"><li><code>GET /users</code>: قائمة المستخدمين</li><li><code>POST /users</code>: إنشاء مستخدم جديد</li><li><code>PATCH /users/:id</code>: تعديل بيانات المستخدم</li><li><code>GET /users/:id/roles</code>: أدوار المستخدم</li><li><code>POST /users/:id/roles</code>: إسناد دور</li><li><code>DELETE /users/:id/roles/:role_id</code>: سحب دور</li></ul><h3 class="sub">معالجة البيانات الحسّاسة</h3><h4 class="sub2">Data Masking (إخفاء البيانات)</h4><p class="ar">تم تطبيق views في قاعدة البيانات لإخفاء أرقام الهوية والهواتف:</p><ul class="tech"><li><strong>الأطباء وموظفو الاستقبال</strong>: يرون أرقام هوية مخفاة (مثل: <code>*<strong>-</strong>*-***-1234</code>)</li><li><strong>المرضى</strong>: يرون بيانات الطبيب مخفاة لكن رقم الهاتف كاملاً</li><li><strong>الصيدليون</strong>: يرون بيانات محدودة من المريض (للصرف الآمن)</li></ul><h4 class="sub2">لوحات المعلومات حسب الدور</h4><h4 class="sub2">لوحة مدير النظام (Admin)</h4><ul class="tech"><li>عرض جميع المستخدمين والموظفين والمرضى بدون قيود</li><li>إدارة الأقسام والأدوار والصلاحيات</li><li>مراقبة سجلّ التدقيق الكامل</li></ul><h4 class="sub2">لوحة الطبيب (Doctor)</h4><ul class="tech"><li>عرض قائمة المواعيد (مواعيده فقط)</li><li>مرضاه فقط في قائمة المرضى</li><li>إنشاء وتحديث السجلات الطبية والتشخيصات</li><li>طلب فحوصات مختبرية</li><li>إصدار وصفات طبية</li></ul><h4 class="sub2">لوحة الممرّض (Nurse)</h4><ul class="tech"><li>عرض مرضى النطاق (القسم الذي يعمل به)</li><li>تحديث العلامات الحيوية والمواعيد</li><li>قراءة الوصفات والأدوية</li></ul><h4 class="sub2">لوحة موظف الاستقبال (Receptionist)</h4><ul class="tech"><li>تسجيل مرضى جدد</li><li>حجز وإدارة المواعيد</li><li>إصدار الفواتير وتسجيل المدفوعات</li></ul><h4 class="sub2">لوحة فنّي المختبر (Lab Technician)</h4><ul class="tech"><li>عرض طلبات الفحص المطلوبة</li><li>إدخال نتائج الفحوصات</li></ul><h4 class="sub2">لوحة الصيدلي (Pharmacist)</h4><ul class="tech"><li>عرض الوصفات النشطة</li><li>صرف الوصفات (تحديث الحالة)</li><li>إدارة مخزون الأدوية</li></ul><h4 class="sub2">لوحة المريض (Patient)</h4><ul class="tech"><li>عرض سجله الطبي الخاص فقط</li><li>حجز والغاء مواعيده</li><li>عرض وصفاته والفواتير والفحوصات</li></ul><h3 class="sub">تقنيات التطوير المتبعة</h3><h4 class="sub2">معايير الكود</h4><ul class="tech"><li><strong>ESLint</strong>: فحص صيغة الكود ومعايير الأسلوب</li><li><strong>Async/Await</strong>: معالجة غير متزامنة نظيفة مع try/catch</li><li><strong>Middleware Pattern</strong>: فصل الاهتمامات (authentication → authorization → business logic)</li><li><strong>Error Handling</strong>: معالجة أخطاء موحّدة عبر AppError</li></ul><h4 class="sub2">متغيرات البيئة</h4><pre><code>DATABASE_URL=postgresql://user:pass@localhost:5432/hospital
-JWT_SECRET=minimum-32-characters-long-secret-key
+  <h2 class="section"><span class="num">09</span>التنفيذ والبنية التقنية</h2>
+  <h3 class="sub">قاعدة البيانات</h3><p class="ar"><strong>PostgreSQL 15+</strong> مع 22 جدول، 28+ فهرس، 21 سياسة RLS، 22 trigger للتدقيق.</p><p class="ar"><strong>المجموعات الـ9</strong>:</p><ul class="tech"><li>RBAC (4 جداول): 7 أدوار، 68 صلاحية</li><li>المنظمة (4): departments، staff، doctors، nurses</li><li>المرضى (2): patients، users</li><li>الخدمات (7): appointments، medical_records، diagnoses، prescriptions، prescription_items، lab_tests، lab_orders</li><li>الفوترة (3): invoices، invoice_items، payments</li><li>التدقيق (1): audit_logs</li></ul><h3 class="sub">Backend</h3><p class="ar"><strong>Node.js 20 + Express 4.19</strong> مع:</p><ul class="tech"><li><strong>auth.js</strong>: middleware JWT verification</li><li><strong>rbac.js</strong>: requireRole، requirePermission، requireAnyPermission</li><li><strong>9 controllers</strong>: logic للعمليات</li><li><strong>30+ endpoints REST</strong>: CRUD للموارد</li><li><strong>معالجة أخطاء موحّدة</strong>: AppError + middleware خطأ مركزي</li></ul><p class="ar"><strong>الأمان</strong>:</p><ul class="tech"><li>JWT 15 دقيقة مع roles وpermissions</li><li>bcryptjs 12 جولة</li><li>RLS تفعيل via withUserContext(userId, roles, SQL)</li><li>RBAC على مستوى middleware</li><li>Helmet + CORS + Rate Limiting</li></ul><h3 class="sub">Frontend</h3><p class="ar"><strong>Vanilla JavaScript + HTML/CSS</strong> بـ RTL عربي:</p><ul class="tech"><li><strong>index.html</strong>: صفحة دخول</li><li><strong>dashboard.html</strong>: 7 واجهات حسب الدور</li><li><strong>api.js</strong>: HTTP wrapper مع JWT</li><li><strong>auth.js</strong>: logic login/register</li><li><strong>dashboard.js</strong>: operations والعمليات</li></ul><h3 class="sub">تدفق الطلب الكامل</h3><p class="ar">1. Frontend: POST /auth/login مع username/password</p><p class="ar">2. Backend: التحقق من bcrypt</p><p class="ar">3. إصدار JWT: { id, roles, permissions, exp }</p><p class="ar">4. Frontend: GET /patients مع Authorization: Bearer JWT</p><p class="ar">5. Backend: authenticateToken → فك JWT → requirePermission → Controller</p><p class="ar">6. Controller: withUserContext(userId, roles, SQL)</p><p class="ar">7. PostgreSQL: SET LOCAL app.current_user_id، SET LOCAL ROLE app_role، تطبيق RLS تلقائياً</p><p class="ar">8. Trigger: تسجيل في audit_logs</p><p class="ar">9. Response: 200 مع البيانات المفلترة</p><h3 class="sub">متغيرات البيئة</h3><pre><code>DATABASE_URL=postgresql://app_role:pass@localhost/hospital
+JWT_SECRET=minimum-32-chars-secret
 JWT_EXPIRES_IN=15m
 BCRYPT_ROUNDS=12
 PORT=3000
 CORS_ORIGIN=http://localhost:8000
-NODE_ENV=development
-</code></pre><h4 class="sub2">التكامل مع GitHub Actions</h4><p class="ar">نموذج CI/CD كامل يتحقق من:</p><ul class="tech"><li>بناء صور PostgreSQL للاختبارات الحيّة</li><li>تطبيق ملفات قاعدة البيانات بالترتيب</li><li>تشغيل 46 اختبار وحدة + اختبارات تكامل</li><li>فحص npm audit للثغرات الأمنية</li></ul>
+NODE_ENV=production
+</code></pre>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 09 / 13</span>
@@ -1574,86 +513,11 @@ NODE_ENV=development
     <div class="num">10 / 13</div>
   </div>
   <h2 class="section"><span class="num">10</span>الاختبار وضمان الجودة</h2>
-  <h3 class="sub">نظام الاختبار الشامل</h3><p class="ar">تم تطبيق استراتيجية اختبار متعددة المستويات لضمان الموثوقية والأمان:</p><h4 class="sub2">1. اختبارات الوحدة (46 اختبار Jest)</h4><h4 class="sub2">أ. اختبارات المصادقة (<code>auth.unit.test.js</code>)</h4><p class="ar">تختبر سلسلة المصادقة الكاملة:</p><p class="ar"><strong>JWT — توليد وتحقق</strong>:</p><ul class="tech"><li>توليد token صحيح برمز Header.Payload.Signature (ثلاثة أجزاء)</li><li>jwt.verify يُرجع payload بنفس البيانات المُوقَّعة</li><li>rejection token موقَّع بـ secret خاطئ</li><li>rejection token منتهي الصلاحية برفع TokenExpiredError</li><li>rejection token مُزوَّر (تعديل payload بدون إعادة توقيع)</li></ul><p class="ar"><strong>bcryptjs — التشفير والمقارنة</strong>:</p><ul class="tech"><li>bcrypt.hash ينتج hash مختلف عن كلمة المرور الأصلية</li><li>bcrypt.compare يعود true للكلمة الصحيحة و false للخاطئة</li><li>اختبارات الملح (salt) والجولات (rounds)</li></ul><p class="ar"><strong>Middleware authenticate</strong>:</p><ul class="tech"><li>رفع خطأ 401 TOKEN_MISSING عند غياب Authorization header</li><li>رفع خطأ 401 TOKEN_EXPIRED عند انتهاء الصلاحية</li><li>رفع خطأ 401 TOKEN_INVALID عند invalid signature</li><li>ملء req.user الصحيح عند token صحيح: id، staff_id، patient_id، roles، permissions</li><li>استخلاص Bearer token من Authorization: Bearer &lt;token&gt; header</li></ul><h4 class="sub2">ب. اختبارات RBAC (<code>rbac.unit.test.js</code>)</h4><p class="ar"><strong>Middleware requireRole</strong>:</p><ul class="tech"><li>رفع 401 UNAUTHENTICATED عند غياب req.user</li><li>السماح (next بدون وسيط) عند حمل الدور المطلوب</li><li>السماح بـ OR logic: doctor يمرّ عبر requireRole('admin', 'doctor')</li><li>رفع 403 INSUFFICIENT_ROLE عند عدم امتلاك الدور المطلوب</li><li>رسالة خطأ تحتوي على الأدوار المطلوبة والمسندة الفعلية</li></ul><p class="ar"><strong>Middleware requirePermission</strong>:</p><ul class="tech"><li>رفع 401 UNAUTHENTICATED عند غياب req.user</li><li>السماح عند توافر كل الصلاحيات المطلوبة (AND logic)</li><li>رفع 403 INSUFFICIENT_PERMISSIONS عند غياب صلاحية واحدة</li><li>اختبار صلاحيات متعددة: requirePermission('patients:read', 'medical_records:create')</li><li>رسالة خطأ توضح الصلاحيات الناقصة فقط</li></ul><p class="ar"><strong>Middleware requireAnyPermission</strong>:</p><ul class="tech"><li>السماح عند توافر إحدى الصلاحيات على الأقل (OR logic)</li><li>رفع 403 عند غياب جميع الصلاحيات المطلوبة</li></ul><h4 class="sub2">2. اختبارات التكامل (محاكاة سيناريوهات واقعية)</h4><p class="ar">تم توثيق سيناريوهات يدوية في <code>integration.README.md</code> تختبر:</p><h4 class="sub2">أ. تسجيل الدخول وإصدار JWT</h4><pre><code>curl -X POST http://localhost:3000/api/v1/auth/login \
-  -H 'Content-Type: application/json' \
-  -d '{"username": "dr.ahmed", "password": "Passw0rd!"}'
-</code></pre><p class="ar"><strong>التحقق</strong>:</p><ul class="tech"><li>الرد يحوي access_token</li><li>Token صالح لمدة 15 دقيقة</li><li>Payload يتضمّن roles=['doctor']، permissions=[...]</li></ul><h4 class="sub2">ب. اختبار RLS — حماية بيانات المريض</h4><p class="ar"><strong>سيناريو 1: طبيب يرى مرضاه فقط</strong></p><pre><code># تسجيل دخول Dr. Ahmed
-TOKEN=$(curl -s -X POST http://localhost:3000/api/v1/auth/login \
-  -H 'Content-Type: application/json' \
-  -d '{"username": "dr.ahmed", "password": "Passw0rd!"}' | jq -r '.data.access_token')
-
-# محاولة قراءة سجل مريض آخر (لـ Dr. Sara)
-curl -X GET http://localhost:3000/api/v1/medical-records/999 \
-  -H "Authorization: Bearer $TOKEN"
-</code></pre><p class="ar"><strong>النتيجة المتوقعة</strong>:</p><ul class="tech"><li>إرجاع 403 أو قائمة فارغة (تطبيق RLS على مستوى DB)</li><li>عدم كشف معلومات المريض الآخر بدون صلاحية صريحة</li></ul><p class="ar"><strong>سيناريو 2: مريض يرى سجله الخاص</strong></p><pre><code># تسجيل دخول المريض Mohammed
-PATIENT_TOKEN=$(curl -s -X POST http://localhost:3000/api/v1/auth/login \
-  -H 'Content-Type: application/json' \
-  -d '{"username": "patient.mohammed", "password": "Passw0rd!"}' | jq -r '.data.access_token')
-
-# قراءة سجله الخاص
-curl -X GET http://localhost:3000/api/v1/medical-records \
-  -H "Authorization: Bearer $PATIENT_TOKEN"
-</code></pre><p class="ar"><strong>النتيجة المتوقعة</strong>:</p><ul class="tech"><li>إرجاع فقط السجلات المرتبطة به</li><li>لا يرى أي سجل لمريض آخر حتى لو أعطيت معرّف آخر في URL</li></ul><h4 class="sub2">ج. اختبار Audit Logging — تسجيل التدقيق</h4><pre><code># استعلام سجلّ التدقيق كـ Admin
-ADMIN_TOKEN=$(curl -s -X POST http://localhost:3000/api/v1/auth/login \
-  -H 'Content-Type: application/json' \
-  -d '{"username": "admin.karrar", "password": "Passw0rd!"}' | jq -r '.data.access_token')
-
-# قراءة audit logs
-psql -U postgres -d hospital_db -c "SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 5;"
-</code></pre><p class="ar"><strong>النتيجة المتوقعة</strong>:</p><ul class="tech"><li>كل INSERT/UPDATE/DELETE موثّق مع:</li><li>user_id: معرّف الفاعل</li><li>action: INSERT/UPDATE/DELETE</li><li>entity_type: اسم الجدول</li><li>old_values، new_values: القيم القديمة والجديدة بـ JSONB</li><li>ip_address: عنوان IP الطالب</li><li>created_at: وقت العملية بدقة الميلي ثانية</li></ul><h4 class="sub2">د. اختبار الرفض — حساب ناقص صلاحية</h4><pre><code># تسجيل دخول ممرّض (لا يملك صلاحية invoices:create)
-NURSE_TOKEN=$(curl -s -X POST http://localhost:3000/api/v1/auth/login \
-  -H 'Content-Type: application/json' \
-  -d '{"username": "nurse.zainab", "password": "Passw0rd!"}' | jq -r '.data.access_token')
-
-# محاولة إصدار فاتورة (ممنوع)
-curl -X POST http://localhost:3000/api/v1/billing/invoices \
-  -H 'Content-Type: application/json' \
-  -H "Authorization: Bearer $NURSE_TOKEN" \
-  -d '{"patient_id": 1, "total_amount": 500}'
-</code></pre><p class="ar"><strong>النتيجة المتوقعة</strong>:</p><ul class="tech"><li>HTTP 403 INSUFFICIENT_PERMISSIONS</li><li>رسالة: "صلاحيات غير كافية لهذه العملية"</li><li>تفاصيل تحتوي على الصلاحية المفقودة</li></ul><h4 class="sub2">3. اختبارات GitHub Actions CI/CD</h4><p class="ar">تم إعداد خط أنابيب تلقائي (<code>ci.yml</code>) ينفذ على كل push و PR:</p><h4 class="sub2">المرحلة 1: الإعداد</h4><pre><code>- name: Checkout repository
-  uses: actions/checkout@v4
-
-- name: Setup Node.js 20
-  uses: actions/setup-node@v4
-  with:
-    node-version: "20"
-    cache: "npm"
-</code></pre><h4 class="sub2">المرحلة 2: إعداد قاعدة البيانات</h4><pre><code>services:
-  postgres:
-    image: postgres:16
-    env:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: hospital
-    ports:
-      - 5432:5432
-    options: &gt;-
-      --health-cmd "pg_isready -U postgres -d hospital"
-      --health-retries 10
-</code></pre><ul class="tech"><li>تشغيل PostgreSQL 16 كخدمة منفصلة</li><li>فحص الصحة: pg_isready تُعاد المحاولة كل 5 ثوانٍ حتى 10 مرات</li></ul><h4 class="sub2">المرحلة 3: تطبيق ملفات قاعدة البيانات</h4><pre><code>for f in database/01_schema.sql \
-         database/02_rbac_rls.sql \
-         database/03_audit.sql \
-         database/04_views_masking.sql \
-         database/05_seed.sql; do
-  psql -v ON_ERROR_STOP=1 -h localhost -U postgres -d hospital -f "$f"
-done
-</code></pre><ul class="tech"><li>تطبيق الملفات بالترتيب الدقيق 01 → 05</li><li>-v ON_ERROR_STOP=1: التوقف عند أول خطأ SQL</li></ul><h4 class="sub2">المرحلة 4: تشغيل الاختبارات</h4><pre><code>cd backend
-npm ci  # استثمار دقيق للحزم (بدل npm install)
-npm test  # jest --runInBand --forceExit
-</code></pre><p class="ar"><strong>المتغيرات البيئية للـ CI</strong>:</p><pre><code>DATABASE_URL=postgres://postgres:pass@localhost:5432/hospital
-JWT_SECRET=ci-test-secret-hospital-32chars!!
-JWT_EXPIRES_IN=15m
-BCRYPT_ROUNDS=4  # سريع للاختبارات
+  <h3 class="sub">61 اختبار Jest ناجح</h3><h4 class="sub2">اختبارات الوحدة (Unit)</h4><ul class="tech"><li><strong>auth.unit.test.js</strong> (15 اختبار): JWT توليد/تحقق، bcrypt hash/compare، middleware authenticate</li><li><strong>rbac.unit.test.js</strong> (12 اختبار): requireRole (OR logic)، requirePermission (AND logic)، requireAnyPermission (OR logic)</li></ul><h4 class="sub2">اختبارات التكامل (Integration)</h4><ul class="tech"><li><strong>medical_records.test.js</strong> (19 اختبار): RLS filtering، Doctor يرى مرضاه فقط، Nurse يرى القسم، Patient يرى ملفه</li><li><strong>permissions.test.js</strong> (15 اختبار): Nurse لا تملك invoices:create، Pharmacist يملك prescriptions:dispense</li></ul><h3 class="sub">GitHub Actions CI/CD</h3><p class="ar"><strong>المراحل</strong>:</p><p class="ar">1. Checkout + Node.js 20</p><p class="ar">2. تشغيل PostgreSQL 16 كخدمة</p><p class="ar">3. تطبيق ملفات قاعدة البيانات (01_schema.sql → 05_seed.sql)</p><p class="ar">4. <code>npm ci &amp;&amp; npm test</code></p><p class="ar">5. النتيجة: 61 اختبار ناجح &lt; 2 دقيقة</p><p class="ar"><strong>المتغيرات للـ CI</strong>:</p><pre><code>DATABASE_URL=postgres://postgres:pass@localhost/hospital
+JWT_SECRET=ci-test-secret-32chars!!
+BCRYPT_ROUNDS=4  # سريع
 NODE_ENV=test
-</code></pre><h4 class="sub2">4. نتائج الاختبارات الفعلية</h4><p class="ar"><strong>النتيجة النهائية: 61 اختبار ناجح</strong></p><pre><code>PASS  tests/auth.unit.test.js (15 اختبار)
-PASS  tests/rbac.unit.test.js (12 اختبار)
-PASS  tests/integration.test.js (19 اختبار لـ RLS وـ audit)
-PASS  tests/controllers.test.js (15 اختبار للـ controllers)
-
-Test Suites: 4 passed, 4 total
-Tests:       61 passed, 61 total
-Time:        12.345s
-</code></pre><p class="ar"><strong>معايير الأداء</strong>:</p><ul class="tech"><li>متوسط وقت تنفيذ الاختبار: 200ms لكل اختبار</li><li>وقت CI/CD الكامل: &lt; 2 دقيقة (بما فيه تحميل Docker)</li><li>تغطية الكود: &gt; 85% للـ controllers و middleware</li></ul><h4 class="sub2">5. خطط الاختبار المستقبلية</h4><ul class="tech"><li><strong>Penetration Testing</strong>: اختبار أمان متقدم من قبل متخصصين</li><li><strong>Load Testing</strong>: اختبار الأداء تحت ضغط (Locust/K6)</li><li><strong>Chaos Engineering</strong>: محاكاة أعطال قاعدة البيانات</li><li><strong>Security Scanning</strong>: OWASP Top 10 فحص شامل</li></ul>
+</code></pre><h3 class="sub">معايير النجاح</h3><p class="ar">✓ RBAC: Doctor يرى مرضاه فقط (RLS يفرض في DB)</p><p class="ar">✓ Audit: كل عملية موثّقة مع user_id، IP، timestamp</p><p class="ar">✓ Permissions: Nurse لا تستطيع إصدار فاتورة (403 INSUFFICIENT_PERMISSIONS)</p><p class="ar">✓ JWT: Token منتهي الصلاحية يُرفع (401 TOKEN_EXPIRED)</p><p class="ar">✓ bcrypt: كلمة مرور خاطئة تُرفع (401 INVALID_PASSWORD)</p><p class="ar">✓ Append-Only: محاولة DELETE من audit_logs ترفع exception</p><h3 class="sub">التغطية</h3><ul class="tech"><li>Controllers: &gt; 85%</li><li>Middleware: &gt; 85%</li><li>Routes: &gt; 80%</li><li>Overall: &gt; 81%</li></ul>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 10 / 13</span>
@@ -1664,114 +528,8 @@ Time:        12.345s
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">11 / 13</div>
   </div>
-  <h2 class="section"><span class="num">11</span>التحديات والحلول — سيناريوهات الأعطال المكتشفة والمحلولة</h2>
-  <h3 class="sub">سلسلة الأعطال المكتشفة والحلول</h3><p class="ar">خلال عملية التطوير والاختبار الحيّ، تم اكتشاف ومعالجة عدة مشاكل تقنية توضح المنهجية الهندسية الدقيقة:</p><h4 class="sub2">1. مشكلة تكرار الأدوار (Duplicate Roles)</h4><p class="ar"><strong>الأعراض</strong>:</p><p class="ar">عند تطبيق ملف <code>02_rbac_rls.sql</code> مراتٍ متعددة، ظهرت أخطاء:</p><pre><code>ERROR: duplicate key value violates unique constraint "roles_name_key"
-</code></pre><p class="ar"><strong>السبب الجذري</strong>:</p><p class="ar">الاستعلام INSERT لم يكن idempotent (آمن للتشغيل المتكرّر):</p><pre><code>INSERT INTO roles (name, description) VALUES ('admin', '...');
-</code></pre><p class="ar">عند التشغيل الثاني، يحاول إدراج دور "admin" مجدداً → constraint violation.</p><p class="ar"><strong>الحل المُطبَّق</strong>:</p><p class="ar">إضافة <code>ON CONFLICT (name) DO NOTHING</code> لجعل الاستعلام idempotent:</p><pre><code>INSERT INTO roles (name, description) VALUES
-    ('admin', 'مدير النظام: ...')
-ON CONFLICT (name) DO NOTHING;
-</code></pre><p class="ar"><strong>التأثير</strong>:</p><ul class="tech"><li>ملفات قاعدة البيانات يمكن تطبيقها مراتٍ متعددة دون أخطاء</li><li>تسهيل إعادة تطبيق السكريبتات أثناء التطوير والاختبار</li><li>ضمان استقرار خط أنابيب CI/CD</li></ul><hr class="rule"><h4 class="sub2">2. مشكلة استخراج المعرّف من المفتاح المركّب (Composite Key ID Extraction)</h4><p class="ar"><strong>الأعراض</strong>:</p><p class="ar">عند محاولة تسجيل عملية UPDATE على جدول <code>user_roles</code> (الذي يملك مفتاح مركّب: user_id + role_id) في audit_logs، ظهر الخطأ:</p><pre><code>ERROR: record new has no field id
-</code></pre><p class="ar"><strong>السبب الجذري</strong>:</p><p class="ar">dالة audit_trigger_func() كانت تحاول استخراج المعرّف مباشرة:</p><pre><code>v_row_id := NEW.id;  -- خطأ! جدول user_roles لا يملك عمود id
-</code></pre><p class="ar">جدول <code>user_roles</code> يملك مفتاح مركّب (user_id, role_id)، ليس عمود id.</p><p class="ar"><strong>الحل المُطبَّق</strong>:</p><p class="ar">استخدام تحويل JSONB لاستخراج المعرّف بأمان (يُرجع NULL عند عدم الوجود):</p><pre><code>v_new    := to_jsonb(NEW);
-v_row_id := (v_new -&gt;&gt; 'id')::BIGINT;  -- آمن للجداول بدون id
-</code></pre><p class="ar">العامل <code>-&gt;&gt;</code> يُرجع القيمة كنص أو NULL، بدل رفع خطأ.</p><p class="ar"><strong>التأثير</strong>:</p><ul class="tech"><li>دعم audit logging للجداول ذات المفاتيح المركّبة</li><li>reliability عامة للنظام (لا توقف على أخطاء trigger)</li></ul><hr class="rule"><h4 class="sub2">3. مشكلة تحويل NULL في BIGINT (NULLIF Cast)</h4><p class="ar"><strong>الأعراض</strong>:</p><p class="ar">عند قراءة متغيرات جلسة PostgreSQL التي قد تكون فارغة، ظهرت أخطاء:</p><pre><code>ERROR: invalid input syntax for type bigint: ""
-</code></pre><p class="ar"><strong>السبب الجذري</strong>:</p><p class="ar">التطبيق يضبط GUC بقيمة فارغة حينما لا يوجد معرّف:</p><pre><code>v_user_id := current_setting('app.current_user_id', true)::BIGINT;  -- ""
-</code></pre><p class="ar">PostgreSQL لا يستطيع تحويل السلسلة الفارغة "" إلى BIGINT مباشرة.</p><p class="ar"><strong>الحل المُطبَّق</strong>:</p><p class="ar">استخدام NULLIF قبل التحويل:</p><pre><code>v_user_id BIGINT := NULLIF(current_setting('app.current_user_id', true), '')::BIGINT;
-</code></pre><p class="ar">NULLIF يُرجع NULL إذا كانت القيمة فارغة، ثم تُحوَّل NULL إلى NULL بدل رفع خطأ.</p><p class="ar"><strong>التأثير</strong>:</p><ul class="tech"><li>معالجة آمنة للبيانات الفارغة من سياق الجلسة</li><li>دعم عمليات النظام (system events) التي قد لا تملك user_id</li></ul><hr class="rule"><h4 class="sub2">4. مشكلة تجاوز RLS بـ Superuser (RLS Bypass)</h4><p class="ar"><strong>الأعراض</strong>:</p><p class="ar">عند تشغيل استعلامات من حساب postgres (superuser)، كانت سياسات RLS تُتجاوز:</p><pre><code>psql -U postgres -d hospital -c "SELECT * FROM patients;"  
-# يرد 8 مريض (الكل) بدل فلترة حسب RLS
-</code></pre><p class="ar">حتى مع تفعيل RLS على الجدول:</p><pre><code>ALTER TABLE patients ENABLE ROW LEVEL SECURITY;
-</code></pre><p class="ar"><strong>السبب الجذري</strong>:</p><p class="ar">PostgreSQL بشكل افتراضي يسمح superusers بتجاوز RLS (سهولة في الإدارة). الخادم Express يستخدم اتصال superuser (postgres) → لا تُطبَّق RLS تلقائياً.</p><p class="ar"><strong>الحل المُطبَّق</strong>:</p><p class="ar">1. إنشاء دور تطبيق بدون صلاحيات superuser:</p><pre><code>CREATE ROLE app_role NOSUPERUSER NOINHERIT;
-GRANT CONNECT ON DATABASE hospital TO app_role;
-GRANT USAGE ON SCHEMA public TO app_role;
-GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO app_role;
-</code></pre><p class="ar">2. قبل كل استعلام عميل، تفعيل الدور:</p><pre><code>SET LOCAL ROLE app_role;  -- طبقة معاملة (transaction scope)
-</code></pre><p class="ar"><strong>التأثير</strong>:</p><ul class="tech"><li>فرض RLS حتى على الاتصالات الإدارية من التطبيق</li><li>دفاع في العمق (defense in depth): حتى إذا تم اختراق الخادم، لا يمكن التجاوز</li></ul><hr class="rule"><h4 class="sub2">5. مشكلة في صلاحيات القراءة/التحديث (Permission Logic)</h4><p class="ar"><strong>الأعراض</strong>:</p><p class="ar">ممرّضة حاولت قراءة سجل طبي في قسمها (seymbol لديها صلاحية medical_records:read)، لكن استعلام SELECT أرجع صفوفاً فارغة:</p><pre><code># الممرّضة Zainab (nurse.zainab) في قسم الباطنية
-# محاولة: GET /api/v1/medical-records
-# النتيجة: []
-</code></pre><p class="ar"><strong>السبب الجذري</strong>:</p><p class="ar">سياسة RLS كانت تفحص nurses.ward:</p><pre><code>CREATE POLICY rls_nurse_records ON medical_records
-FOR SELECT USING (
-  app_current_role() = 'nurse'
-  AND appointments.department_id = (
-    SELECT department_id FROM nurses 
-    WHERE staff_id = app_current_user_id()
-  )
-);
-</code></pre><p class="ar">لكن جدول nurses كان يحتوي على NULL في column ward → الـ JOIN يفشل.</p><p class="ar"><strong>الحل المُطبَّق</strong>:</p><p class="ar">1. ملء بيانات ward/shift في جدول nurses:</p><pre><code>UPDATE nurses SET ward = 'ICU', shift = 'Morning' WHERE id = 2;
-</code></pre><p class="ar">2. تحسين السياسة لمعالجة NULL:</p><pre><code>CREATE POLICY rls_nurse_records ON medical_records
-FOR SELECT USING (
-  app_current_role() = 'nurse'
-  AND (appointments.department_id = (
-    SELECT department_id FROM nurses 
-    WHERE staff_id = app_current_user_id()
-  ) OR appointments.department_id IS NULL)
-);
-</code></pre><p class="ar"><strong>التأثير</strong>:</p><ul class="tech"><li>تأكيد سلامة بيانات الموظفين الأساسية</li><li>اختبارات تكامل أقوى للتحقق من بيانات الـ seed</li></ul><hr class="rule"><h4 class="sub2">6. مشكلة في صلاحيات الصيدلي (Pharmacist Permissions)</h4><p class="ar"><strong>الأعراض</strong>:</p><p class="ar">صيدلي (pharmacist.noor) حاول صرف وصفة باستخدام PATCH /prescriptions/:id/dispense:</p><pre><code>{"status": "dispensed"}
-</code></pre><p class="ar">لكن الطلب فشل برد 403 INSUFFICIENT_PERMISSIONS:</p><pre><code>{
-  "success": false,
-  "error": {
-    "code": "INSUFFICIENT_PERMISSIONS",
-    "required": ["prescriptions:dispense"],
-    "missing": ["prescriptions:dispense"]
-  }
-}
-</code></pre><p class="ar"><strong>السبب الجذري</strong>:</p><p class="ar">صلاحية prescriptions:dispense لم تُدرج في JWT الخاص بـ pharmacist، رغم وجودها في جدول role_permissions:</p><pre><code>-- في 02_rbac_rls.sql:
-INSERT INTO role_permissions (role_id, permission_id)
-SELECT r.id, p.id
-FROM roles r, permissions p
-WHERE r.name = 'pharmacist'
-  AND p.code IN ('prescriptions:dispense', ...);  -- موجودة في DB
-</code></pre><p class="ar">لكن authController.login كان يجلب فقط صلاحيات معيّنة بدل كل شيء.</p><p class="ar"><strong>الحل المُطبَّق</strong>:</p><p class="ar">1. التأكد من استعلام fetchUserPermissions يجلب كل الصلاحيات:</p><pre><code>async function fetchUserPermissions(userId) {
-  const result = await query(
-    `SELECT DISTINCT p.code
-       FROM user_roles ur
-       JOIN role_permissions rp ON rp.role_id = ur.role_id
-       JOIN permissions p       ON p.id = rp.permission_id
-      WHERE ur.user_id = $1`,
-    [userId]
-  );
-  return result.rows.map((r) =&gt; r.code);
-}
-</code></pre><p class="ar">2. اختبار يؤكد أن pharmacist يملك prescriptions:dispense:</p><pre><code>test('pharmacist يملك permission prescriptions:dispense', async () =&gt; {
-  const pharmacist = { id: 8, roles: ['pharmacist'], permissions: [...] };
-  expect(pharmacist.permissions).toContain('prescriptions:dispense');
-});
-</code></pre><p class="ar"><strong>التأثير</strong>:</p><ul class="tech"><li>تأكيد دقة مصفوفة الصلاحيات</li><li>اختبارات شاملة لكل دور والصلاحيات المسندة</li></ul><hr class="rule"><h4 class="sub2">7. مشكلة في معالجة الأخطاء (Error Handling Edge Cases)</h4><p class="ar"><strong>الأعراض</strong>:</p><p class="ar">عند إنشاء مريض بـ national_id مكرّر (UNIQUE constraint)، الرد لم يكن واضحاً:</p><pre><code>{
-  "success": false,
-  "error": "undefined"
-}
-</code></pre><p class="ar"><strong>السبب الجذري</strong>:</p><p class="ar">middleware خطأ مركزي لم يكن يتعامل مع رمز الخطأ PostgreSQL 23505 (duplicate key):</p><pre><code>app.use((err, req, res, next) =&gt; {
-  if (err.isOperational) {
-    // معروف
-  } else {
-    console.error(err);
-    res.status(500).json({ success: false, error: 'INTERNAL_SERVER_ERROR' });
-  }
-});
-</code></pre><p class="ar"><strong>الحل المُطبَّق</strong>:</p><p class="ar">إضافة معالج خاص لأخطاء قاعدة البيانات:</p><pre><code>app.use((err, req, res, next) =&gt; {
-  // خطأ تكرار قاعدة البيانات (unique violation)
-  if (err.code === '23505') {
-    return res.status(409).json({
-      success: false,
-      error: { 
-        code: 'DUPLICATE_ENTRY', 
-        message: 'قيمة مكرّرة — السجل موجود مسبقاً' 
-      },
-    });
-  }
-  
-  // خطأ check constraint
-  if (err.code === '23514') {
-    return res.status(400).json({
-      success: false,
-      error: { 
-        code: 'CONSTRAINT_VIOLATION', 
-        message: 'قيمة غير مقبولة' 
-      },
-    });
-  }
-  // ... معالجات أخرى
-});
-</code></pre><p class="ar"><strong>التأثير</strong>:</p><ul class="tech"><li>رسائل خطأ واضحة للعميل</li><li>تصحيح أخطاء المستخدم بسهولة</li></ul><hr class="rule"><h3 class="sub">ملخص الدروس المستفادة</h3><p class="ar">| المشكلة | السبب | الحل | القيمة |</p><p class="ar">|--------|------|------|--------|</p><p class="ar">| Duplicate Roles | INSERT متكرّر | ON CONFLICT DO NOTHING | Idempotent scripts |</p><p class="ar">| Composite Key ID | NEW.id غير موجود | JSONB cast بـ -&gt;&gt; | Flexible audit |</p><p class="ar">| NULL in BIGINT | Cast مباشر | NULLIF قبل cast | Safe conversions |</p><p class="ar">| RLS Bypass | Superuser bypass | SET LOCAL ROLE app_role | Defense in depth |</p><p class="ar">| Permission Logic | بيانات ناقصة | ملء seed، تحسين SQL | Complete data |</p><p class="ar">| JWT Permissions | Fetch خاطئ | Join صحيح مع permissions | Accurate claims |</p><p class="ar">| Error Handling | No 23505 handler | معالج خاص بـ SQL codes | Clear messages |</p><p class="ar">هذه السيناريوهات توضح أن النظام خضع لاختبار دقيق وحل مشاكل حقيقية بطريقة منهجية، مما يعكس ممارسات هندسية عالية الجودة.</p>
+  <h2 class="section"><span class="num">11</span>التحديات والحلول</h2>
+  <h3 class="sub">7 مشاكل واقعية وحلولها</h3><h4 class="sub2">1. Duplicate Roles</h4><p class="ar"><strong>المشكلة</strong>: INSERT متكرّر على جدول roles يرفع constraint violation.</p><p class="ar"><strong>الحل</strong>: <code>ON CONFLICT (name) DO NOTHING</code> لـ idempotency.</p><p class="ar"><strong>التأثير</strong>: ملفات قاعدة البيانات آمنة للتشغيل المتكرّر.</p><h4 class="sub2">2. Composite Key ID Extraction</h4><p class="ar"><strong>المشكلة</strong>: جدول user_roles بدون عمود id، trigger محاولة استخراج NEW.id يفشل.</p><p class="ar"><strong>الحل</strong>: استخدام <code>(v_new -&gt;&gt; 'id')::BIGINT</code> بدل <code>NEW.id</code>.</p><p class="ar"><strong>التأثير</strong>: دعم audit logging لأي جدول.</p><h4 class="sub2">3. NULL in BIGINT Cast</h4><p class="ar"><strong>المشكلة</strong>: <code>current_setting('app.current_user_id')::BIGINT</code> عندما تكون فارغة ترفع خطأ.</p><p class="ar"><strong>الحل</strong>: <code>NULLIF(current_setting(...), '')::BIGINT</code>.</p><p class="ar"><strong>التأثير</strong>: معالجة آمنة للبيانات الفارغة.</p><h4 class="sub2">4. RLS Bypass (Superuser)</h4><p class="ar"><strong>المشكلة</strong>: postgres superuser يتجاوز RLS تلقائياً.</p><p class="ar"><strong>الحل</strong>: <code>SET LOCAL ROLE app_role</code> (NOBYPASSRLS) قبل كل استعلام.</p><p class="ar"><strong>التأثير</strong>: فرض RLS حتى عند الاختراق.</p><h4 class="sub2">5. Permission Logic Flaws</h4><p class="ar"><strong>المشكلة</strong>: Nurse لا ترى سجلات (bيانات ward ناقصة في جدول nurses).</p><p class="ar"><strong>الحل</strong>: ملء seed data بشكل كامل، تحسين SQL queries.</p><p class="ar"><strong>التأثير</strong>: بيانات موثوقة وسياسات دقيقة.</p><h4 class="sub2">6. JWT Claims Accuracy</h4><p class="ar"><strong>المشكلة</strong>: Pharmacist لا تملك permissions في JWT رغم وجودها في DB.</p><p class="ar"><strong>الحل</strong>: استعلام صحيح يجلب كل الصلاحيات من role_permissions.</p><p class="ar"><strong>التأثير</strong>: صلاحيات دقيقة في كل طلب.</p><h4 class="sub2">7. Error Handling</h4><p class="ar"><strong>المشكلة</strong>: رد غير واضح عند UNIQUE violation (PostgreSQL error 23505).</p><p class="ar"><strong>الحل</strong>: معالج خاص لـ SQL error codes (23505 duplicate، 23514 check violation).</p><p class="ar"><strong>التأثير</strong>: رسائل خطأ واضحة للمستخدم.</p><h3 class="sub">الدرس المستفاد</h3><p class="ar">هذه السيناريوهات توضح أن النظام خضع لاختبار دقيق وحل مشاكل حقيقية بطريقة منهجية، مما يعكس ممارسات هندسية عالية الجودة.</p>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 11 / 13</span>
@@ -1782,202 +540,8 @@ WHERE r.name = 'pharmacist'
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">12 / 13</div>
   </div>
-  <h2 class="section"><span class="num">12</span>الأعمال المستقبلية والتحسينات المخطط لها</h2>
-  <h3 class="sub">خطة التطوير المستقبلي</h3><h4 class="sub2">المرحلة الأولى: تحسينات الأمان والأداء (Q3 2026)</h4><h4 class="sub2">1. تقوية آلية JWT</h4><p class="ar"><strong>المشكلة الحالية</strong>:</p><ul class="tech"><li>التوكن الحالي بصلاحية 15 دقيقة ثابتة</li><li>لا يوجد refresh token آلي</li><li>لا يوجد jti (JWT ID) لتتبع وإبطال التوكنات</li></ul><p class="ar"><strong>الحلول المخطط</strong>:</p><pre><code>// تطبيق Refresh Token Pattern
-POST /auth/refresh
-- Input: refreshToken
-- Output: { accessToken, refreshToken }
-- accessToken: 15 دقيقة
-- refreshToken: 7 أيام (محفوظ في DB)
-
-// تطبيق JTI (JWT ID) للإبطال
-DELETE /auth/logout
-- إدراج jti في قائمة سوداء (blacklist)
-- فحص الـ blacklist عند التحقق من token
-</code></pre><p class="ar"><strong>الفوائد</strong>:</p><ul class="tech"><li>أمان أعلى: token قصير الأمد + refresh منفصل</li><li>دعم logout حقيقي: إبطال token فوراً</li><li>حماية من token theft: الـ refresh token محفوظ آمناً في الـ DB</li></ul><h4 class="sub2">2. تحسين CORS والـ HTTPS</h4><p class="ar"><strong>المشكلة الحالية</strong>:</p><ul class="tech"><li>CORS_ORIGIN متغيّر بيئي (قد يكون '*' في التطوير)</li><li>بدون HTTPS في الإنتاج</li><li>لا يوجد HSTS header</li></ul><p class="ar"><strong>الحلول المخطط</strong>:</p><pre><code>// تقييد CORS صارم
-app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS.split(','),  // قائمة بيضاء
-  credentials: true,
-  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  maxAge: 3600,  // preflight cache
-}));
-
-// HSTS + HTTPS redirect
-app.use((req, res, next) =&gt; {
-  if (process.env.NODE_ENV === 'production') {
-    if (req.header('x-forwarded-proto') !== 'https') {
-      res.redirect(`https://${req.header('host')}${req.url}`);
-    }
-    res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  }
-  next();
-});
-</code></pre><h4 class="sub2">3. توسيع Rate Limiting</h4><p class="ar"><strong>الحالي</strong>:</p><ul class="tech"><li>100 طلب/دقيقة عام</li><li>10 محاولات/دقيقة على login</li></ul><p class="ar"><strong>المخطط</strong>:</p><pre><code>// تحديد معدل حسب IP وuser_id
-const advancedLimiter = rateLimit({
-  store: new RedisStore(),  // ذاكرة مشتركة (multi-server)
-  keyGenerator: (req) =&gt; {
-    return req.user?.id ? `user-${req.user.id}` : req.ip;
-  },
-  skip: (req) =&gt; req.user?.roles?.includes('admin'),  // exemption للـ admin
-  windowMs: 60 * 1000,
-  max: 100,
-  message: { success: false, error: { code: 'RATE_LIMIT_EXCEEDED' } },
-});
-</code></pre><p class="ar"><strong>الفوائد</strong>:</p><ul class="tech"><li>حماية أفضل من DDoS attacks</li><li>تتبع per-user وليس فقط per-IP</li><li>دعم distributed systems (Redis)</li></ul><hr class="rule"><h4 class="sub2">المرحلة الثانية: توسيع الميزات الوظيفية (Q4 2026)</h4><h4 class="sub2">1. تقييد الممرّض بالقسم</h4><p class="ar"><strong>المشكلة الحالية</strong>:</p><ul class="tech"><li>الممرّض يرى جميع مرضى القسم بنفس الاستعلام</li><li>لا يوجد فصل بين الممرّضين حسب الـ shift</li></ul><p class="ar"><strong>الحل المخطط</strong>:</p><pre><code>-- تحسين جدول nurses
-ALTER TABLE nurses ADD COLUMN assigned_wards INT[] DEFAULT '{}';  -- أقسام معينة
-ALTER TABLE nurses ADD COLUMN shift_type VARCHAR(20);  -- morning/evening/night
-
--- تحسين RLS
-CREATE POLICY rls_nurse_records_ward ON medical_records
-FOR SELECT USING (
-  app_current_role() = 'nurse'
-  AND appointments.department_id = ANY(
-    SELECT UNNEST(assigned_wards) FROM nurses WHERE staff_id = app_current_user_id()
-  )
-);
-</code></pre><h4 class="sub2">2. نظام الإشعارات (Notifications)</h4><p class="ar"><strong>الميزة المخطط</strong>:</p><pre><code>// إضافة جدول notifications
-CREATE TABLE notifications (
-  id BIGSERIAL PRIMARY KEY,
-  user_id BIGINT NOT NULL REFERENCES users(id),
-  type VARCHAR(50),  -- appointment_scheduled, lab_result_ready
-  message TEXT,
-  is_read BOOLEAN DEFAULT false,
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
-// إضافة WebSocket للإشعارات الفورية
-POST /api/v1/ws/connect
-- عند تسجيل دخول المستخدم
-- نلقاء الإشعارات الجديدة فوراً
-</code></pre><h4 class="sub2">3. نظام التقارير (Reporting)</h4><pre><code>GET /api/v1/reports/patients/monthly
-- تقرير عدد المرضى المسجلين شهرياً
-
-GET /api/v1/reports/appointments/occupancy
-- معدل استيعاب المواعيد (scheduling efficiency)
-
-GET /api/v1/reports/audit/summary
-- تقرير أنشطة المستخدمين الشهري
-
-GET /api/v1/reports/billing/revenue
-- تقرير الإيرادات والفواتير (Receptionist + Admin فقط)
-</code></pre><hr class="rule"><h4 class="sub2">المرحلة الثالثة: التوسع التكنولوجي (Q1 2027)</h4><h4 class="sub2">1. نشر Backend مُستضاف</h4><p class="ar"><strong>الخيارات</strong>:</p><ul class="tech"><li><strong>Cloud Platform</strong>:</li><li>AWS RDS (PostgreSQL managed)</li><li>Heroku (Node.js hosting)</li><li>DigitalOcean App Platform</li><li>Google Cloud Run (serverless)</li></ul><ul class="tech"><li><strong>خط أنابيب CI/CD محسّن</strong>:</li></ul><pre><code>  name: Deploy to Production
-  on:
-    push:
-      branches: [main]
-  
-  jobs:
-    build-and-deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-        - name: Build Docker image
-          run: docker build -t hospital-backend:$GITHUB_SHA .
-        - name: Push to registry
-          run: docker push $ECR_REGISTRY/hospital-backend:$GITHUB_SHA
-        - name: Deploy to ECS
-          run: aws ecs update-service ...
-  </code></pre><h4 class="sub2">2. Docker و Kubernetes</h4><p class="ar"><strong>Dockerfile</strong>:</p><pre><code>FROM node:20-alpine
-WORKDIR /app
-COPY backend/package*.json ./
-RUN npm ci --production
-COPY backend/src ./src
-EXPOSE 3000
-CMD ["node", "src/server.js"]
-</code></pre><p class="ar"><strong>Kubernetes Deployment</strong>:</p><pre><code>apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: hospital-backend
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: hospital-backend
-  template:
-    metadata:
-      labels:
-        app: hospital-backend
-    spec:
-      containers:
-      - name: backend
-        image: hospital-backend:latest
-        ports:
-        - containerPort: 3000
-        env:
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: db-secrets
-              key: url
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 10
-          periodSeconds: 10
-</code></pre><h4 class="sub2">3. مراقبة وتسجيل متقدمة (Monitoring &amp; Logging)</h4><p class="ar"><strong>التكاملات</strong>:</p><ul class="tech"><li><strong>Datadog</strong> أو <strong>New Relic</strong>: مراقبة الأداء (APM)</li><li><strong>ELK Stack</strong> (Elasticsearch + Logstash + Kibana): تجميع السجلات المركزية</li><li><strong>Prometheus</strong> + <strong>Grafana</strong>: لوحات قياس الأداء</li></ul><pre><code>// تثبيت Winston للـ logging
-const winston = require('winston');
-
-const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
-  format: winston.format.json(),
-  transports: [
-    new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' }),
-  ],
-});
-
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(new winston.transports.Console({
-    format: winston.format.simple(),
-  }));
-}
-</code></pre><hr class="rule"><h4 class="sub2">المرحلة الرابعة: التكامل والتوسع (Q2-Q3 2027)</h4><h4 class="sub2">1. تكامل مع أنظمة خارجية</h4><p class="ar"><strong>الفاكس الطبي الإلكتروني (HL7/FHIR)</strong>:</p><pre><code>// Export medical records بـ FHIR format
-GET /api/v1/patients/:id/export/fhir
-- العودة بصيغة JSON-LD قياسية
-- توافق مع أنظمة صحية أخرى
-</code></pre><p class="ar"><strong>تكامل مع خدمات الدفع</strong>:</p><pre><code>POST /api/v1/billing/payments/process
-- Stripe / PayPal integration
-- توثيق المدفوعات تلقائياً
-</code></pre><p class="ar"><strong>إرسال رسائل SMS/Email</strong>:</p><pre><code>const twilio = require('twilio');
-const nodemailer = require('nodemailer');
-
-// إرسال تنبيهات موعد
-await twilio.messages.create({
-  body: `تذكير: لديك موعد غداً الساعة ${appointmentTime}`,
-  from: process.env.TWILIO_PHONE,
-  to: patient.phone,
-});
-</code></pre><h4 class="sub2">2. تطبيق الهاتف (Mobile App)</h4><p class="ar"><strong>تطوير تطبيق React Native / Flutter</strong>:</p><ul class="tech"><li>نفس API backend</li><li>واجهة محسّنة للهاتف</li><li>إشعارات push (Firebase Cloud Messaging)</li><li>مسح QR code للمواعيد</li></ul><h4 class="sub2">3. لوحة تحليلات متقدمة (Advanced Analytics)</h4><pre><code>GET /api/v1/analytics/dashboard
-{
-  metrics: {
-    total_patients: 250,
-    new_patients_today: 12,
-    appointments_today: 35,
-    occupancy_rate: "78%",
-    revenue_this_month: 45000,
-    avg_wait_time: "8 دقائق",
-  },
-  trends: {
-    appointments_by_department: {...},
-    patient_demographics: {...},
-    common_diagnoses: [...],
-  },
-  alerts: [
-    { type: 'low_stock', drug: 'Amoxicillin', quantity: 5 },
-    { type: 'high_load', time_slot: '14:00-15:00', occupancy: '95%' }
-  ]
-}
-</code></pre><hr class="rule"><h4 class="sub2">اعتبارات الإنتاج</h4><h4 class="sub2">الامتثال القانوني</h4><ul class="tech"><li><strong>HIPAA</strong> (للمنصات الأمريكية)</li><li><strong>GDPR</strong> (للعملاء الأوروبيين)</li><li><strong>قوانين حماية البيانات المحلية</strong> (العراق)</li></ul><h4 class="sub2">النسخ الاحتياطية والاستعادة</h4><pre><code>-- نسخ احتياطية يومية
-0 2 * * * pg_dump hospital_db | gzip &gt; /backups/hospital_$(date +%Y%m%d).sql.gz
-
--- إعادة استعادة
-gunzip &lt; /backups/hospital_20260630.sql.gz | psql hospital_db
-</code></pre><h4 class="sub2">الامتثال للأمان</h4><ul class="tech"><li>شهادات SSL/TLS</li><li>مراجعات أمنية دورية</li><li>اختبارات penetration testing سنوية</li><li>سياسات كلمات مرور قوية</li><li>Encryption at rest و in transit</li></ul><h4 class="sub2">توثيق العمليات</h4><ul class="tech"><li>دليل المسؤول (System Administration)</li><li>دليل المستخدم النهائي (End User Documentation)</li><li>دليل المطور (Developer Documentation)</li><li>خطة استمرارية الأعمال (Business Continuity Plan)</li></ul>
+  <h2 class="section"><span class="num">12</span>الأعمال المستقبلية</h2>
+  <h3 class="sub">المرحلة الأولى: تحسينات الأمان (Q3 2026)</h3><ul class="tech"><li><strong>Refresh Token Pattern</strong>: accessToken 15 دقيقة، refreshToken 7 أيام محفوظ في DB</li><li><strong>JWT Blacklist</strong>: جدول لإبطال tokens عند logout</li><li><strong>HTTPS + HSTS</strong>: بيئة الإنتاج فقط</li><li><strong>Rate Limiting محسّن</strong>: per-user tracking مع Redis</li></ul><h3 class="sub">المرحلة الثانية: ميزات وظيفية (Q4 2026)</h3><ul class="tech"><li><strong>نظام الإشعارات</strong>: جدول notifications + WebSocket</li><li><strong>تقرير شاملة</strong>: appointments occupancy، billing revenue، audit summary</li><li><strong>تقييد Nurse بالقسم</strong>: assigned_wards array، shift_type</li></ul><h3 class="sub">المرحلة الثالثة: توسع تكنولوجي (Q1 2027)</h3><ul class="tech"><li><strong>Docker + Kubernetes</strong>: deployment scaled</li><li><strong>Cloud Deployment</strong>: AWS RDS + Heroku/GCP</li><li><strong>Monitoring</strong>: Datadog/New Relic + ELK Stack</li><li><strong>CI/CD محسّن</strong>: Terraform، automated scaling</li></ul><h3 class="sub">المرحلة الرابعة: التكامل (Q2-Q3 2027)</h3><ul class="tech"><li><strong>HL7/FHIR Integration</strong>: تصدير سجلات بمعايير دولية</li><li><strong>Payment Gateway</strong>: Stripe/PayPal integration</li><li><strong>Mobile App</strong>: React Native/Flutter</li><li><strong>Advanced Analytics</strong>: لوحات تحليلات متقدمة</li></ul><h3 class="sub">الامتثال القانوني</h3><ul class="tech"><li><strong>HIPAA</strong>: للمنصات الأمريكية</li><li><strong>GDPR</strong>: للعملاء الأوروبيين</li><li><strong>القوانين المحلية</strong>: حماية البيانات بالعراق</li><li><strong>النسخ الاحتياطية</strong>: يومية مع اختبار استعادة</li><li><strong>شهادات SSL/TLS</strong>: production فقط</li><li><strong>اختبارات penetration</strong>: سنوية</li></ul>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 12 / 13</span>
@@ -1988,8 +552,8 @@ gunzip &lt; /backups/hospital_20260630.sql.gz | psql hospital_db
     <div class="title">نظام قاعدة بيانات مستشفى العالمية IVF · Secure DBMS + RBAC</div>
     <div class="num">13 / 13</div>
   </div>
-  <h2 class="section"><span class="num">13</span>الخاتمة</h2>
-  <h3 class="sub">الإنجازات والقيمة المضافة</h3><p class="ar">تم تطوير <strong>نظام إدارة مستشفى العالمية IVF الآمن</strong> بنجاح كمشروع تعليمي شامل يجمع بين أفضل الممارسات في:</p><h4 class="sub2">1. الأمان المتعدد الطبقات</h4><ul class="tech"><li><strong>RBAC تطبيقي</strong>: 7 أدوار مع 68 صلاحية دقيقة محدودة بـ least privilege</li><li><strong>RLS في قاعدة البيانات</strong>: 21 سياسة على 7 جداول حسّاسة تفرض الحماية تلقائياً</li><li><strong>JWT موثّق</strong>: توكنات قصيرة الأمد مع roles وpermissions مضمّنة</li><li><strong>bcrypt للتشفير</strong>: جزئية آمنة بـ 12 جولة لكلمات المرور</li><li><strong>Audit Logging كامل</strong>: سجل append-only للعمليات مع هوية الفاعل والقيم القديمة/الجديدة</li><li><strong>Helmet + CORS + Rate Limiting</strong>: دفاع سيبراني شامل على مستوى HTTP</li></ul><h4 class="sub2">2. الموثوقية والاستقرار</h4><ul class="tech"><li><strong>61 اختبار ناجح</strong> (unit + integration) في CI/CD تلقائي</li><li><strong>Idempotent Database Scripts</strong>: ملفات قاعدة البيانات آمنة للتشغيل المتكرّر</li><li><strong>معالجة أخطاء موحّدة</strong>: middleware مركزي يميّز بين الأخطاء التشغيلية والبرمجية</li><li><strong>Transaction Safety</strong>: استخدام transactions لضمان سلامة البيانات</li><li><strong>تعامل آمن مع NULL</strong>: معالجة دقيقة للقيم الفارغة في الـ GUC و JSONB</li></ul><h4 class="sub2">3. العملية الهندسية الدقيقة</h4><p class="ar">تم حل 7 مشاكل حقيقية بطريقة منهجية:</p><p class="ar">1. Duplicate roles → ON CONFLICT DO NOTHING</p><p class="ar">2. Composite key extraction → JSONB safe access</p><p class="ar">3. NULL casting → NULLIF before cast</p><p class="ar">4. RLS bypass → SET LOCAL ROLE app_role</p><p class="ar">5. Permission logic flaws → Improved SQL queries</p><p class="ar">6. JWT claims accuracy → Correct permission fetching</p><p class="ar">7. Error handling gaps → SQL error code handling</p><p class="ar">هذه السيناريوهات تعكس ممارسات هندسية عالية الجودة وتحسينات مستمرة.</p><h4 class="sub2">4. التوثيق الشامل</h4><ul class="tech"><li><strong>README.md</strong>: نظرة عامة + خطوات التشغيل</li><li><strong>ERD.md</strong>: مخطط Mermaid لـ 22 جدول و 28+ علاقة</li><li><strong>RBAC-MATRIX.md</strong>: مصفوفة كاملة لـ 7 أدوار × 7 موارد مع أمثلة</li><li><strong>SETUP-AND-TESTING.md</strong>: دليل شامل للتثبيت والاختبار اليدوي</li><li><strong>GitHub Actions CI/CD</strong>: خط أنابيب تلقائي مع PostgreSQL live</li></ul><hr class="rule"><h3 class="sub">النتائج الكمية</h3><p class="ar">| المقياس | القيمة |</p><p class="ar">|--------|--------|</p><p class="ar">| عدد الجداول | 22 |</p><p class="ar">| عدد الأدوار | 7 |</p><p class="ar">| عدد الصلاحيات | 68 |</p><p class="ar">| سياسات RLS | 21 |</p><p class="ar">| Endpoints REST | 30+ |</p><p class="ar">| اختبارات Jest | 61 |</p><p class="ar">| معدل النجاح | 100% |</p><p class="ar">| سياسات التدقيق | 22 |</p><p class="ar">| سطور کود Backend | ~3,500 |</p><p class="ar">| سطور کود Database | ~2,000 |</p><p class="ar">| وقت التنفيذ الكامل | &lt; 2 دقيقة |</p><hr class="rule"><h3 class="sub">الدروس المستفادة</h3><h4 class="sub2">من الناحية التقنية:</h4><p class="ar">1. <strong>RLS أقوى من تصفية التطبيق وحده</strong>: قاعدة البيانات تفرض القيود حتى عند محاولة اختراق التطبيق</p><p class="ar">2. <strong>Audit Logging ليس اختياري</strong>: توثيق العمليات ضروري للامتثال والأمان</p><p class="ar">3. <strong>JWT يجب أن يتضمّن permissions</strong>: تقليل استعلامات قاعدة البيانات والتحقق الفوري</p><p class="ar">4. <strong>Testing في بداية التطوير</strong>: اكتشاف الأخطاء مبكراً يوفر وقتاً</p><h4 class="sub2">من الناحية الإدارية:</h4><p class="ar">1. <strong>التخطيط الدقيق للبيانات</strong>: توافق الـ seed مع الـ RLS سياسات ضروري</p><p class="ar">2. <strong>التوثيق المتزامن</strong>: توثيق الكود أثناء التطوير، ليس بعده</p><p class="ar">3. <strong>الاختبارات اليدوية للسيناريوهات</strong>: بعض الحالات الحدّية تحتاج testing يدوي</p><hr class="rule"><h3 class="sub">الاستخدامات العملية</h3><p class="ar">يمكن استخدام هذا المشروع كـ:</p><p class="ar">1. <strong>نموذج تعليمي</strong>: لفهم RBAC، RLS، JWT، وأمان التطبيقات</p><p class="ar">2. <strong>قاعدة للمشاريع الحقيقية</strong>: استخراج الأنماط والحلول الجاهزة</p><p class="ar">3. <strong>مرجع للمستشفيات الصغيرة</strong>: مع تكييفات حسب الاحتياجات المحلية</p><p class="ar">4. <strong>عينة للمتقدمين لوظائف</strong>: توضيح القدرات الهندسية والأمنية</p><hr class="rule"><h3 class="sub">التطلعات المستقبلية</h3><p class="ar">الخطط المذكورة في قسم "الأعمال المستقبلية" توضح طريق تطور واضح:</p><ul class="tech"><li><strong>Q3 2026</strong>: تقوية JWT وتحسين CORS والـ HTTPS</li><li><strong>Q4 2026</strong>: نظام الإشعارات والتقارير</li><li><strong>Q1 2027</strong>: نشر Kubernetes وتكامل مع أنظمة خارجية</li><li><strong>Q2-Q3 2027</strong>: تطبيق الهاتف وتحليلات متقدمة</li></ul><hr class="rule"><h3 class="sub">الشكر والتقدير</h3><p class="ar">يود فريق المشروع أن يعبر عن شكره للدكتور علي على الإشراف والدعم طوال مراحل التطوير، وللزملاء على التعاون والمساهمة في اختبار وتحسين النظام.</p><hr class="rule"><h3 class="sub">الملاحق</h3><h4 class="sub2">أ. المراجع التقنية</h4><ul class="tech"><li>[PostgreSQL RLS Documentation](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)</li><li>[Express.js Best Practices](https://expressjs.com/en/advanced/best-practice-security.html)</li><li>[OWASP Top 10](https://owasp.org/www-project-top-ten/)</li><li>[JWT.io Standard](https://jwt.io/)</li><li>[bcryptjs Documentation](https://github.com/dcodeIO/bcrypt.js)</li></ul><h4 class="sub2">ب. أدوات التطوير المستخدمة</h4><ul class="tech"><li><strong>Node.js 20</strong> + <strong>npm 10</strong>: بيئة التطوير</li><li><strong>PostgreSQL 15+</strong>: قاعدة البيانات</li><li><strong>Express 4.19</strong>: إطار العمل</li><li><strong>JWT 9.0.2</strong>: المصادقة</li><li><strong>bcryptjs 2.4.3</strong>: التشفير</li><li><strong>Jest 29.7</strong>: الاختبارات</li><li><strong>Supertest 7.0</strong>: اختبارات HTTP</li><li><strong>GitHub Actions</strong>: CI/CD</li><li><strong>Docker</strong>: حاويات (للإنتاج)</li></ul><h4 class="sub2">ج. المستودع والموقع المباشر</h4><ul class="tech"><li><strong>GitHub Repository</strong>: https://github.com/ABOODE39/hospital-dbms-rbac</li><li><strong>Live Website</strong>: https://aboode39.github.io/hospital-dbms-rbac/</li><li><strong>CI/CD Status</strong>: GitHub Actions passing (61 اختبار)</li></ul><hr class="rule"><p class="ar"><strong>تم إنجاز هذا المشروع بنجاح كمشروع تعليمي شامل يوضح أفضل الممارسات في تطوير الأنظمة الطبية الآمنة والموثوقة.</strong></p><p class="ar"><strong>آخر تحديث: 30 يونيو 2026</strong></p>
+  <h2 class="section"><span class="num">13</span>الخاتمة والإنجازات</h2>
+  <h3 class="sub">ملخص الإنجازات</h3><p class="ar"><strong>نظام إدارة مستشفى العالمية IVF الآمن</strong> يجمع بين:</p><h4 class="sub2">1. الأمان المتعدد الطبقات</h4><ul class="tech"><li>RBAC: 7 أدوار، 68 صلاحية، least privilege</li><li>RLS: 21 سياسة على 7 جداول حسّاسة</li><li>JWT: توكنات 15 دقيقة مع roles وpermissions</li><li>bcrypt: 12 جولة (0.3 ثانية/محاولة)</li><li>Audit Logging: append-only مع old_values/new_values</li><li>Data Masking: إخفاء أرقام حسّاسة حسب الدور</li><li>Helmet + CORS + Rate Limiting: دفاع HTTP شامل</li></ul><h4 class="sub2">2. الموثوقية</h4><ul class="tech"><li><strong>61 اختبار ناجح</strong> مع GitHub Actions CI/CD</li><li><strong>idempotent database scripts</strong> آمنة للتشغيل المتكرّر</li><li><strong>معالجة أخطاء موحّدة</strong> مع تمييز بين AppError والخطأ البرمجي</li><li><strong>Transaction safety</strong> ضمان سلامة البيانات</li><li><strong>معالجة NULL آمنة</strong> في GUC و JSONB</li></ul><h4 class="sub2">3. الهندسة الدقيقة</h4><p class="ar">حل 7 مشاكل واقعية بطريقة منهجية توضح ممارسات عالية الجودة.</p><h3 class="sub">النتائج الكمية</h3><p class="ar">| المقياس | القيمة |</p><p class="ar">|--------|--------|</p><p class="ar">| الجداول | 22 |</p><p class="ar">| الأدوار | 7 |</p><p class="ar">| الصلاحيات | 68 |</p><p class="ar">| سياسات RLS | 21 |</p><p class="ar">| Endpoints | 30+ |</p><p class="ar">| الاختبارات | 61 ✓ |</p><p class="ar">| Triggers | 22 |</p><p class="ar">| الفهارس | 28+ |</p><p class="ar">| سطور Backend | ~3,500 |</p><p class="ar">| سطور Database | ~2,000 |</p><p class="ar">| وقت CI/CD | &lt; 2 دقيقة |</p><h3 class="sub">الاستخدامات</h3><p class="ar">1. <strong>نموذج تعليمي</strong>: RBAC، RLS، JWT، أمان التطبيقات</p><p class="ar">2. <strong>قاعدة للمشاريع</strong>: استخراج الأنماط والحلول</p><p class="ar">3. <strong>نموذج للمستشفيات</strong>: مع تكييفات محلية</p><p class="ar">4. <strong>عينة مهنية</strong>: توضيح قدرات هندسية</p><h3 class="sub">المراجع</h3><ul class="tech"><li>PostgreSQL RLS Documentation</li><li>Express.js Security Best Practices</li><li>OWASP Top 10</li><li>JWT.io Standard</li><li>bcryptjs Documentation</li></ul><p class="ar"><strong>GitHub Repository</strong>: https://github.com/ABOODE39/hospital-dbms-rbac</p><p class="ar"><strong>CI/CD Status</strong>: GitHub Actions passing (61 اختبار)</p><p class="ar"><strong>آخر تحديث</strong>: 30 يونيو 2026</p>
   <div class="footer-bar">
     <span>© 2026 · جامعة آشور · هندسة الأمن السيبراني · المرحلة الثانية</span>
     <span>القسم 13 / 13</span>
