@@ -5,8 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>مستشفى العالمية IVF — تسجيل الدخول</title>
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── شارة وضع العرض ── */
+    #demo-badge {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: linear-gradient(90deg, #b45309 0%, #d97706 100%);
+      color: #fff;
+      text-align: center;
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .28rem .75rem;
+      letter-spacing: .03em;
+      box-shadow: 0 1px 4px rgba(0,0,0,.25);
+      user-select: none;
+    }
+    #demo-badge.visible { display: block; }
+    /* عند وجود الشارة: ادفع محتوى الصفحة للأسفل قليلاً */
+    body.has-demo-badge .login-wrapper { padding-top: 2rem; }
+  </style>
 </head>
 <body class="login-page">
+
+  <!-- شارة وضع العرض (تظهر فقط في وضع العرض) -->
+  <div id="demo-badge" role="status" aria-live="polite">
+    وضع عرض &middot; DEMO &mdash; البيانات تجريبية &middot; لا تُخزَّن أي تغييرات
+  </div>
 
   <!-- شاشة تسجيل الدخول -->
   <div class="login-wrapper">
@@ -36,6 +64,25 @@
 
       <!-- رسالة الخطأ (مخفية افتراضياً) -->
       <div id="login-error" class="alert alert-error" role="alert" hidden></div>
+
+      <!-- تلميح حسابات العرض (يظهر فقط في وضع العرض) -->
+      <div id="demo-hint" hidden style="
+        background: #fef3c7;
+        border: 1px solid #d97706;
+        border-radius: 6px;
+        padding: .6rem .85rem;
+        margin-bottom: 1rem;
+        font-size: .8rem;
+        color: #92400e;
+        line-height: 1.6;
+      ">
+        <strong>حسابات العرض</strong> (كلمة المرور لجميعهم: <code dir="ltr" style="font-size:.85em">Passw0rd!</code>)<br>
+        <span dir="ltr" style="display:inline-block;margin-top:.25rem">
+          admin.karrar &bull; dr.ahmed &bull; dr.sara &bull; dr.ali<br>
+          reception.mariam &bull; nurse.zainab &bull; lab.omar<br>
+          pharma.noor &bull; patient.mohammed &bull; patient.fatima
+        </span>
+      </div>
 
       <form id="login-form" novalidate>
 
@@ -76,9 +123,22 @@
     <p class="login-footer">مستشفى العالمية IVF — نظام إدارة قاعدة البيانات الآمن</p>
   </div>
 
+  <!-- demo-data.js يجب أن يُحمَّل قبل api.js -->
+  <script src="js/demo-data.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
   <script>
+    /* ── تفعيل عناصر وضع العرض ───────────────────────────────── */
+    (function () {
+      if (window.HMS_DEMO_MODE) {
+        var badge = document.getElementById('demo-badge');
+        var hint  = document.getElementById('demo-hint');
+        if (badge) badge.classList.add('visible');
+        if (hint)  hint.hidden = false;
+        document.body.classList.add('has-demo-badge');
+      }
+    })();
+
     /* حارس الصفحة: إذا كان المستخدم مسجلاً بالفعل → اذهب للوحة */
     if (localStorage.getItem('hms_token')) {
       window.location.href = 'dashboard.html';

@@ -5,8 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>لوحة التحكم — مستشفى العالمية IVF</title>
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── شارة وضع العرض ── */
+    #demo-badge {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: linear-gradient(90deg, #b45309 0%, #d97706 100%);
+      color: #fff;
+      text-align: center;
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .28rem .75rem;
+      letter-spacing: .03em;
+      box-shadow: 0 1px 4px rgba(0,0,0,.25);
+      user-select: none;
+    }
+    #demo-badge.visible { display: block; }
+    /* تعويض ارتفاع الشارة حتى لا تغطي محتوى الـ topbar */
+    body.has-demo-badge .dashboard-layout { padding-top: 1.6rem; }
+  </style>
 </head>
 <body>
+
+  <!-- شارة وضع العرض (تظهر فقط في وضع العرض) -->
+  <div id="demo-badge" role="status" aria-live="polite">
+    وضع عرض &middot; DEMO &mdash; البيانات تجريبية &middot; لا تُخزَّن أي تغييرات
+  </div>
 
   <!-- هيكل اللوحة الرئيسية -->
   <div class="dashboard-layout">
@@ -79,6 +107,9 @@
 
   <!-- ─── تحميل السكريبتات ──────────────────────────────────────── -->
 
+  <!-- 0. بيانات وضع العرض (يجب أن يكون أولاً قبل api.js) -->
+  <script src="js/demo-data.js"></script>
+
   <!-- 1. طبقة API -->
   <script src="js/api.js"></script>
 
@@ -97,6 +128,17 @@
 
   <!-- 4. منسّق التطبيق الرئيسي (يقرأ window.HMS.modules ويبني القائمة) -->
   <script src="js/app.js"></script>
+
+  <!-- 5. تفعيل شارة وضع العرض -->
+  <script>
+    (function () {
+      if (window.HMS_DEMO_MODE) {
+        var badge = document.getElementById('demo-badge');
+        if (badge) badge.classList.add('visible');
+        document.body.classList.add('has-demo-badge');
+      }
+    })();
+  </script>
 
 </body>
 </html>
