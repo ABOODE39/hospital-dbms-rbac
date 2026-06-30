@@ -87,7 +87,7 @@ npm test
 database/   ملفّات SQL بالترتيب (مخطّط · RBAC+RLS · تدقيق · views · بيانات)
 backend/    Express API: config, middleware (auth/rbac), controllers, routes, tests
 frontend/   واجهة عربية: تسجيل دخول + لوحة تتغيّر حسب الدور
-docs/        ERD · مصفوفة RBAC · دليل التشغيل · التقرير الأكاديمي
+(الوثائق والتقرير الأكاديمي والملزمة محليّة — غير مُضمّنة في المستودع)
 ```
 
 ## الفريق
